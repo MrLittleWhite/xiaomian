@@ -1,11 +1,13 @@
-import 'dart:ffi';
-
 import 'package:audio_session/audio_session.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/player/basic_audio_player.dart';
+import 'package:xiaomian/player/remote_audio_handler.dart';
 import 'package:xiaomian/player/xm_just_player.dart';
 
 class AudioPlayerController extends GetxController {
+
+  static const platform = MethodChannel('com.xiaomianstudio.xiaomian/play');
 
   late final player = XMJustPlayer();
   
@@ -17,6 +19,16 @@ class AudioPlayerController extends GetxController {
 
   bool get toPlay {
     return _toPlay;
+  }
+
+  @override
+  void onInit() {
+    // RemoteAudioHandler.initialize();
+    super.onInit();
+  }
+
+  void setURL(String url) {
+    player.set(url);
   }
 
   void playOrPause() {
@@ -59,6 +71,10 @@ class AudioPlayerController extends GetxController {
     }).catchError((e) {
       _toPlay = false;
       player.controller.addError(BasicAudioException(999998, e.toString()));
+    }).then((value) {
+      return setNowPlayingInfo();
+    }).catchError((e) {
+
     });
 
   }
@@ -97,6 +113,10 @@ class AudioPlayerController extends GetxController {
       return _session?.configure(const AudioSessionConfiguration.speech());
     }).catchError((e) {
       _hasConfigSession = false;
+    }).then((value) {
+      return setNowPlayingInfo();
+    }).catchError((e) {
+      
     });
   }
 
@@ -141,4 +161,34 @@ class AudioPlayerController extends GetxController {
     });
   }
 
+  Map<String, dynamic> get nowPlayingInfo {
+    return {'id': "123", 
+         'title': '东方红', 
+        'artist': '北京合唱团', 
+    'albumTitle': '新中国', 
+       'artwork': 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg'};
+  }
+
+  //PlatformException
+  Future<void> setNowPlayingInfo() async {
+
+    // MPMediaItemPropertyAlbumTitle
+    // MPMediaItemPropertyAlbumTrackCount
+    // MPMediaItemPropertyAlbumTrackNumber
+    // MPMediaItemPropertyArtist
+    // MPMediaItemPropertyArtwork
+    // MPMediaItemPropertyComposer
+    // MPMediaItemPropertyDiscCount
+    // MPMediaItemPropertyDiscNumber
+    // MPMediaItemPropertyGenre
+    // MPMediaItemPropertyPersistentID
+    // MPMediaItemPropertyPlaybackDuration
+    // MPMediaItemPropertyTitle
+    return platform.invokeMethod('setNowPlayingInfo', {'id': "123", 
+                                                    'title': '东方红', 
+                                                   'artist': '北京合唱团', 
+                                               'albumTitle': '新中国', 
+                                                  'artwork': 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg'}
+                                );
+  }
 }
