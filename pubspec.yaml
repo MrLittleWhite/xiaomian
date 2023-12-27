@@ -37,12 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.4.0
   get_storage: ^2.1.1
-  freezed: ^2.4.6
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
   get: ^4.6.6
   gap: ^3.0.1
   persistent_bottom_nav_bar: ^5.0.2
   just_audio: ^0.9.36
   audio_session: ^0.1.18
+  audio_service: ^0.18.12
+  
+  
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +58,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
+  build_runner: ^2.4.7
+  json_serializable: ^6.7.1
+  freezed: ^2.4.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
