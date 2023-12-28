@@ -45,21 +45,22 @@ class XMAudioHandler extends BaseAudioHandler
     _notifyPlaybackEvents();
   }
 
-  late final _justAudioPlayer = player.player.player;
+  late final _justAudioPlayer = player.player;
 
+  //now playing 状态控制
   void _notifyPlaybackEvents() {
     _justAudioPlayer.playbackEventStream.listen((PlaybackEvent event) {
       final playing = _justAudioPlayer.playing;
       playbackState.add(playbackState.value.copyWith(
         controls: [
-          MediaControl.skipToPrevious,
+          // MediaControl.skipToPrevious,
           if (playing) MediaControl.pause else MediaControl.play,
           MediaControl.stop,
-          MediaControl.skipToNext,
+          // MediaControl.skipToNext,
         ],
-        systemActions: const {
-          MediaAction.seek,
-        },
+        // systemActions: const {
+        //   MediaAction.seek,
+        // },
         androidCompactActionIndices: const [0, 1, 3],
         processingState: const {
           ProcessingState.idle: AudioProcessingState.idle,
@@ -99,10 +100,10 @@ class XMAudioHandler extends BaseAudioHandler
   }
   
   Future<void> playOrPause() async {
-    if (player.inPause) {
-      player.play();
+    if (player.isPlaying) {
+      pause();
     } else {
-      player.pause();
+      play();
     }
   }
 
@@ -112,7 +113,9 @@ class XMAudioHandler extends BaseAudioHandler
   static setMedioInfo(AudioPlayItem? playItem) {
     if (playItem != null) {
       final mediaItem = shared?._mediaItemFrom(playItem);
-      shared?.playMediaItem(mediaItem!);
+      //NowPlayingInfo
+      shared?.mediaItem.add(mediaItem);
+      shared?.player.setURL(playItem.url, medioInfo: mediaItem);
     }
   }
 
@@ -121,6 +124,8 @@ class XMAudioHandler extends BaseAudioHandler
                   title: playItem.title, 
                  artist: playItem.artist, 
                   album: playItem.albumTitle, 
-                 artUri: Uri.parse(playItem.artwork));
+                 artUri: Uri.parse(playItem.artwork),
+           displayTitle: playItem.title, 
+        displaySubtitle: playItem.albumTitle);
   }
 }

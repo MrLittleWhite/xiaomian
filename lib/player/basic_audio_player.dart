@@ -11,7 +11,7 @@ class BasicAudioException implements Exception {
 }
 
 abstract class BasicAudioPlayer {
-  void set(String url);
+  void setURL(String url, {dynamic medioInfo});
   bool get isPlaying;
   bool get isLoading;
   Stream<bool> get playingStream;

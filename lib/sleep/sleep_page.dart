@@ -29,7 +29,7 @@ class _SleepPageState extends State<SleepPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             StreamBuilder<bool>(
-              stream: playerController.basicPlayer.playingStream,
+              stream: playerController.player.playingStream,
               builder: (context, snapshot) {
                 return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,7 @@ class _SleepPageState extends State<SleepPage> {
                         const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
                         playerController.setPlayItem(model);
                         playerController.handler?.playOrPause();
-                      }, child: Icon( playerController.player.inPause ? Icons.play_arrow : Icons.pause)
+                      }, child: Icon( playerController.player.isPlaying ?Icons.pause : Icons.play_arrow)
                       ),
                       Text((!snapshot.hasError && snapshot.data == true) ? "暂停" : "播放"),
                     ],
@@ -46,7 +46,7 @@ class _SleepPageState extends State<SleepPage> {
               },  
             ),
 
-            StreamBuilder(stream: playerController.basicPlayer.errorStream, builder: (context, snapshot) {
+            StreamBuilder(stream: playerController.player.errorStream, builder: (context, snapshot) {
               return Text( snapshot.hasError ? snapshot.error.toString() : "");
             }),
           ],

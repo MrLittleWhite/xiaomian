@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
-import 'package:xiaomian/player/basic_audio_player.dart';
 import 'package:xiaomian/player/xm_audio_handler.dart';
 import 'package:xiaomian/player/xm_audio_player.dart';
 
@@ -13,10 +12,6 @@ class AudioPlayerController extends GetxController {
     return _playItem;
   }
 
-  BasicAudioPlayer get basicPlayer {
-    return player.player;
-  }
-  
   @override
   void onInit() {
     XMAudioHandler.initialize().then((value) {
@@ -34,7 +29,6 @@ class AudioPlayerController extends GetxController {
   void setPlayItem(AudioPlayItem item) {
     _playItem = item;
     XMAudioHandler.setMedioInfo(item);
-    player.setURL(item.url);
   }
 
 }

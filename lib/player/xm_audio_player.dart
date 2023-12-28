@@ -1,146 +1,89 @@
-import 'package:audio_session/audio_session.dart';
+import 'dart:async';
+import 'package:audio_service/audio_service.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:xiaomian/player/basic_audio_player.dart';
-import 'package:xiaomian/player/xm_just_player.dart';
 
-class XMAudioPlayer {
+class XMAudioPlayer implements BasicAudioPlayer {
 
-  late final player = XMJustPlayer();
+  var _url = "";
+
+  late final player = AudioPlayer();
+
+  late final controller = StreamController<BasicAudioException>.broadcast();
+
+  XMAudioPlayer() {
+    player.setLoopMode(LoopMode.one);
+    player.playbackEventStream.listen((event) {}, onError: (Object e, StackTrace st) {
+      if (e is PlayerException) {
+          controller.addError(BasicAudioException(e.code, e.message));
+      } else {
+          controller.addError(BasicAudioException(999999, e.toString()));
+      }
+    });
+  }
+
+  Future<void> dispose() async {
+    await player.stop();
+    await player.dispose();
+    controller.close();
+  }
   
-  AudioSession? _session;
-  var _hasGetSession = false;
-  var _hasConfigSession = false;
-
-  var _toPlay = false;
-  bool get toPlay {
-    return _toPlay;
-  }
-
-  bool get inPause {
-    return player.isPlaying == false && _toPlay == false;
-  }
-
-  void setURL(String url) {
-    player.set(url);
-  }
-
-  void playOrPause() {
-    if (inPause) {
-      play();
-    } else {
-      pause();
-    }
-  }
-
-  void play() {
-    if (_toPlay == true) {
+  @override
+  void setURL(String url, {dynamic medioInfo}) {
+    if (url == _url) {
       return;
     }
-
-    _toPlay = true;
-
-    final getSession = _hasGetSession? Future.value(_session!) : AudioSession.instance;
-    getSession.then((value) {
-      if (!_hasGetSession) {
-        _hasGetSession = true;
-        _session = value;
-        listenSession(value);
-      }
-
-      if (_hasConfigSession) {
-        return Future.value(null);
-      }
-      return value.configure(const AudioSessionConfiguration.speech());
-    }).then((value) {
-      _hasConfigSession = true;
-      return _session!.setActive(true);
-    }).then((value) {
-      if (_toPlay && value) {
-        _toPlay = false;
-        player.play();
-      } else {
-        _toPlay = false;
-      }
-    }).catchError((e) {
-      _toPlay = false;
-      player.controller.addError(BasicAudioException(999998, e.toString()));
+    _url = url;
+    final audioSource = LockCachingAudioSource(Uri.parse(url), tag: medioInfo);
+    player.setAudioSource(audioSource).catchError((e) {
+      //todo: upload error
+      return null;
     });
   }
 
-  void pause() {
-    _toPlay = false;
+  @override
+  void play() async {
+    if(player.playing) {
+      return;
+    }
+    player.play();
+  }
+
+  @override
+  void pause() async {
     player.pause();
   }
-
-  void resumeFromInterruption() {
-    _session?.configure(const AudioSessionConfiguration(
-          avAudioSessionCategory: AVAudioSessionCategory.playback,
-          avAudioSessionCategoryOptions: AVAudioSessionCategoryOptions.mixWithOthers,
-          avAudioSessionMode: AVAudioSessionMode.spokenAudio,
-          androidAudioAttributes: AndroidAudioAttributes(
-            contentType: AndroidAudioContentType.speech,
-            usage: AndroidAudioUsage.media,
-          ),
-          androidAudioFocusGainType: AndroidAudioFocusGainType.gain,
-          androidWillPauseWhenDucked: true,
-      )
-    ).then((value) {
-      _hasConfigSession = true;
-      return _session!.setActive(true);
-    }).then((value) {
-      if (_toPlay && value) {
-        _toPlay = false;
-        player.play();
-      } else {
-        _toPlay = false;
-      }
-    }).catchError((e) {
-      _toPlay = false;
-      player.controller.addError(BasicAudioException(999998, e.toString()));
-    }).then<void>((value) {
-      return _session?.configure(const AudioSessionConfiguration.speech());
-    }).catchError((e) {
-      _hasConfigSession = false;
+  
+  @override
+  void stop() async {
+    player.stop();
+  }
+  
+  @override
+  bool get isLoading {
+    return player.processingState == ProcessingState.loading || player.processingState == ProcessingState.buffering;
+  }
+  
+  @override
+  bool get isPlaying {
+    return player.playing;
+  }
+  
+  @override
+  Stream<bool> get playingStream {
+    return player.playingStream;
+  }
+  
+  @override
+  Stream<bool> get loadingStream {
+    return player.processingStateStream.map((event) {
+      return event == ProcessingState.loading || event == ProcessingState.buffering;
     });
   }
 
-  void listenSession(AudioSession session) {
-    session.interruptionEventStream.listen((event) {
-      if (event.begin) {
-        switch (event.type) {
-          case AudioInterruptionType.duck:
-            // Another app started playing audio and we should duck.
-            pause();
-            break;
-          case AudioInterruptionType.pause:
-          case AudioInterruptionType.unknown:
-            // Another app started playing audio and we should pause.
-            pause();
-            break;
-        }
-      } else {
-        switch (event.type) {
-          case AudioInterruptionType.duck:
-            // The interruption ended and we should unduck.
-            resumeFromInterruption();
-            break;
-          case AudioInterruptionType.pause:
-            // The interruption ended and we should resume.
-            resumeFromInterruption();
-            break;
-          case AudioInterruptionType.unknown:
-            // The interruption ended but we should not resume.
-            break;
-        }
-      }
-    });
-
-    session.becomingNoisyEventStream.listen((_) {
-      // The user unplugged the headphones, so we should pause or lower the volume.
-    });
-
-    session.devicesChangedEventStream.listen((event) {
-      // print('Devices added:   ${event.devicesAdded}');
-      // print('Devices removed: ${event.devicesRemoved}');
-    });
+  @override
+  Stream<BasicAudioException> get errorStream {
+    return controller.stream;
   }
+
 }
