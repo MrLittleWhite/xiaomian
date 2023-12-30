@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 
@@ -18,34 +19,22 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _buildScreens(),
-        items: _navBarsItems(),
-        confineInSafeArea: true,
-        backgroundColor: Colors.white, // Default is Colors.white.
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-        hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          colorBehindNavBar: Colors.white,
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: const ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-          animateTabTransition: false,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style6, // Choose the nav bar style with this property.
-    );
+    final items = _navBarsItems();
+    return PersistentTabView.custom(context, 
+      controller: _controller, 
+      handleAndroidBackButtonPress: true,
+      onWillPop: (context) { return Future(() => true); },
+      customWidget: CustomNavBarWidget(
+        selectedIndex: _controller.index, 
+        items: items, 
+        onItemSelected: (value) {
+          setState(() {
+            _controller.index = value;
+          });
+        }), 
+        itemCount: items.length, 
+        screens: _buildScreens()
+      );
   }
 
   List<Widget> _buildScreens() {
@@ -58,18 +47,104 @@ class _HomePageState extends State<HomePage> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
           PersistentBottomNavBarItem(
-              icon: const Icon(CupertinoIcons.moon_zzz),
+              icon: const Icon(XMIconfont.moonStar),
               title: ("Sleep"),
-              activeColorPrimary: CupertinoColors.activeBlue,
-              inactiveColorPrimary: CupertinoColors.systemGrey,
+              iconSize: 24,
+              activeColorPrimary: const Color(0xFF4870FF),
+              inactiveColorPrimary: Colors.black,
           ),
           PersistentBottomNavBarItem(
-              icon: const Icon(CupertinoIcons.settings),
-              title: ("Settings"),
-              activeColorPrimary: CupertinoColors.activeBlue,
-              inactiveColorPrimary: CupertinoColors.systemGrey,
+              icon: const Icon(XMIconfont.userProfile),
+              title: ("profile"),
+              iconSize: 24,
+              activeColorPrimary: const Color(0xFF4870FF),
+              inactiveColorPrimary: Colors.black,
           ),
       ];
   }
+  
 }
+
+
+
+class CustomNavBarWidget extends StatelessWidget {
+    final int selectedIndex;
+    final List<PersistentBottomNavBarItem> items; //可以使用自定义model
+    final ValueChanged<int> onItemSelected;
+
+    const CustomNavBarWidget(
+        {super.key,
+        required this.selectedIndex,
+        required this.items,
+        required this.onItemSelected,});
+
+    Widget _buildItem(
+        PersistentBottomNavBarItem item, bool isSelected) {
+        return Container(
+        color: const Color(0xFF21283F),
+        alignment: Alignment.center,
+        height: kBottomNavigationBarHeight,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+            Flexible(
+                child: IconTheme(
+                  data: IconThemeData(
+                    size: item.iconSize,
+                    color: isSelected
+                        ? (item.activeColorSecondary ?? item.activeColorPrimary)
+                        : item.inactiveColorPrimary ?? item.activeColorPrimary),
+                  child: item.icon,
+                ),
+            ),
+            isSelected ? Padding(  
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Material(
+                type: MaterialType.transparency,
+                child: FittedBox(
+                    child: Text(
+                    item.title ?? "",
+                    style: TextStyle(
+                        color: isSelected
+                            ? (item.activeColorSecondary ?? item.activeColorPrimary)
+                            : item.inactiveColorPrimary,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12.0),
+                )),
+                ),
+            ) : const Gap(0)
+            ],
+        ),
+        );
+    }
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+        color: Colors.white,
+        child: SizedBox(
+            width: double.infinity,
+            height: kBottomNavigationBarHeight,
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: items.map((item) {
+                int index = items.indexOf(item);
+                return Flexible(
+                child: GestureDetector(
+                    onTap: () {
+                    onItemSelected(index);
+                    },
+                    child: _buildItem(
+                        item, selectedIndex == index),
+                ),
+                );
+            }).toList(),
+            ),
+        ),
+        );
+    }
+}
+
 

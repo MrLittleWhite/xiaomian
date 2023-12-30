@@ -8,14 +8,23 @@ import 'package:xiaomian/mine/play_setting/time_setting_page.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 
 class AppRoute {
+
+  static String home ="/home";
+  static String sleep ="/sleep";
+  static String mine ="/mine";
+  static String playHistory ="/playHistory";
+  static String playSetting ="/playSetting";
+  static String aboutUs ="/aboutUs";
+  static String timeSetting ="/timeSetting";
+
   static final pages = [
-    GetPage(name: "/home", page: () => const HomePage()),
-    GetPage(name: "/sleep", page: () => const SleepPage()),
-    GetPage(name: "/mine", page: () => const MinePage()),
-    GetPage(name: "/playHistory", page: () => const PlayHistoryPage()),
-    GetPage(name: "/playSetting", page: () =>  const PlaySettingPage()),
-    GetPage(name: "/aboutUs", page: () => const AboutUsPage()),
-    GetPage(name: "/timeSetting", page: () => const TimeSettingPage()),
+    GetPage(name: AppRoute.home, page: () => const HomePage()),
+    GetPage(name: AppRoute.sleep, page: () => const SleepPage()),
+    GetPage(name: AppRoute.mine, page: () => const MinePage()),
+    GetPage(name: AppRoute.playHistory, page: () => const PlayHistoryPage()),
+    GetPage(name: AppRoute.playSetting, page: () =>  const PlaySettingPage()),
+    GetPage(name: AppRoute.aboutUs, page: () => const AboutUsPage()),
+    GetPage(name: AppRoute.timeSetting, page: () => const TimeSettingPage()),
     // GetPage(name: "/playSetting", page: () => const SingInPage(), binding: AuthBinding(), children: [
     //   GetPage(name: "/captcha", page: () => const CaptchaPage()),
     // ])

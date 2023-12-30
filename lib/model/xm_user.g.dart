@@ -7,9 +7,9 @@ part of 'xm_user.dart';
 // **************************************************************************
 
 _$XMUserImpl _$$XMUserImplFromJson(Map<String, dynamic> json) => _$XMUserImpl(
-      id: json['id'],
-      name: json['name'],
-      avatar: json['avatar'],
+      id: json['id'] as String,
+      name: json['name'] as String,
+      avatar: json['avatar'] as String,
     );
 
 Map<String, dynamic> _$$XMUserImplToJson(_$XMUserImpl instance) =>

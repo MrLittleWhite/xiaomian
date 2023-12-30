@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
+import 'package:xiaomian/route/app_route.dart';
 
 class SleepPage extends StatefulWidget {
   const SleepPage({super.key});
@@ -41,6 +41,10 @@ class _SleepPageState extends State<SleepPage> {
                       }, child: Icon( playerController.player.isPlaying ?Icons.pause : Icons.play_arrow)
                       ),
                       Text((!snapshot.hasError && snapshot.data == true) ? "暂停" : "播放"),
+                      FilledButton(onPressed: () {
+                        Get.toNamed(AppRoute.playSetting);
+                      }, child: Icon( playerController.player.isPlaying ?Icons.pause : Icons.play_arrow)
+                      ),
                     ],
                   );
               },  
