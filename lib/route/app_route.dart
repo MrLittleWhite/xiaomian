@@ -9,13 +9,13 @@ import 'package:xiaomian/sleep/sleep_page.dart';
 
 class AppRoute {
 
-  static String home ="/home";
-  static String sleep ="/sleep";
-  static String mine ="/mine";
-  static String playHistory ="/playHistory";
-  static String playSetting ="/playSetting";
-  static String aboutUs ="/aboutUs";
-  static String timeSetting ="/timeSetting";
+  static const String home ="/home";
+  static const String sleep ="/sleep";
+  static const String mine ="/mine";
+  static const String playHistory ="/playHistory";
+  static const String playSetting ="/playSetting";
+  static const String aboutUs ="/aboutUs";
+  static const String timeSetting ="/timeSetting";
 
   static final pages = [
     GetPage(name: AppRoute.home, page: () => const HomePage()),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
+import 'package:xiaomian/assets_code/xm_color.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -50,16 +52,16 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(XMIconfont.moonStar),
               title: ("Sleep"),
               iconSize: 24,
-              activeColorPrimary: const Color(0xFF4870FF),
-              inactiveColorPrimary: Colors.black,
+              activeColorPrimary: XMColor.xmWhite,
+              inactiveColorPrimary: XMColor.xmBlue,
           ),
           PersistentBottomNavBarItem(
               icon: const Icon(XMIconfont.userProfile),
-              title: ("profile"),
+              title: ("Profile"),
               iconSize: 24,
-              activeColorPrimary: const Color(0xFF4870FF),
-              inactiveColorPrimary: Colors.black,
-          ),
+              activeColorPrimary: XMColor.xmWhite,
+              inactiveColorPrimary: XMColor.xmBlue,
+          ),  
       ];
   }
   
@@ -95,7 +97,7 @@ class CustomNavBarWidget extends StatelessWidget {
                     size: item.iconSize,
                     color: isSelected
                         ? (item.activeColorSecondary ?? item.activeColorPrimary)
-                        : item.inactiveColorPrimary ?? item.activeColorPrimary),
+                        : item.inactiveColorPrimary ?? item.inactiveColorSecondary),
                   child: item.icon,
                 ),
             ),
@@ -109,10 +111,15 @@ class CustomNavBarWidget extends StatelessWidget {
                     style: TextStyle(
                         color: isSelected
                             ? (item.activeColorSecondary ?? item.activeColorPrimary)
-                            : item.inactiveColorPrimary,
+                            : (item.inactiveColorPrimary ?? item.inactiveColorPrimary),
                         fontWeight: FontWeight.normal,
                         fontSize: 12.0),
-                )),
+                ),).animate().move(
+                  duration: const Duration(milliseconds:200), 
+                  begin: const Offset(0, 16), 
+                  end: const Offset(0, 0), 
+                  curve: Curves.easeInOut
+                  ),
                 ),
             ) : const Gap(0)
             ],

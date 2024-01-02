@@ -45,6 +45,9 @@ dependencies:
   just_audio: ^0.9.36
   audio_service: ^0.18.12
   flutter_svg: ^2.0.9
+  flutter_animate: ^4.3.0
+  package_info_plus: ^5.0.1
+  loading_animation_widget: ^1.2.0+4
   
   
 
@@ -79,6 +82,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/
+    - assets/icon_image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -106,5 +110,23 @@ flutter:
     - family: XMIconfont
       fonts:
         - asset: assets/icon_font/XMIconfont.ttf
+    - family: Nunito
+      fonts:
+        - asset: assets/icon_font/Nunito/Nunito-Black.ttf
+        - asset: assets/icon_font/Nunito/Nunito-BlackItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-Bold.ttf
+        - asset: assets/icon_font/Nunito/Nunito-BoldItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-ExtraBold.ttf
+        - asset: assets/icon_font/Nunito/Nunito-ExtraBoldItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-ExtraLight.ttf
+        - asset: assets/icon_font/Nunito/Nunito-ExtraLightItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-Italic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-Light.ttf
+        - asset: assets/icon_font/Nunito/Nunito-LightItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-Medium.ttf
+        - asset: assets/icon_font/Nunito/Nunito-MediumItalic.ttf
+        - asset: assets/icon_font/Nunito/Nunito-Regular.ttf
+        - asset: assets/icon_font/Nunito/Nunito-SemiBold.ttf
+        - asset: assets/icon_font/Nunito/Nunito-SemiBoldItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
