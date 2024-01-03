@@ -41,13 +41,14 @@ dependencies:
   freezed_annotation: ^2.4.1
   get: ^4.6.6
   gap: ^3.0.1
-  persistent_bottom_nav_bar: ^5.0.2
   just_audio: ^0.9.36
   audio_service: ^0.18.12
   flutter_svg: ^2.0.9
   flutter_animate: ^4.3.0
   package_info_plus: ^5.0.1
   loading_animation_widget: ^1.2.0+4
+  persistent_bottom_nav_bar_v2: ^4.2.8
+  blurrycontainer: ^1.0.2
   
   
 

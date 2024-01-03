@@ -1,7 +1,8 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
@@ -18,22 +19,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = PersistentTabController(initialIndex: 0);
+  final playBarHeight = 75.0;
 
   @override
   Widget build(BuildContext context) {
     final items = _navBarsItems();
     return PersistentTabView.custom(context, 
+      backgroundColor: Colors.transparent,
+      navBarHeight: kBottomNavigationBarHeight+playBarHeight,
+      bottomScreenMargin: kBottomNavigationBarHeight,
       controller: _controller, 
       handleAndroidBackButtonPress: true,
       onWillPop: (context) { return Future(() => true); },
-      customWidget: CustomNavBarWidget(
-        selectedIndex: _controller.index, 
-        items: items, 
-        onItemSelected: (value) {
-          setState(() {
-            _controller.index = value;
-          });
-        }), 
+      customWidget: (navBarEssentials) => Column(
+        children: [
+          // Container(height: playBarHeight, width: double.infinity, color: Colors.orange,),
+          BlurryContainer(blur: 80, elevation: 40, height: playBarHeight, color: XMColor(0x141927, opacity: 0.76), width: double.infinity, child: Icon(Icons.home),),
+          SizedBox(
+            height: kBottomNavigationBarHeight,
+            child: CustomNavBarWidget(
+              selectedIndex: _controller.index, 
+              items: items, 
+              onItemSelected: (value) {
+                setState(() {
+                  _controller.index = value;
+                });
+              }),
+          ),
+        ],
+      ), 
         itemCount: items.length, 
         screens: _buildScreens()
       );
@@ -83,7 +97,7 @@ class CustomNavBarWidget extends StatelessWidget {
     Widget _buildItem(
         PersistentBottomNavBarItem item, bool isSelected) {
         return Container(
-        color: const Color(0xFF21283F),
+        color: XMColor.xmSeparator,
         alignment: Alignment.center,
         height: kBottomNavigationBarHeight,
         child: Column(
@@ -130,7 +144,7 @@ class CustomNavBarWidget extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Container(
-        color: Colors.white,
+        alignment: Alignment.bottomCenter,
         child: SizedBox(
             width: double.infinity,
             height: kBottomNavigationBarHeight,

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Sleepless Home',
+      title: 'SleepGo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: XMColor.xmMain),
         useMaterial3: true,

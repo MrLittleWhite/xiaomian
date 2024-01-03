@@ -36,7 +36,7 @@ class _SleepPageState extends State<SleepPage> {
         ), 
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             StreamBuilder<bool>(
               stream: playerController.player.playingStream,
