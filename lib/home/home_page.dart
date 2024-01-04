@@ -2,9 +2,14 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/mine/mine_page.dart';
+import 'package:xiaomian/model/audio_item.dart';
+import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 
@@ -21,6 +26,8 @@ class _HomePageState extends State<HomePage> {
   final _controller = PersistentTabController(initialIndex: 0);
   final playBarHeight = 75.0;
 
+  final playerController = Get.find<AudioPlayerController>();
+
   @override
   Widget build(BuildContext context) {
     final items = _navBarsItems();
@@ -34,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       customWidget: (navBarEssentials) => Column(
         children: [
           // Container(height: playBarHeight, width: double.infinity, color: Colors.orange,),
-          BlurryContainer(blur: 80, elevation: 40, height: playBarHeight, color: XMColor(0x141927, opacity: 0.76), width: double.infinity, child: Icon(Icons.home),),
+          _buildPlayerBar(),
           SizedBox(
             height: kBottomNavigationBarHeight,
             child: CustomNavBarWidget(
@@ -50,6 +57,65 @@ class _HomePageState extends State<HomePage> {
       ), 
         itemCount: items.length, 
         screens: _buildScreens()
+      );
+  }
+
+  Widget _buildPlayerBar() {
+    return BlurryContainer(
+      borderRadius: BorderRadius.zero,
+      blur: 80, elevation: 40, height: playBarHeight, width: double.infinity,
+      color: const XMColor(0x141927, opacity: 0.76), 
+      padding: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
+      child: Row (
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network('https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+              fit: BoxFit.cover,
+              width: 59, 
+              height: 59, 
+              ),
+          ),
+          const Gap(16),
+          Expanded(
+            child: Column (
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Name of song", style: XMTextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
+                Text("Pack name", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: 56,
+            height: 59,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                StreamBuilder<bool>(
+                  stream: playerController.player.loadingStream,
+                  builder: (context, snapshot) {
+                    return playerController.player.isLoading ? LoadingAnimationWidget.threeArchedCircle(color: Colors.white, size: 33) : Container();
+                  },  
+                ),
+                StreamBuilder<bool>(
+                  stream: playerController.player.playingStream,
+                  builder: (context, snapshot) {
+                    return IconButton(
+                    onPressed: () {
+                      const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
+                      playerController.setPlayItem(model);
+                      playerController.handler?.playOrPause();
+                    },  
+                    icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white,),
+                    );
+                  },  
+                ),
+                ]
+            ),
+          ),
+        ],)
       );
   }
 

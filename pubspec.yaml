@@ -49,6 +49,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   persistent_bottom_nav_bar_v2: ^4.2.8
   blurrycontainer: ^1.0.2
+  shared_preferences: ^2.2.2
   
   
 
