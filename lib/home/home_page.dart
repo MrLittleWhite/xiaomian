@@ -10,6 +10,8 @@ import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
+import 'package:xiaomian/player/ui/audio_player_page.dart';
+import 'package:xiaomian/route/app_route.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 
@@ -61,62 +63,67 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildPlayerBar() {
-    return BlurryContainer(
-      borderRadius: BorderRadius.zero,
-      blur: 80, elevation: 40, height: playBarHeight, width: double.infinity,
-      color: const XMColor(0x141927, opacity: 0.76), 
-      padding: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
-      child: Row (
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.network('https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
-              fit: BoxFit.cover,
-              width: 59, 
-              height: 59, 
+    return GestureDetector(
+      onTap: () { 
+          AppRoute.toDialog(AudioPlayerPage());
+        },
+      child: BlurryContainer(
+        borderRadius: BorderRadius.zero,
+        blur: 80, elevation: 40, height: playBarHeight, width: double.infinity,
+        color: const XMColor(0x141927, opacity: 0.76), 
+        padding: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
+        child: Row (
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network('https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+                fit: BoxFit.cover,
+                width: 59, 
+                height: 59, 
+                ),
+            ),
+            const Gap(16),
+            Expanded(
+              child: Column (
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Name of song", style: XMTextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
+                  Text("Pack name", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
+                ],
               ),
-          ),
-          const Gap(16),
-          Expanded(
-            child: Column (
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Name of song", style: XMTextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
-                Text("Pack name", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
-              ],
             ),
-          ),
-          SizedBox(
-            width: 56,
-            height: 59,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                StreamBuilder<bool>(
-                  stream: playerController.player.loadingStream,
-                  builder: (context, snapshot) {
-                    return playerController.player.isLoading ? LoadingAnimationWidget.threeArchedCircle(color: Colors.white, size: 33) : Container();
-                  },  
-                ),
-                StreamBuilder<bool>(
-                  stream: playerController.player.playingStream,
-                  builder: (context, snapshot) {
-                    return IconButton(
-                    onPressed: () {
-                      const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
-                      playerController.setPlayItem(model);
-                      playerController.handler?.playOrPause();
+            SizedBox(
+              width: 56,
+              height: 59,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  StreamBuilder<bool>(
+                    stream: playerController.player.loadingStream,
+                    builder: (context, snapshot) {
+                      return playerController.player.isLoading ? LoadingAnimationWidget.threeArchedCircle(color: Colors.white, size: 33) : Container();
                     },  
-                    icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white,),
-                    );
-                  },  
-                ),
-                ]
+                  ),
+                  StreamBuilder<bool>(
+                    stream: playerController.player.playingStream,
+                    builder: (context, snapshot) {
+                      return IconButton(
+                      onPressed: () {
+                        const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
+                        playerController.setPlayItem(model);
+                        playerController.handler?.playOrPause();
+                      },  
+                      icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white,),
+                      );
+                    },  
+                  ),
+                  ]
+              ),
             ),
-          ),
-        ],)
-      );
+          ],)
+        ),
+    );
   }
 
   List<Widget> _buildScreens() {

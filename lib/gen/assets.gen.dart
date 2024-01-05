@@ -15,8 +15,11 @@ class $AssetsIconImageGen {
   /// File path: assets/icon_image/app_icon.svg
   String get appIcon => 'assets/icon_image/app_icon.svg';
 
+  /// File path: assets/icon_image/pull_close.svg
+  String get pullClose => 'assets/icon_image/pull_close.svg';
+
   /// List of all assets
-  List<String> get values => [appIcon];
+  List<String> get values => [appIcon, pullClose];
 }
 
 class Assets {
