@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
@@ -26,6 +27,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
+    XMSystemChrome.setUIEdgeToEdge(XMColor.xmMain);
     return Dismissible(
       direction: DismissDirection.down,
       key: const Key('AudioPlayerPage'),
@@ -49,7 +51,16 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
               Flexible(flex: 6, fit: FlexFit.tight, child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ClipRRect(borderRadius: BorderRadius.circular(20), child: Image.network('https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', fit: BoxFit.cover, height: 170, width: 170,)),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20), 
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage, 
+                      image:'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+                      fit: BoxFit.cover,
+                      width: 170, 
+                      height: 170, 
+                    )
+                  ),
                   const Gap(23),
                   Text("center music", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
                   const Gap(10),
@@ -73,6 +84,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                         alignment: Alignment.center,
                         children: [
                           StreamBuilder<bool>(
+                            key: const Key("xm_player_wave"),
                             stream: playerController.player.loadingStream,
                             builder: (context, snapshot) {
                               return playerController.player.isLoading ? LoadingAnimationWidget.threeArchedCircle(color: Colors.white, size: 56) : Container();

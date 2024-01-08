@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
+import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
 
 void main() {
+   XMSystemChrome.setUIEdgeToEdge(XMColor.xmMain);
   runApp(const MyApp());
 }
 
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
         pageTransitionsTheme: const PageTransitionsTheme(builders: {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
           TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        }),
+        }
+        ),
       ),
       initialRoute: AppRoute.home, getPages: AppRoute.pages, defaultTransition: Transition.cupertino,
       initialBinding: AllControllerBinding(),

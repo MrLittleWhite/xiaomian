@@ -1,5 +1,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/assets_code/xm_icons.dart';
+import 'package:xiaomian/component/xm_media_query.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
@@ -14,6 +16,7 @@ import 'package:xiaomian/player/ui/audio_player_page.dart';
 import 'package:xiaomian/route/app_route.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -34,15 +37,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final items = _navBarsItems();
     return PersistentTabView.custom(context, 
+      confineInSafeArea: Platform.isAndroid,
       backgroundColor: Colors.transparent,
-      navBarHeight: kBottomNavigationBarHeight+playBarHeight,
-      bottomScreenMargin: kBottomNavigationBarHeight,
+      navBarHeight: XMMediaQuery.xmBottom(context)+kBottomNavigationBarHeight+playBarHeight,
+      bottomScreenMargin: XMMediaQuery.xmBottom(context)+kBottomNavigationBarHeight,
       controller: _controller, 
       handleAndroidBackButtonPress: true,
       onWillPop: (context) { return Future(() => true); },
       customWidget: (navBarEssentials) => Column(
         children: [
-          // Container(height: playBarHeight, width: double.infinity, color: Colors.orange,),
           _buildPlayerBar(),
           SizedBox(
             height: kBottomNavigationBarHeight,
@@ -55,6 +58,10 @@ class _HomePageState extends State<HomePage> {
                 });
               }),
           ),
+          Platform.isAndroid ? const Gap(0) : SizedBox(
+            height: XMMediaQuery.xmBottom(context), 
+            width: double.infinity,
+            child: Container(color: XMColor.xmSeparator),)
         ],
       ), 
         itemCount: items.length, 
@@ -76,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network('https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+              child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image:'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
                 fit: BoxFit.cover,
                 width: 59, 
                 height: 59, 
