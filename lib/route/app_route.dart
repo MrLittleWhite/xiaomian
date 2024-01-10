@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/home/home_page.dart';
 import 'package:xiaomian/mine/about_us/about_us_page.dart';
+import 'package:xiaomian/mine/general_setting/general_setting_page.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/mine/play_history/play_history_page.dart';
 import 'package:xiaomian/mine/play_setting/play_setting_page.dart';
@@ -17,6 +18,7 @@ class AppRoute {
   static const String mine ="/mine";
   static const String playHistory ="/playHistory";
   static const String playSetting ="/playSetting";
+  static const String generalSetting ="/generalSetting";
   static const String aboutUs ="/aboutUs";
   static const String timeSetting ="/timeSetting";
   static const String audioPlayer ="/audioPlayer";
@@ -27,6 +29,7 @@ class AppRoute {
     GetPage(name: AppRoute.mine, page: () => const MinePage()),
     GetPage(name: AppRoute.playHistory, page: () => const PlayHistoryPage()),
     GetPage(name: AppRoute.playSetting, page: () =>  const PlaySettingPage()),
+    GetPage(name: AppRoute.generalSetting, page: () =>  const GeneralSettingPage()),
     GetPage(name: AppRoute.aboutUs, page: () => const AboutUsPage()),
     GetPage(name: AppRoute.timeSetting, page: () => const TimeSettingPage()),
     GetPage(name: AppRoute.audioPlayer, page: () => const AudioPlayerPage(), middlewares: [AudioPlayerMiddleWare()]),

@@ -22,9 +22,13 @@ class XMAudioPlayer implements BasicAudioPlayer {
   }
 
   Future<void> dispose() async {
-    await player.stop();
-    await player.dispose();
-    controller.close();
+    player.stop().then(
+      (value) => player.dispose()
+    ).then(
+      (value) => controller.close()
+    ).catchError((e) {
+      
+    });
   }
   
   @override

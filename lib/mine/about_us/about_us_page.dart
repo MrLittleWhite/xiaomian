@@ -7,6 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
+import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
 
 enum AboutUsItemType {
@@ -20,13 +21,13 @@ extension AboutUsItemTypeExtension on AboutUsItemType {
   String get name {
     switch (this) {
       case AboutUsItemType.version:
-        return 'version';
+        return XMIntl.current.version;
       case AboutUsItemType.terms:
-        return 'terms';
+        return XMIntl.current.terms;
       case AboutUsItemType.privacy:
-        return 'privacy';
+        return XMIntl.current.privacy;
       case AboutUsItemType.contact:
-        return 'contact';
+        return XMIntl.current.contact;
     }
   }
 
@@ -94,7 +95,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: XMAppBar.name("About Us"), 
+      appBar: XMAppBar.name(XMIntl.current.aboutUs), 
       backgroundColor: XMColor.xmMain,
       body: Center(
         child: Column(
@@ -106,7 +107,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     ClipRRect(borderRadius: BorderRadius.circular(16), 
                       child: SvgPicture.asset(Assets.iconImage.appIcon, width: 100, height: 100,)),
                     const Gap(16),
-                    const Text("SleepGo", style: XMTextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
+                    Text(XMIntl.current.sleepGo, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                   ]
                 ),
             ),
@@ -125,13 +126,13 @@ class _AboutUsPageState extends State<AboutUsPage> {
                         } else if (snapshot.data != null) {
                           PackageInfo packageInfo = snapshot.data!;
                           icon = const Icon(Icons.bookmark, color: Colors.white,);
-                          title = "version";
+                          title = XMIntl.current.version;
                           detail = '${packageInfo.version}.${packageInfo.buildNumber}';
                           // String version = packageInfo.version;
                           // String buildNumber = packageInfo.buildNumber;
                         } else {
                           icon = LoadingAnimationWidget.threeRotatingDots(color: Colors.white, size: 40);
-                          title = "loading version...";
+                          title = "${XMIntl.current.loading}...";
                           detail = "";
                         }
 
@@ -139,15 +140,15 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           if (index == 0) {
                             return ListTile(
                             leading: SizedBox(width: 40, height: 40, child: icon,), 
-                            title: Text(title, style: XMTextStyle(color: color ?? Colors.white, fontSize: 16)), 
-                            trailing: detail != null ? Text(detail, style: XMTextStyle(color: color ?? Colors.white, fontSize: 14)) : const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
+                            title: Text(title, style: TextStyle(color: color ?? Colors.white, fontSize: 16)), 
+                            trailing: detail != null ? Text(detail, style: TextStyle(color: color ?? Colors.white, fontSize: 14)) : const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
                             );
                           }
                           var item = _items[index];
                           return ListTile(
                             key: ValueKey(item), 
                             leading: SizedBox(width: 40, height: 40, child: Icon(item.icon, color: item.iconColor,),), 
-                            title: Text(_items[index].name, style: const XMTextStyle(color: Colors.white, fontSize: 16)), 
+                            title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 16)), 
                             trailing: const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
                             onTap: () {
                               item.navigateAct();

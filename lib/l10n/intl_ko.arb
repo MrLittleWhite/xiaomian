@@ -1,0 +1,20 @@
+{
+    "sleep": "수면",
+    "profile": "프로필",
+    "playHistory": "재생 기록",
+    "playSettings": "재생 설정",
+    "generalSettings": "일반 설정",
+    "feedback": "피드백",
+    "aboutUs": "회사 소개",
+    "playPeriod": "재생 기간",
+    "autoPlay": "자동 재생",
+    "version": "버전",
+    "terms": "약관",
+    "privacy": "개인정보 처리방침",
+    "contact": "연락처",
+    "confirm": "확인",
+    "loading": "로딩 중",
+    "language": "언어",
+    "english": "영어"
+
+}

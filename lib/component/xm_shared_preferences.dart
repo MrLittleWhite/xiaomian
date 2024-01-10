@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class XMPrefersKey {
   static const String autoPlay = "xm_auto_play";
   static const String playPeriod = "xm_play_period"; //mins
+  static const String language = "xm_language"; 
 }
 
 class XMSharedPreferences {

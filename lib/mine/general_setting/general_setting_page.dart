@@ -1,0 +1,132 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:xiaomian/assets_code/xm_color.dart';
+import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/xm_appbar.dart';
+import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/component/xm_shared_preferences.dart';
+
+enum GeneralSettingItemType {
+  language,
+}
+
+extension GeneralSettingItemTypeExtension on GeneralSettingItemType {
+  String get name {
+    switch (this) {
+      case GeneralSettingItemType.language:
+        return XMIntl.current.language;
+    }
+  }
+
+  IconData get icon {
+    switch (this) {
+      case GeneralSettingItemType.language:
+        return Icons.language;
+    }
+  }
+
+  Color? get iconColor {
+    switch (this) {
+      case GeneralSettingItemType.language:
+        return Colors.white;
+    }
+  }
+}
+
+class GeneralSettingPage extends StatefulWidget {
+  const GeneralSettingPage({super.key});
+
+  @override
+  State<GeneralSettingPage> createState() => _GeneralSettingPageState();
+}
+
+class _GeneralSettingPageState extends State<GeneralSettingPage> {
+
+  final List<GeneralSettingItemType> _items = [
+    GeneralSettingItemType.language,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: XMAppBar.name(XMIntl.current.generalSettings),
+      backgroundColor: XMColor.xmMain,
+      body: Theme(
+        data: ThemeData(listTileTheme: const ListTileThemeData(contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16))),
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            var item = _items[index];
+                return ListTile(
+            key: ValueKey(item), 
+            leading: SizedBox(width: 45, height: 45, child: Icon(item.icon, color: item.iconColor,),), 
+            title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 20)), 
+            trailing: FutureBuilder(
+              future: XMSharedPreferences.getInt(XMPrefersKey.language),
+              builder: (context, snapshot) {
+                String content = "${XMIntl.current.loading}...";
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasData) {
+                    var language = XMLanguage.values[snapshot.data!] ;
+                    content = language.desc;
+                  } else {
+                    content = XMlocale.language(context).desc;
+                  } 
+                } 
+                return Text(content, style: TextStyle(color: Colors.white, fontSize: 16),);
+              }, 
+            ),
+            onTap: () {
+              changeLanguage().then((value) {
+                if (value == null) {
+                  return Future(() => false);
+                }
+                XMLanguage language = XMLanguage.values[value];
+                return Future.wait([XMSharedPreferences.setInt(XMPrefersKey.language, value), XMIntl.setLanguage(language)]) ;
+              }).then((value) => null).catchError((e) {
+                //upload error
+              });
+            },
+            );
+            
+          }, 
+          separatorBuilder: (context, index) {
+            var item = _items[index];
+            Key key = ValueKey(item);
+            return Padding(
+              key: key,
+              padding: const EdgeInsets.only(left: 72),
+              child: Gap(1, color: XMColor.xmSeparator,),
+            );
+          }, 
+          itemCount: _items.length,
+          ),
+      ),
+    );
+  }
+
+  SimpleDialogOption option(XMLanguage language) {
+    return SimpleDialogOption(
+      child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Text(language.desc),
+              ),
+      onPressed: () {
+        Navigator.pop(context, language.index);
+      }
+    );
+  }
+
+  Future<int?> changeLanguage() async {
+  return showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('请选择语言'),
+          children: XMLanguage.values.map((e) => option(e)).toList(),
+        );
+      }
+    );
+  }
+
+}

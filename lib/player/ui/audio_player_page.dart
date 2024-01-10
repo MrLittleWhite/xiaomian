@@ -8,7 +8,6 @@ import 'package:transparent_image/transparent_image.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
 import 'package:xiaomian/model/audio_item.dart';
@@ -62,9 +61,9 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                     )
                   ),
                   const Gap(23),
-                  Text("center music", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
+                  Text("center music", style: TextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
                   const Gap(10),
-                  Text("Pack name", style: XMTextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900),),
+                  Text("Pack name", style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900),),
                 ]
               )),
               Flexible(flex: 4, child: Column(

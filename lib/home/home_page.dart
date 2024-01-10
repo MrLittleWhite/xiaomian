@@ -6,9 +6,10 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/assets_code/xm_icons.dart';
+import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_media_query.dart';
+import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final items = _navBarsItems();
+    XMSystemChrome.setUIEdgeToEdge(XMColor.xmMain);
     return PersistentTabView.custom(context, 
       confineInSafeArea: Platform.isAndroid,
       backgroundColor: Colors.transparent,
@@ -95,8 +97,8 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Name of song", style: XMTextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
-                  Text("Pack name", style: XMTextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
+                  Text("Name of song", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
+                  Text("Pack name", style: TextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
                 ],
               ),
             ),
@@ -144,14 +146,14 @@ class _HomePageState extends State<HomePage> {
       return [
           PersistentBottomNavBarItem(
               icon: const Icon(XMIconfont.moonStar),
-              title: ("Sleep"),
+              title: XMIntl.current.sleep,
               iconSize: 24,
               activeColorPrimary: XMColor.xmWhite,
               inactiveColorPrimary: XMColor.xmBlue,
           ),
           PersistentBottomNavBarItem(
               icon: const Icon(XMIconfont.userProfile),
-              title: ("Profile"),
+              title: XMIntl.current.profile,
               iconSize: 24,
               activeColorPrimary: XMColor.xmWhite,
               inactiveColorPrimary: XMColor.xmBlue,

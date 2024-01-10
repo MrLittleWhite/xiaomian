@@ -15,7 +15,7 @@ class XMAppBar {
           },
         ),
         title: Text(name, 
-        style: const XMTextStyle(
+        style: const TextStyle(
           color: Colors.white, 
           fontSize: 20, 
           fontWeight: FontWeight.w900),),

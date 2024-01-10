@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
@@ -28,11 +30,19 @@ class _SleepPageState extends State<SleepPage> {
       backgroundColor: XMColor.xmMain,
       appBar: AppBar(
         backgroundColor: XMColor.xmMain,
-        title: const Text('Sleep', 
-        style: XMTextStyle(
-          color: Colors.white, 
-          fontSize: 20, 
-          fontWeight: FontWeight.w900),), 
+        centerTitle: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Gap(5),
+            Text(XMIntl.current.sleep, 
+            style: TextStyle(
+              color: Colors.white, 
+              fontSize: 20, 
+              fontWeight: FontWeight.w900),),
+          ],
+        ), 
         ), 
       body: Center(
         child: Column(

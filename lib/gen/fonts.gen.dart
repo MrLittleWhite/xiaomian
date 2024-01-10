@@ -14,5 +14,8 @@ class FontFamily {
   static const String nunito = 'Nunito';
 
   /// Font family: XMIconfont
-  static const String xMIconfont = 'XMIconfont';
+  static const String xmIconfont = 'XMIconfont';
+
+  /// Font family: XMRound
+  static const String xmRound = 'XMRound';
 }

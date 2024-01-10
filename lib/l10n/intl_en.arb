@@ -1,0 +1,21 @@
+{
+    "sleepGo": "SleepGo",
+    "sleep": "Sleep",
+    "profile": "Profile",
+    "playHistory": "Play History",
+    "playSettings": "Play Settings",
+    "generalSettings": "General Settings",
+    "feedback": "Feedback",
+    "aboutUs": "About us",
+    "playPeriod": "Play Period",
+    "autoPlay": "Auto Play",
+    "version": "Version",
+    "terms": "Terms",
+    "privacy": "Privacy",
+    "contact": "Contact",
+    "cancel": "cancel",
+    "confirm": "confirm",
+    "loading": "loading",
+    "language": "language",
+    "english": "english"
+}

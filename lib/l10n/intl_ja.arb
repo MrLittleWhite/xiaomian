@@ -1,0 +1,19 @@
+{
+    "sleep": "睡眠",
+    "profile": "プロフィール",
+    "playHistory": "再生履歴",
+    "playSettings": "再生設定",
+    "generalSettings": "一般設定",
+    "feedback": "フィードバック",
+    "aboutUs": "私たちについて",
+    "playPeriod": "再生期間",
+    "autoPlay": "自動再生",
+    "version": "バージョン",
+    "terms": "利用規約",
+    "privacy": "プライバシー",
+    "contact": "お問い合わせ",
+    "confirm": "確認する",
+    "loading": "読み込み中",
+    "language": "言語",
+    "english": "英語"
+}
