@@ -4,7 +4,7 @@
     "playHistory": "播放歷史",
     "playSettings": "播放設置",
     "generalSettings": "通用設定",
-    "feedback": "反饋",
+    "feedback": "意見反饋",
     "aboutUs": "關於我們",
     "playPeriod": "播放時長",
     "autoPlay": "自動播放",
@@ -16,5 +16,6 @@
     "confirm": "確認",
     "loading": "加载中",
     "language": "語言",
-    "english": "英語"
+    "english": "英語",
+    "pleaseSelectLanguage": " 請選擇一種語言"
 }

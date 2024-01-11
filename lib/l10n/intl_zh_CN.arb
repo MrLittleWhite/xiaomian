@@ -17,5 +17,6 @@
     "confirm": "确认",
     "loading": "加载中",
     "language": "语言",
-    "english": "英语"
+    "english": "英语",
+    "pleaseSelectLanguage": "请选择一种语言"
 }

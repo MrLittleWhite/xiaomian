@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "playHistory": MessageLookupByLibrary.simpleMessage("再生履歴"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("再生期間"),
         "playSettings": MessageLookupByLibrary.simpleMessage("再生設定"),
+        "pleaseSelectLanguage":
+            MessageLookupByLibrary.simpleMessage("言語を選択してください"),
         "privacy": MessageLookupByLibrary.simpleMessage("プライバシー"),
         "profile": MessageLookupByLibrary.simpleMessage("プロフィール"),
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,12 +53,12 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20), 
-                    child: FadeInImage.memoryNetwork(
-                      placeholder: kTransparentImage, 
-                      image:'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+                    child: CachedNetworkImage(
+                      placeholder: (context, url) => Container(), 
+                      errorWidget: (context, url, error) => Container(),
                       fit: BoxFit.cover,
                       width: 170, 
-                      height: 170, 
+                      height: 170, imageUrl: 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
                     )
                   ),
                   const Gap(23),

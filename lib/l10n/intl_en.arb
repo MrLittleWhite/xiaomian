@@ -17,5 +17,6 @@
     "confirm": "confirm",
     "loading": "loading",
     "language": "language",
-    "english": "english"
+    "english": "english",
+    "pleaseSelectLanguage": "Please select a language"
 }

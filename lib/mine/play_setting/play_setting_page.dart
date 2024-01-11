@@ -1,9 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/assets_code/xm_tools.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
@@ -73,22 +74,10 @@ class _PlaySettingPageState extends State<PlaySettingPage> {
               key: ValueKey(item), 
               leading: SizedBox(width: 45, height: 45, child: Icon(item.icon, color: item.iconColor,),), 
               title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 20)), 
-              trailing: Stack(
-                children: [
-                  Positioned(
-                    left: 8, top: 10, right: 8, bottom: 10,
-                    child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: XMColor.xmOrange, width: 1)),
-                    ),
-                  ),
-                  CupertinoButton(
-                  child: Obx(() => Text(playerController.playPeriod.value.xmPlayPeriod, style: TextStyle(color: XMColor.xmOrange, fontSize: 16))), 
-                  onPressed: () {
-                    navigateAct(context, item);
-                  },
-                  ),
-                ]
-              ), 
+              trailing: Obx(() => Text(playerController.playPeriod.value.xmPlayPeriod, style: TextStyle(color: XMColor.xmOrange, fontSize: 16))), 
+              onTap: () {
+                navigateAct(context, item);
+              } 
               );
             } else {
               return ListTile(
@@ -139,7 +128,63 @@ class _PlaySettingPageState extends State<PlaySettingPage> {
   }
 
   void _showDialog(BuildContext context) {
+
     Duration duration = Duration(minutes: playerController.playPeriod.value);
+
+    if (Platform.isAndroid) {
+      showDialog<int>(
+        context: context,
+        builder: (BuildContext context) {
+            var child = SizedBox(
+              height: 200,
+              child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: CupertinoTimerPicker(
+                    mode: CupertinoTimerPickerMode.hm,
+                    initialTimerDuration: duration,
+                    // This is called when the user changes the timer's
+                    // duration.
+                    onTimerDurationChanged: (Duration newDuration) {
+                      duration = newDuration;
+                    },
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CupertinoButton(
+                      child: Text(XMIntl.current.cancel),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    CupertinoButton(
+                      child: Text(XMIntl.current.confirm),
+                      onPressed: () {
+                        XMSharedPreferences.setInt(XMPrefersKey.playPeriod, duration.inMinutes).then((value) {
+                          if (value) {
+                            playerController.playPeriod.value = duration.inMinutes;
+                          }
+                        }).catchError((e) {
+                          //upload error
+                        }).whenComplete(() => Navigator.pop(context));
+                      },
+                    ),
+                  ],
+                )
+              ],
+                        ),
+            );
+          return Dialog(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), child: child,);
+        }
+      );
+
+      return;
+    }
+
+
+    
     showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) => Container(

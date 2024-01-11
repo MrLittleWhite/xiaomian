@@ -1,4 +1,5 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -84,12 +85,13 @@ class _HomePageState extends State<HomePage> {
         child: Row (
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: FadeInImage.memoryNetwork(placeholder: kTransparentImage, image:'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
-                fit: BoxFit.cover,
-                width: 59, 
-                height: 59, 
-                ),
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                placeholder: (context, url) => Container(), 
+                errorWidget: (context, url, error) => Container(),
+                imageUrl: 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+                width: 59, height: 59, fit: BoxFit.cover,
+              ),
             ),
             const Gap(16),
             Expanded(

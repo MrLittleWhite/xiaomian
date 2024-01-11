@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
@@ -122,7 +120,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('请选择语言'),
+          title: Text(XMIntl.current.pleaseSelectLanguage),
           children: XMLanguage.values.map((e) => option(e)).toList(),
         );
       }

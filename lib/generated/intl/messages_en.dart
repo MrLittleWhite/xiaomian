@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("Play Period"),
         "playSettings": MessageLookupByLibrary.simpleMessage("Play Settings"),
+        "pleaseSelectLanguage":
+            MessageLookupByLibrary.simpleMessage("Please select a language"),
         "privacy": MessageLookupByLibrary.simpleMessage("Privacy"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),

@@ -15,6 +15,7 @@
     "confirm": "확인",
     "loading": "로딩 중",
     "language": "언어",
-    "english": "영어"
+    "english": "영어",
+    "pleaseSelectLanguage": "언어를 선택하십시오"
 
 }
