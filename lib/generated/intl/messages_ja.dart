@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoPlay": MessageLookupByLibrary.simpleMessage("自動再生"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認する"),
         "connectDesc": MessageLookupByLibrary.simpleMessage(
-            "ネットワークが利用できません。ネットワーク接続を確認してから再試してください"),
+            "ネットワークが利用できません。ネットワーク接続を確認してから再試してください。"),
         "connectError": MessageLookupByLibrary.simpleMessage("ネットワークが利用できません"),
         "contact": MessageLookupByLibrary.simpleMessage("お問い合わせ"),
         "feedback": MessageLookupByLibrary.simpleMessage("フィードバック"),
@@ -34,10 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("言語"),
         "loading": MessageLookupByLibrary.simpleMessage("読み込み中"),
         "netDesc": MessageLookupByLibrary.simpleMessage(
-            "ネットワークエラーです。ネットワーク接続を確認するか、後でもう一度お試しください"),
+            "ネットワークエラーです。ネットワーク接続を確認するか、後でもう一度お試しください。"),
         "netError": MessageLookupByLibrary.simpleMessage("ネットワークエラー"),
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
-            "関連するデータが見つかりませんでした。後で再試してください"),
+            "関連するデータが見つかりませんでした。後で再試してください。"),
         "noDataError": MessageLookupByLibrary.simpleMessage("関連するデータはありません"),
         "playHistory": MessageLookupByLibrary.simpleMessage("再生履歴"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("再生期間"),
@@ -49,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),
         "terms": MessageLookupByLibrary.simpleMessage("利用規約"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("もう一度試してください"),
-        "tryLater": MessageLookupByLibrary.simpleMessage("しばらくしてから再試してください"),
+        "tryLater": MessageLookupByLibrary.simpleMessage("しばらくしてから再試してください。"),
         "unknownError": MessageLookupByLibrary.simpleMessage("未知のエラー"),
         "version": MessageLookupByLibrary.simpleMessage("バージョン")
       };

@@ -19,11 +19,11 @@
     "pleaseSelectLanguage": "請選擇一種語言",
     "unknownError": "未知錯誤",
     "tryLater":"請稍後再試",
-    "tryAgain":"再試一次",
+    "tryAgain":"再試一次。",
     "netError": "網絡錯誤",
-    "netDesc": "網絡錯誤，請檢查網絡連接或稍後再試",
+    "netDesc": "網絡錯誤，請檢查網絡連接或稍後再試。",
     "connectError": "網絡不可用",
-    "connectDesc": "網絡不可用，請檢查網絡連接後再試",
+    "connectDesc": "網絡不可用，請檢查網絡連接後再試。",
     "noDataError": "沒有相關數據",
-    "noDataDesc": "沒有找到相關數據，請稍後再試"
+    "noDataDesc": "沒有找到相關數據，請稍後再試。"
 }

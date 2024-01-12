@@ -19,12 +19,12 @@
     "language": "语言",
     "pleaseSelectLanguage": "请选择一种语言",
     "unknownError": "未知错误",
-    "tryLater":"请稍后再试",
+    "tryLater":"请稍后再试。",
     "tryAgain":"再试一次",
     "netError": "网络错误",
-    "netDesc": "网络错误，请检查网络链接或稍后再试",
+    "netDesc": "网络错误，请检查网络链接或稍后再试。",
     "connectError": "网络不可用",
-    "connectDesc": "网络不可用，请检查网络链接后再试",
+    "connectDesc": "网络不可用，请检查网络链接后再试。",
     "noDataError": "没有相关数据",
-    "noDataDesc": "没有找到相关数据，请稍后再试"
+    "noDataDesc": "没有找到相关数据，请稍后再试。"
 }

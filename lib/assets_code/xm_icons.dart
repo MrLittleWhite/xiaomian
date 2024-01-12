@@ -24,5 +24,4 @@ class XMIconfont {
 
   static const IconData moonStar = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData note = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData appIcon = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

@@ -1,8 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_icons.dart';
+import 'dart:math' as math; 
 import 'package:xiaomian/component/xm_error.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 
@@ -15,34 +16,47 @@ class XMErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: XMColor.xmMain, child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          crossAxisAlignment: CrossAxisAlignment.center, 
-          mainAxisSize: MainAxisSize.min, 
-          children: [
-            const Icon(XMIconfont.note),
-            Text(error.title, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
-          ],),
-        Text(error.message, style: TextStyle(color: Colors.white, fontSize: 16),),
-        Stack(
-          children: [
-            Positioned(
-              left: 8, top: 10, right: 8, bottom: 10,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(8, 0, 16, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center, 
+              crossAxisAlignment: CrossAxisAlignment.center, 
+              children: [
+                Transform.rotate(angle: math.pi*1.5,
+                child: Transform.flip(flipY: true, child: Icon(Icons.note_outlined, color: XMColor.xmBlue, size: 48,))),
+                Flexible(child: Text(error.title, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w900),)),
+              ],),
+          ),
+          Gap(18),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Gap(16),
+              Flexible(child: Text(error.message, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),)),
+              Gap(16),
+            ],
+          ),
+          Gap(25),
+          SizedBox(
+            width: double.infinity,
+            child: Center(
               child: Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: XMColor.xmOrange, width: 1)),
+                child: CupertinoButton(
+                  child: Text(XMIntl.current.tryAgain, style: TextStyle(color: XMColor.xmOrange, fontSize: 15)), 
+                  onPressed: retry,
+                  ),
               ),
             ),
-            CupertinoButton(
-            child: Text(XMIntl.current.tryAgain, style: TextStyle(color: XMColor.xmOrange, fontSize: 16)), 
-            onPressed: retry,
-            ),
-          ]
-        ),
-      ],
-    ),);
+          ),
+        ],
+      ),
+    );
   }
 }

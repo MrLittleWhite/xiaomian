@@ -19,12 +19,12 @@
     "language": "language",
     "pleaseSelectLanguage": "Please select a language",
     "unknownError": "Unknown error",
-    "tryLater":"Please try again later",
+    "tryLater":"Please try again later.",
     "tryAgain":"Try again",
     "netError": "Network error",
-    "netDesc": "Network error, please check your network connection or try again later",
+    "netDesc": "Network error, please check your network connection or try again later.",
     "connectError": "Network unavailable",
-    "connectDesc": "Network unavailable, please check your network connection and try again",
+    "connectDesc": "Network unavailable, please check your network connection and try again.",
     "noDataError": "No relevant data",
-    "noDataDesc": "No relevant data found, please try again later"
+    "noDataDesc": "No relevant data found, please try again later."
 }

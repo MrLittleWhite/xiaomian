@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoPlay": MessageLookupByLibrary.simpleMessage("자동 재생"),
         "confirm": MessageLookupByLibrary.simpleMessage("확인"),
         "connectDesc": MessageLookupByLibrary.simpleMessage(
-            "네트워크를 사용할 수 없습니다. 네트워크 연결을 확인한 후 다시 시도해 주세요"),
+            "네트워크를 사용할 수 없습니다. 네트워크 연결을 확인한 후 다시 시도해 주세요."),
         "connectError":
             MessageLookupByLibrary.simpleMessage("네트워크를 사용할 수 없습니다"),
         "contact": MessageLookupByLibrary.simpleMessage("연락처"),
@@ -35,10 +35,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("언어"),
         "loading": MessageLookupByLibrary.simpleMessage("로딩 중"),
         "netDesc": MessageLookupByLibrary.simpleMessage(
-            "네트워크 오류입니다. 네트워크 연결을 확인하거나 나중에 다시 시도해 주세요"),
+            "네트워크 오류입니다. 네트워크 연결을 확인하거나 나중에 다시 시도해 주세요."),
         "netError": MessageLookupByLibrary.simpleMessage("네트워크 오류"),
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
-            "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요"),
+            "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요."),
         "noDataError": MessageLookupByLibrary.simpleMessage("관련 데이터가 없습니다"),
         "playHistory": MessageLookupByLibrary.simpleMessage("재생 기록"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("재생 기간"),
@@ -50,7 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sleep": MessageLookupByLibrary.simpleMessage("수면"),
         "terms": MessageLookupByLibrary.simpleMessage("약관"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("다시 시도하세요"),
-        "tryLater": MessageLookupByLibrary.simpleMessage("잠시 후에 다시 시도해 주세요"),
+        "tryLater": MessageLookupByLibrary.simpleMessage("잠시 후에 다시 시도해 주세요."),
         "unknownError": MessageLookupByLibrary.simpleMessage("미지의 오류"),
         "version": MessageLookupByLibrary.simpleMessage("버전")
       };

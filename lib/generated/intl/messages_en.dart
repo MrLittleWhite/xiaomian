@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
         "connectDesc": MessageLookupByLibrary.simpleMessage(
-            "Network unavailable, please check your network connection and try again"),
+            "Network unavailable, please check your network connection and try again."),
         "connectError":
             MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
@@ -37,10 +37,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("language"),
         "loading": MessageLookupByLibrary.simpleMessage("loading"),
         "netDesc": MessageLookupByLibrary.simpleMessage(
-            "Network error, please check your network connection or try again later"),
+            "Network error, please check your network connection or try again later."),
         "netError": MessageLookupByLibrary.simpleMessage("Network error"),
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
-            "No relevant data found, please try again later"),
+            "No relevant data found, please try again later."),
         "noDataError": MessageLookupByLibrary.simpleMessage("No relevant data"),
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("Play Period"),
@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "terms": MessageLookupByLibrary.simpleMessage("Terms"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
         "tryLater":
-            MessageLookupByLibrary.simpleMessage("Please try again later"),
+            MessageLookupByLibrary.simpleMessage("Please try again later."),
         "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "version": MessageLookupByLibrary.simpleMessage("Version")
       };

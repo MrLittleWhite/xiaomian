@@ -250,10 +250,10 @@ class S {
     );
   }
 
-  /// `Please try again later`
+  /// `Please try again later.`
   String get tryLater {
     return Intl.message(
-      'Please try again later',
+      'Please try again later.',
       name: 'tryLater',
       desc: '',
       args: [],
@@ -280,10 +280,10 @@ class S {
     );
   }
 
-  /// `Network error, please check your network connection or try again later`
+  /// `Network error, please check your network connection or try again later.`
   String get netDesc {
     return Intl.message(
-      'Network error, please check your network connection or try again later',
+      'Network error, please check your network connection or try again later.',
       name: 'netDesc',
       desc: '',
       args: [],
@@ -300,10 +300,10 @@ class S {
     );
   }
 
-  /// `Network unavailable, please check your network connection and try again`
+  /// `Network unavailable, please check your network connection and try again.`
   String get connectDesc {
     return Intl.message(
-      'Network unavailable, please check your network connection and try again',
+      'Network unavailable, please check your network connection and try again.',
       name: 'connectDesc',
       desc: '',
       args: [],
@@ -320,10 +320,10 @@ class S {
     );
   }
 
-  /// `No relevant data found, please try again later`
+  /// `No relevant data found, please try again later.`
   String get noDataDesc {
     return Intl.message(
-      'No relevant data found, please try again later',
+      'No relevant data found, please try again later.',
       name: 'noDataDesc',
       desc: '',
       args: [],
