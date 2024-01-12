@@ -74,8 +74,9 @@ extension XMLanguageExtension on XMLanguage {
 
 
 class XMlocale {
-  static XMLanguage language(BuildContext context) {
-    var locale = Localizations.localeOf(context);
+  //需要XMIntl.locale()调用后使用
+  static XMLanguage get language {
+    var locale = Localizations.localeOf(Get.context!);
 
     if (locale.languageCode == 'zh') {
       if (locale.countryCode == 'CN') {

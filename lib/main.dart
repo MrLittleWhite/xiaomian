@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       onGenerateTitle: (context) => S.of(context).sleepGo,
       theme: ThemeData(
         fontFamily: FontFamily.nunito,
-        fontFamilyFallback: const [FontFamily.xmRound, "Cupertino"],
+        fontFamilyFallback: const [FontFamily.xmRound],
         colorScheme: ColorScheme.fromSeed(seedColor: XMColor.xmMain),
         useMaterial3: true,
         pageTransitionsTheme: const PageTransitionsTheme(builders: {

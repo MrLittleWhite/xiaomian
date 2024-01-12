@@ -26,12 +26,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoPlay": MessageLookupByLibrary.simpleMessage("自动播放"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
+        "connectDesc": MessageLookupByLibrary.simpleMessage("网络不可用，请检查网络链接后再试"),
+        "connectError": MessageLookupByLibrary.simpleMessage("网络不可用"),
         "contact": MessageLookupByLibrary.simpleMessage("联系方式"),
-        "english": MessageLookupByLibrary.simpleMessage("英语"),
         "feedback": MessageLookupByLibrary.simpleMessage("意见反馈"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("通用设置"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "loading": MessageLookupByLibrary.simpleMessage("加载中"),
+        "netDesc": MessageLookupByLibrary.simpleMessage("网络错误，请检查网络链接或稍后再试"),
+        "netError": MessageLookupByLibrary.simpleMessage("网络错误"),
+        "noDataDesc": MessageLookupByLibrary.simpleMessage("没有找到相关数据，请稍后再试"),
+        "noDataError": MessageLookupByLibrary.simpleMessage("没有相关数据"),
         "playHistory": MessageLookupByLibrary.simpleMessage("播放历史"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("播放时长"),
         "playSettings": MessageLookupByLibrary.simpleMessage("播放设置"),
@@ -41,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("失眠家"),
         "terms": MessageLookupByLibrary.simpleMessage("条款"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("再试一次"),
+        "tryLater": MessageLookupByLibrary.simpleMessage("请稍后再试"),
+        "unknownError": MessageLookupByLibrary.simpleMessage("未知错误"),
         "version": MessageLookupByLibrary.simpleMessage("版本")
       };
 }

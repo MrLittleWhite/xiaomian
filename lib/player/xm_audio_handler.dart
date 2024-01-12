@@ -122,10 +122,10 @@ class XMAudioHandler extends BaseAudioHandler
   MediaItem _mediaItemFrom(AudioPlayItem playItem) {
     return MediaItem(id: playItem.id, 
                   title: playItem.title, 
-                 artist: playItem.artist, 
-                  album: playItem.albumTitle, 
-                 artUri: Uri.parse(playItem.artwork),
+                 artist: playItem.author, 
+                  album: playItem.desc, 
+                 artUri: Uri.parse(playItem.cover),
            displayTitle: playItem.title, 
-        displaySubtitle: playItem.albumTitle);
+        displaySubtitle: playItem.desc);
   }
 }

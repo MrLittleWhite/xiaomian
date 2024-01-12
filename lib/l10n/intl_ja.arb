@@ -15,6 +15,14 @@
     "confirm": "確認する",
     "loading": "読み込み中",
     "language": "言語",
-    "english": "英語",
-    "pleaseSelectLanguage": "言語を選択してください"
+    "pleaseSelectLanguage": "言語を選択してください",
+    "unknownError": "未知のエラー",
+    "tryLater":"しばらくしてから再試してください",
+    "tryAgain":"もう一度試してください",
+    "netError": "ネットワークエラー",
+    "netDesc": "ネットワークエラーです。ネットワーク接続を確認するか、後でもう一度お試しください",
+    "connectError": "ネットワークが利用できません",
+    "connectDesc": "ネットワークが利用できません。ネットワーク接続を確認してから再試してください",
+    "noDataError": "関連するデータはありません",
+    "noDataDesc": "関連するデータが見つかりませんでした。後で再試してください"
 }

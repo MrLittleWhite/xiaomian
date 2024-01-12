@@ -26,13 +26,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoPlay": MessageLookupByLibrary.simpleMessage("Auto Play"),
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
+        "connectDesc": MessageLookupByLibrary.simpleMessage(
+            "Network unavailable, please check your network connection and try again"),
+        "connectError":
+            MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
-        "english": MessageLookupByLibrary.simpleMessage("english"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "generalSettings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
         "language": MessageLookupByLibrary.simpleMessage("language"),
         "loading": MessageLookupByLibrary.simpleMessage("loading"),
+        "netDesc": MessageLookupByLibrary.simpleMessage(
+            "Network error, please check your network connection or try again later"),
+        "netError": MessageLookupByLibrary.simpleMessage("Network error"),
+        "noDataDesc": MessageLookupByLibrary.simpleMessage(
+            "No relevant data found, please try again later"),
+        "noDataError": MessageLookupByLibrary.simpleMessage("No relevant data"),
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("Play Period"),
         "playSettings": MessageLookupByLibrary.simpleMessage("Play Settings"),
@@ -43,6 +52,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("SleepGo"),
         "terms": MessageLookupByLibrary.simpleMessage("Terms"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("Try again"),
+        "tryLater":
+            MessageLookupByLibrary.simpleMessage("Please try again later"),
+        "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "version": MessageLookupByLibrary.simpleMessage("Version")
       };
 }

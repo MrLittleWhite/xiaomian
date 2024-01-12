@@ -12,11 +12,11 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconImageGen {
   const $AssetsIconImageGen();
 
-  /// File path: assets/icon_image/app_icon.svg
-  String get appIcon => 'assets/icon_image/app_icon.svg';
+  /// File path: assets/icon_image/app_icon.jpeg
+  String get appIcon => 'assets/icon_image/app_icon.jpeg';
 
-  /// File path: assets/icon_image/pull_close.svg
-  String get pullClose => 'assets/icon_image/pull_close.svg';
+  /// File path: assets/icon_image/pull_close.png
+  String get pullClose => 'assets/icon_image/pull_close.png';
 
   /// List of all assets
   List<String> get values => [appIcon, pullClose];

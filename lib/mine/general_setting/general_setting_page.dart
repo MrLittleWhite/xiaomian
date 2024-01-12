@@ -4,6 +4,7 @@ import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
+import 'package:xiaomian/gen/fonts.gen.dart';
 
 enum GeneralSettingItemType {
   language,
@@ -20,7 +21,7 @@ extension GeneralSettingItemTypeExtension on GeneralSettingItemType {
   IconData get icon {
     switch (this) {
       case GeneralSettingItemType.language:
-        return Icons.language;
+        return Icons.public;
     }
   }
 
@@ -58,22 +59,8 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
                 return ListTile(
             key: ValueKey(item), 
             leading: SizedBox(width: 45, height: 45, child: Icon(item.icon, color: item.iconColor,),), 
-            title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 20)), 
-            trailing: FutureBuilder(
-              future: XMSharedPreferences.getInt(XMPrefersKey.language),
-              builder: (context, snapshot) {
-                String content = "${XMIntl.current.loading}...";
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasData) {
-                    var language = XMLanguage.values[snapshot.data!] ;
-                    content = language.desc;
-                  } else {
-                    content = XMlocale.language(context).desc;
-                  } 
-                } 
-                return Text(content, style: TextStyle(color: Colors.white, fontSize: 16),);
-              }, 
-            ),
+            title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 20, fontFamily: FontFamily.nunito, fontFamilyFallback: [FontFamily.xmRound])), 
+            trailing: Text(XMlocale.language.desc, style: const TextStyle(color: Colors.white, fontSize: 16, fontFamily: FontFamily.nunito, fontFamilyFallback: [FontFamily.xmRound]),),
             onTap: () {
               changeLanguage().then((value) {
                 if (value == null) {
@@ -120,6 +107,7 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Text(XMIntl.current.pleaseSelectLanguage),
           children: XMLanguage.values.map((e) => option(e)).toList(),
         );

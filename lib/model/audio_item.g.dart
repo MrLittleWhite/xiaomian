@@ -9,19 +9,19 @@ part of 'audio_item.dart';
 _$AudioItemImpl _$$AudioItemImplFromJson(Map<String, dynamic> json) =>
     _$AudioItemImpl(
       id: json['id'] as String,
-      title: json['title'] as String,
+      titleTXT: LanguageText.fromJson(json['titleTXT'] as Map<String, dynamic>),
       url: json['url'] as String,
-      artist: json['artist'] as String,
-      albumTitle: json['albumTitle'] as String,
-      artwork: json['artwork'] as String,
+      cover: json['cover'] as String,
+      author: json['author'] as String,
+      descTXT: LanguageText.fromJson(json['descTXT'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AudioItemImplToJson(_$AudioItemImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
+      'titleTXT': instance.titleTXT,
       'url': instance.url,
-      'artist': instance.artist,
-      'albumTitle': instance.albumTitle,
-      'artwork': instance.artwork,
+      'cover': instance.cover,
+      'author': instance.author,
+      'descTXT': instance.descTXT,
     };

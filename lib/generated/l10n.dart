@@ -230,21 +230,101 @@ class S {
     );
   }
 
-  /// `english`
-  String get english {
-    return Intl.message(
-      'english',
-      name: 'english',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Please select a language`
   String get pleaseSelectLanguage {
     return Intl.message(
       'Please select a language',
       name: 'pleaseSelectLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown error`
+  String get unknownError {
+    return Intl.message(
+      'Unknown error',
+      name: 'unknownError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again later`
+  String get tryLater {
+    return Intl.message(
+      'Please try again later',
+      name: 'tryLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try again`
+  String get tryAgain {
+    return Intl.message(
+      'Try again',
+      name: 'tryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network error`
+  String get netError {
+    return Intl.message(
+      'Network error',
+      name: 'netError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network error, please check your network connection or try again later`
+  String get netDesc {
+    return Intl.message(
+      'Network error, please check your network connection or try again later',
+      name: 'netDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network unavailable`
+  String get connectError {
+    return Intl.message(
+      'Network unavailable',
+      name: 'connectError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network unavailable, please check your network connection and try again`
+  String get connectDesc {
+    return Intl.message(
+      'Network unavailable, please check your network connection and try again',
+      name: 'connectDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No relevant data`
+  String get noDataError {
+    return Intl.message(
+      'No relevant data',
+      name: 'noDataError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No relevant data found, please try again later`
+  String get noDataDesc {
+    return Intl.message(
+      'No relevant data found, please try again later',
+      name: 'noDataDesc',
       desc: '',
       args: [],
     );

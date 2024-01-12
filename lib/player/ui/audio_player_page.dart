@@ -40,7 +40,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
           backgroundColor: XMColor.xmMain,
           centerTitle: true,
           title: CupertinoButton(
-            child: SvgPicture.asset(Assets.iconImage.pullClose, width: 36, height: 10), 
+            child: Image.asset(Assets.iconImage.pullClose, width: 36, height: 10), 
             onPressed: () {
             Get.back();
           },),
@@ -95,9 +95,9 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                             builder: (context, snapshot) {
                               return IconButton(
                               onPressed: () {
-                                const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
-                                playerController.setPlayItem(model);
-                                playerController.handler?.playOrPause();
+                                // const model = AudioItem(id: "123", title: "东方红", albumTitle: "新中国", artist: "陕北人民", url: "https://cccimg.com/view.php/5d4086139dcd25bef2522c469512c83f.mp3", artwork: "https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg");
+                                // playerController.setPlayItem(model);
+                                // playerController.handler?.playOrPause();
                               },  
                               icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 36,),
                               );

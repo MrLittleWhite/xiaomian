@@ -15,7 +15,14 @@
     "confirm": "확인",
     "loading": "로딩 중",
     "language": "언어",
-    "english": "영어",
-    "pleaseSelectLanguage": "언어를 선택하십시오"
-
+    "pleaseSelectLanguage": "언어를 선택하십시오",
+    "unknownError": "미지의 오류",
+    "tryLater":"잠시 후에 다시 시도해 주세요",
+    "tryAgain":"다시 시도하세요",
+    "netError": "네트워크 오류",
+    "netDesc": "네트워크 오류입니다. 네트워크 연결을 확인하거나 나중에 다시 시도해 주세요",
+    "connectError": "네트워크를 사용할 수 없습니다",
+    "connectDesc": "네트워크를 사용할 수 없습니다. 네트워크 연결을 확인한 후 다시 시도해 주세요",
+    "noDataError": "관련 데이터가 없습니다",
+    "noDataDesc": "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요"
 }

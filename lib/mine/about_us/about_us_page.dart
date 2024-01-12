@@ -105,7 +105,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ClipRRect(borderRadius: BorderRadius.circular(16), 
-                      child: SvgPicture.asset(Assets.iconImage.appIcon, width: 100, height: 100,)),
+                      child: Image.asset(Assets.iconImage.appIcon, width: 100, height: 100,)),
                     const Gap(16),
                     Text(XMIntl.current.sleepGo, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                   ]

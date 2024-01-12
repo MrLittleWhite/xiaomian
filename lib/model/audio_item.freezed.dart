@@ -21,11 +21,11 @@ AudioItem _$AudioItemFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AudioItem {
   String get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
+  LanguageText get titleTXT => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String get artist => throw _privateConstructorUsedError;
-  String get albumTitle => throw _privateConstructorUsedError;
-  String get artwork => throw _privateConstructorUsedError;
+  String get cover => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
+  LanguageText get descTXT => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,11 +40,14 @@ abstract class $AudioItemCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String title,
+      LanguageText titleTXT,
       String url,
-      String artist,
-      String albumTitle,
-      String artwork});
+      String cover,
+      String author,
+      LanguageText descTXT});
+
+  $LanguageTextCopyWith<$Res> get titleTXT;
+  $LanguageTextCopyWith<$Res> get descTXT;
 }
 
 /// @nodoc
@@ -61,38 +64,54 @@ class _$AudioItemCopyWithImpl<$Res, $Val extends AudioItem>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? titleTXT = null,
     Object? url = null,
-    Object? artist = null,
-    Object? albumTitle = null,
-    Object? artwork = null,
+    Object? cover = null,
+    Object? author = null,
+    Object? descTXT = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      titleTXT: null == titleTXT
+          ? _value.titleTXT
+          : titleTXT // ignore: cast_nullable_to_non_nullable
+              as LanguageText,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      artist: null == artist
-          ? _value.artist
-          : artist // ignore: cast_nullable_to_non_nullable
+      cover: null == cover
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
               as String,
-      albumTitle: null == albumTitle
-          ? _value.albumTitle
-          : albumTitle // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
-      artwork: null == artwork
-          ? _value.artwork
-          : artwork // ignore: cast_nullable_to_non_nullable
-              as String,
+      descTXT: null == descTXT
+          ? _value.descTXT
+          : descTXT // ignore: cast_nullable_to_non_nullable
+              as LanguageText,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LanguageTextCopyWith<$Res> get titleTXT {
+    return $LanguageTextCopyWith<$Res>(_value.titleTXT, (value) {
+      return _then(_value.copyWith(titleTXT: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LanguageTextCopyWith<$Res> get descTXT {
+    return $LanguageTextCopyWith<$Res>(_value.descTXT, (value) {
+      return _then(_value.copyWith(descTXT: value) as $Val);
+    });
   }
 }
 
@@ -106,11 +125,16 @@ abstract class _$$AudioItemImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String title,
+      LanguageText titleTXT,
       String url,
-      String artist,
-      String albumTitle,
-      String artwork});
+      String cover,
+      String author,
+      LanguageText descTXT});
+
+  @override
+  $LanguageTextCopyWith<$Res> get titleTXT;
+  @override
+  $LanguageTextCopyWith<$Res> get descTXT;
 }
 
 /// @nodoc
@@ -125,37 +149,37 @@ class __$$AudioItemImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
+    Object? titleTXT = null,
     Object? url = null,
-    Object? artist = null,
-    Object? albumTitle = null,
-    Object? artwork = null,
+    Object? cover = null,
+    Object? author = null,
+    Object? descTXT = null,
   }) {
     return _then(_$AudioItemImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
+      titleTXT: null == titleTXT
+          ? _value.titleTXT
+          : titleTXT // ignore: cast_nullable_to_non_nullable
+              as LanguageText,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      artist: null == artist
-          ? _value.artist
-          : artist // ignore: cast_nullable_to_non_nullable
+      cover: null == cover
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
               as String,
-      albumTitle: null == albumTitle
-          ? _value.albumTitle
-          : albumTitle // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
-      artwork: null == artwork
-          ? _value.artwork
-          : artwork // ignore: cast_nullable_to_non_nullable
-              as String,
+      descTXT: null == descTXT
+          ? _value.descTXT
+          : descTXT // ignore: cast_nullable_to_non_nullable
+              as LanguageText,
     ));
   }
 }
@@ -165,11 +189,11 @@ class __$$AudioItemImplCopyWithImpl<$Res>
 class _$AudioItemImpl implements _AudioItem {
   const _$AudioItemImpl(
       {required this.id,
-      required this.title,
+      required this.titleTXT,
       required this.url,
-      required this.artist,
-      required this.albumTitle,
-      required this.artwork});
+      required this.cover,
+      required this.author,
+      required this.descTXT});
 
   factory _$AudioItemImpl.fromJson(Map<String, dynamic> json) =>
       _$$AudioItemImplFromJson(json);
@@ -177,19 +201,19 @@ class _$AudioItemImpl implements _AudioItem {
   @override
   final String id;
   @override
-  final String title;
+  final LanguageText titleTXT;
   @override
   final String url;
   @override
-  final String artist;
+  final String cover;
   @override
-  final String albumTitle;
+  final String author;
   @override
-  final String artwork;
+  final LanguageText descTXT;
 
   @override
   String toString() {
-    return 'AudioItem(id: $id, title: $title, url: $url, artist: $artist, albumTitle: $albumTitle, artwork: $artwork)';
+    return 'AudioItem(id: $id, titleTXT: $titleTXT, url: $url, cover: $cover, author: $author, descTXT: $descTXT)';
   }
 
   @override
@@ -198,18 +222,18 @@ class _$AudioItemImpl implements _AudioItem {
         (other.runtimeType == runtimeType &&
             other is _$AudioItemImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
+            (identical(other.titleTXT, titleTXT) ||
+                other.titleTXT == titleTXT) &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.artist, artist) || other.artist == artist) &&
-            (identical(other.albumTitle, albumTitle) ||
-                other.albumTitle == albumTitle) &&
-            (identical(other.artwork, artwork) || other.artwork == artwork));
+            (identical(other.cover, cover) || other.cover == cover) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.descTXT, descTXT) || other.descTXT == descTXT));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, url, artist, albumTitle, artwork);
+      Object.hash(runtimeType, id, titleTXT, url, cover, author, descTXT);
 
   @JsonKey(ignore: true)
   @override
@@ -223,16 +247,22 @@ class _$AudioItemImpl implements _AudioItem {
       this,
     );
   }
+  
+  @override
+  String get desc => descTXT.txt;
+  
+  @override
+  String get title => titleTXT.txt;
 }
 
 abstract class _AudioItem implements AudioItem {
   const factory _AudioItem(
       {required final String id,
-      required final String title,
+      required final LanguageText titleTXT,
       required final String url,
-      required final String artist,
-      required final String albumTitle,
-      required final String artwork}) = _$AudioItemImpl;
+      required final String cover,
+      required final String author,
+      required final LanguageText descTXT}) = _$AudioItemImpl;
 
   factory _AudioItem.fromJson(Map<String, dynamic> json) =
       _$AudioItemImpl.fromJson;
@@ -240,15 +270,15 @@ abstract class _AudioItem implements AudioItem {
   @override
   String get id;
   @override
-  String get title;
+  LanguageText get titleTXT;
   @override
   String get url;
   @override
-  String get artist;
+  String get cover;
   @override
-  String get albumTitle;
+  String get author;
   @override
-  String get artwork;
+  LanguageText get descTXT;
   @override
   @JsonKey(ignore: true)
   _$$AudioItemImplCopyWith<_$AudioItemImpl> get copyWith =>

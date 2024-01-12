@@ -3,7 +3,7 @@ abstract class AudioPlayItem {
   String get id;
   String get title;
   String get url;
-  String get artist;
-  String get albumTitle;
-  String get artwork;
+  String get author;
+  String get desc;
+  String get cover;
 }
