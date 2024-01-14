@@ -1,34 +1,84 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
+import 'package:isar/isar.dart';
 import 'package:xiaomian/model/language_text.dart';
+import 'package:xiaomian/model/xm_user.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
 
-part 'audio_item.freezed.dart';
 part 'audio_item.g.dart';
 
-@freezed
-class AudioItem with _$AudioItem implements AudioPlayItem {
-// class AudioItem with _$AudioItem {
-  const factory AudioItem({
-    required String id,
-    required LanguageText titleTXT,
-    required String url,
-    required String cover,
-    required String author,
-    required LanguageText descTXT
-  }) = _AudioItem;
+@collection
+class AudioItem implements AudioPlayItem {
 
-  factory AudioItem.fromJson(Map<String, Object?> json)
-      => _$AudioItemFromJson(json);
+    @Index(unique: true, replace: true)
+    @override
+      String aId;
 
-  @override
-  String get title {
-    return titleTXT.txt;
-  }
+    @override
+      String? cover;
 
-  @override
-  String get desc {
-    return descTXT.txt;
-  }
+    @override
+      String? url;
+
+    LanguageText? titleTXT;
+    XMUser? author;
+    LanguageText? descTXT;
+
+    Id id = Isar.autoIncrement;
+
+    @Index()
+    DateTime? createTime;
+
+    AudioItem({
+        required this.aId,
+        this.cover,
+        this.url,
+        this.titleTXT,
+        this.author,
+        this.descTXT,
+        this.createTime,
+    });
+
+    factory AudioItem.fromRawJson(String str) => AudioItem.fromJson(json.decode(str));
+
+    String toRawJson() => json.encode(toJson());
+
+    factory AudioItem.fromJson(Map<String, dynamic> json) => AudioItem(
+        aId: json["id"],
+        cover: json["cover"],
+        url: json["url"],
+        titleTXT: json["title"] == null ? null : LanguageText.fromJson(json["title"]),
+        author: json["author"] == null ? null : XMUser.fromJson(json["author"]),
+        descTXT: json["desc"] == null ? null : LanguageText.fromJson(json["desc"]),
+        createTime: json["createTime"] == null ? DateTime.now() : DateTime.parse(json["createTime"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": aId,
+        "cover": cover,
+        "url": url,
+        "title": titleTXT?.toJson(),
+        "author": author?.toJson(),
+        "desc": descTXT?.toJson(),
+    };
+    
+    @ignore
+    @override
+    String? get authorName {
+      return author?.name;
+    }
+
+    @ignore
+    @override
+    String? get desc {
+      return descTXT?.txt;
+    }
+
+    @ignore  
+    @override
+    String? get title {
+      return titleTXT?.txt;
+    }
+
 }
 
 extension AudioItemExtensin on AudioItem {

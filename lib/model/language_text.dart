@@ -1,36 +1,52 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:isar/isar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 
-part 'language_text.freezed.dart';
 part 'language_text.g.dart';
 
-@freezed
-class LanguageText with _$LanguageText {
-  const factory LanguageText({
-    required String en,
-    required String cn,
-    required String ja,
-    required String ko,
-    required String cnHK
-  }) = _LanguageText;
+@embedded
+class LanguageText {
+  String? en;
+  String? cn;
+  String? ja;
+  String? ko;
+  String? cnHK;
 
-  factory LanguageText.fromJson(Map<String, Object?> json)
-      => _$LanguageTextFromJson(json);
+  LanguageText({this.en, this.cn, this.ja, this.ko, this.cnHK});
+
+  LanguageText.fromJson(Map<String, dynamic> json) {
+    en = json['en'];
+    cn = json['cn'];
+    ja = json['ja'];
+    ko = json['ko'];
+    cnHK = json['cnHK'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['en'] = en;
+    data['cn'] = cn;
+    data['ja'] = ja;
+    data['ko'] = ko;
+    data['cnHK'] = cnHK;
+    return data;
+  }
 }
 
 extension LanguageTextExtension on LanguageText {
   String get txt {
+    String? text;
     switch (XMlocale.language) {
       case XMLanguage.english:
-        return en;
+        text = en;
       case XMLanguage.simpleChinese:
-        return cn;
+        text = cn;
       case XMLanguage.japanese:
-        return ja;
+        text = ja;
       case XMLanguage.korean:
-        return ko;
+        text = ko;
       case XMLanguage.troditionalChinese:
-        return cnHK;
+        text = cnHK;
     }
+    return text ?? "mutiple languages error";
   }
 }

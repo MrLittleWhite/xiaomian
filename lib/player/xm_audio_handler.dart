@@ -1,5 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
 import 'package:xiaomian/player/xm_audio_player.dart';
 
@@ -111,20 +112,20 @@ class XMAudioHandler extends BaseAudioHandler
   // Future<void> skipToQueueItem(int i) async {}
 
   static setMedioInfo(AudioPlayItem? playItem) {
-    if (playItem != null) {
+    if (playItem != null && playItem.url != null) {
       final mediaItem = shared?._mediaItemFrom(playItem);
       //NowPlayingInfo
       shared?.mediaItem.add(mediaItem);
-      shared?.player.setURL(playItem.url, medioInfo: mediaItem);
+      shared?.player.setURL(playItem.url!, medioInfo: mediaItem);
     }
   }
 
   MediaItem _mediaItemFrom(AudioPlayItem playItem) {
-    return MediaItem(id: playItem.id, 
-                  title: playItem.title, 
-                 artist: playItem.author, 
+    return MediaItem(id: playItem.aId, 
+                  title: playItem.title ?? XMIntl.current.sleepGo, 
+                 artist: playItem.authorName, 
                   album: playItem.desc, 
-                 artUri: Uri.parse(playItem.cover),
+                 artUri: playItem.cover == null ? null : Uri.parse(playItem.cover!),
            displayTitle: playItem.title, 
         displaySubtitle: playItem.desc);
   }
