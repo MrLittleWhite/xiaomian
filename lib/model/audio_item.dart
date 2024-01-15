@@ -49,7 +49,7 @@ class AudioItem implements AudioPlayItem {
         titleTXT: json["title"] == null ? null : LanguageText.fromJson(json["title"]),
         author: json["author"] == null ? null : XMUser.fromJson(json["author"]),
         descTXT: json["desc"] == null ? null : LanguageText.fromJson(json["desc"]),
-        createTime: json["createTime"] == null ? DateTime.now() : DateTime.parse(json["createTime"]),
+        createTime: json["createTime"] == null ? DateTime.now() : DateTime.fromMillisecondsSinceEpoch(json["createTime"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -59,6 +59,7 @@ class AudioItem implements AudioPlayItem {
         "title": titleTXT?.toJson(),
         "author": author?.toJson(),
         "desc": descTXT?.toJson(),
+        "createTime": createTime?.toIso8601String(),
     };
     
     @ignore

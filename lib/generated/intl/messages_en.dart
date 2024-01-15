@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectError":
             MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+        "developer": MessageLookupByLibrary.simpleMessage("developer"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "generalSettings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
@@ -42,13 +43,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
             "No relevant data found, please try again later."),
         "noDataError": MessageLookupByLibrary.simpleMessage("No relevant data"),
+        "notSupport":
+            MessageLookupByLibrary.simpleMessage("Temporarily not supported"),
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("Play Period"),
         "playSettings": MessageLookupByLibrary.simpleMessage("Play Settings"),
         "pleaseSelectLanguage":
             MessageLookupByLibrary.simpleMessage("Please select a language"),
+        "positiveFeedback":
+            MessageLookupByLibrary.simpleMessage("five-star rating"),
         "privacy": MessageLookupByLibrary.simpleMessage("Privacy"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "questionsSuggestions":
+            MessageLookupByLibrary.simpleMessage("Questions and suggestions"),
         "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("SleepGo"),
         "terms": MessageLookupByLibrary.simpleMessage("Terms"),

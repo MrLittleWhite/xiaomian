@@ -329,6 +329,46 @@ class S {
       args: [],
     );
   }
+
+  /// `five-star rating`
+  String get positiveFeedback {
+    return Intl.message(
+      'five-star rating',
+      name: 'positiveFeedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Questions and suggestions`
+  String get questionsSuggestions {
+    return Intl.message(
+      'Questions and suggestions',
+      name: 'questionsSuggestions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Temporarily not supported`
+  String get notSupport {
+    return Intl.message(
+      'Temporarily not supported',
+      name: 'notSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `developer`
+  String get developer {
+    return Intl.message(
+      'developer',
+      name: 'developer',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_intl.dart';
@@ -58,7 +62,7 @@ extension ProfileItemTypeExtension on ProfileItemType {
     }
   }
 
-  void navigateAct() {
+  void navigateAct(BuildContext context) {
     String? name;
     switch (this) {
       case ProfileItemType.playHistory:
@@ -71,7 +75,7 @@ extension ProfileItemTypeExtension on ProfileItemType {
         name = AppRoute.generalSetting;
         break;
       case ProfileItemType.feedBack:
-        // todo
+      //todo
         break;
       case ProfileItemType.aboutUs:
         name = '/aboutUs';
@@ -130,7 +134,11 @@ class _MinePageState extends State<MinePage> {
           title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 16)), 
           trailing: const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
           onTap: () {
-            item.navigateAct();
+            if(item == ProfileItemType.feedBack) {
+              showFeedback(context);
+            } else {
+              item.navigateAct(context);
+            }
           },);
         }, 
         separatorBuilder: (BuildContext context, int index) { 
@@ -155,5 +163,50 @@ class _MinePageState extends State<MinePage> {
         itemCount: _items.length,
         ),
       );
+  }
+
+  Future<int?> showFeedback(BuildContext context) async {
+    return showDialog<int>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          backgroundColor: XMColor.xmBackground,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          children: [
+            option(true),
+            option(false)
+          ],
+        );
+      }
+    );
+  }
+
+  SimpleDialogOption option(bool like) {
+    return SimpleDialogOption(
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(vertical: 6),
+        leading: Icon( like ? Icons.favorite : Icons.edit_document, color: like ? Colors.red : XMColor.xmBlue,), 
+        title: Text(like ? XMIntl.current.positiveFeedback : XMIntl.current.questionsSuggestions, style: TextStyle(fontWeight: FontWeight.w700)),
+        onTap: () {
+          if (like) {
+            final inAppReview = InAppReview.instance;
+            inAppReview.isAvailable().then((value) {
+              if (value) {
+                return inAppReview.requestReview();
+              }
+              Fluttertoast.showToast(msg: XMIntl.current.notSupport);
+              return Future(() => null);
+            }).catchError((e) {
+              Fluttertoast.showToast(msg: "$e");
+            });
+          } else {
+            final url = Uri.encodeFull("mailto:luffy243077002@163.com?subject=${XMIntl.current.sleepGo}: ${XMIntl.current.questionsSuggestions}");
+            launchUrlString(url).then((value) => null).catchError((e) {
+              Fluttertoast.showToast(msg: "$e", textColor: Colors.red);
+            });
+          }
+          Get.back();
+        },),
+    );
   }
 }

@@ -26,5 +26,9 @@
     "connectError": "网络不可用",
     "connectDesc": "网络不可用，请检查网络链接后再试。",
     "noDataError": "没有相关数据",
-    "noDataDesc": "没有找到相关数据，请稍后再试。"
+    "noDataDesc": "没有找到相关数据，请稍后再试。",
+    "positiveFeedback": "五星好评",
+    "questionsSuggestions": "疑问和建议",
+    "notSupport": "暂未支持",
+    "developer": "开发者"
 }

@@ -11,8 +11,10 @@ class PlayHistoryRepository {
   static final PlayHistoryRepository _instance = PlayHistoryRepository._internal();
 
   factory PlayHistoryRepository() => _instance;
+  
+  int? count;
 
-  Future<Isar> initialize() async {
+  Future<Isar> _initialize() async {
     if (_isar != null) {
       return Future(() => _isar!);
     }
@@ -23,6 +25,37 @@ class PlayHistoryRepository {
   }
 
   Future<AudioItem?> getFirstItem() async {
-    return initialize().then((value) => value.audioItems.where().sortByCreateTime().findFirst());
+    return _initialize().then((value) => value.audioItems.where().sortByCreateTimeDesc().findFirst());
+  }
+
+  Future<void> insert(AudioItem item) async {
+    return _initialize().then(
+      (value) => value.writeTxn(() => value.audioItems.put(item))
+    ).then( (value) {
+      if (count != null) {
+        count = count! + 1;
+        return _initialize();
+      } else {
+        return getAll().then((value) {
+          return _initialize();
+        });
+      }
+    }).then((value) {
+      if (count! > 50) {
+        return value.audioItems.where().sortByCreateTime().deleteFirst();
+      }
+      return Future(() => null);
+    });
+  }
+
+  Future<List<AudioItem>> getAll() async {
+    return _initialize().then((value) => value.audioItems.where().findAll()).then((value) {
+      count = value.length;
+      return Future(() => value);
+    });
+  }
+
+  Future<void> delete(AudioItem item) async {
+    return _initialize().then((value) => value.writeTxn(() => value.audioItems.delete(item.id)));
   }
 }

@@ -103,10 +103,11 @@ class _GeneralSettingPageState extends State<GeneralSettingPage> {
   }
 
   Future<int?> changeLanguage() async {
-  return showDialog<int>(
+    return showDialog<int>(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
+          backgroundColor: XMColor.xmBackground,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           title: Text(XMIntl.current.pleaseSelectLanguage),
           children: XMLanguage.values.map((e) => option(e)).toList(),

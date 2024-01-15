@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectError":
             MessageLookupByLibrary.simpleMessage("네트워크를 사용할 수 없습니다"),
         "contact": MessageLookupByLibrary.simpleMessage("연락처"),
+        "developer": MessageLookupByLibrary.simpleMessage("개발자"),
         "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("일반 설정"),
         "language": MessageLookupByLibrary.simpleMessage("언어"),
@@ -40,13 +41,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
             "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요."),
         "noDataError": MessageLookupByLibrary.simpleMessage("관련 데이터가 없습니다"),
+        "notSupport": MessageLookupByLibrary.simpleMessage("일시적으로 지원하지 않음"),
         "playHistory": MessageLookupByLibrary.simpleMessage("재생 기록"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("재생 기간"),
         "playSettings": MessageLookupByLibrary.simpleMessage("재생 설정"),
         "pleaseSelectLanguage":
             MessageLookupByLibrary.simpleMessage("언어를 선택하십시오"),
+        "positiveFeedback": MessageLookupByLibrary.simpleMessage("별 다섯 개 평가"),
         "privacy": MessageLookupByLibrary.simpleMessage("개인정보 처리방침"),
         "profile": MessageLookupByLibrary.simpleMessage("프로필"),
+        "questionsSuggestions": MessageLookupByLibrary.simpleMessage("의문과 제안"),
         "sleep": MessageLookupByLibrary.simpleMessage("수면"),
         "terms": MessageLookupByLibrary.simpleMessage("약관"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("다시 시도하세요"),

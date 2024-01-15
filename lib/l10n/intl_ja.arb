@@ -24,5 +24,9 @@
     "connectError": "ネットワークが利用できません",
     "connectDesc": "ネットワークが利用できません。ネットワーク接続を確認してから再試してください。",
     "noDataError": "関連するデータはありません",
-    "noDataDesc": "関連するデータが見つかりませんでした。後で再試してください。"
+    "noDataDesc": "関連するデータが見つかりませんでした。後で再試してください。",
+    "positiveFeedback": "五つ星評価",
+    "questionsSuggestions": "疑問と提案",
+    "notSupport": "一時的にサポートされていません",
+    "developer": "開発者"
 }

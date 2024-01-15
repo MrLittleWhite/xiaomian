@@ -26,5 +26,9 @@
     "connectError": "Network unavailable",
     "connectDesc": "Network unavailable, please check your network connection and try again.",
     "noDataError": "No relevant data",
-    "noDataDesc": "No relevant data found, please try again later."
+    "noDataDesc": "No relevant data found, please try again later.",
+    "positiveFeedback": "five-star rating",
+    "questionsSuggestions": "Questions and suggestions",
+    "notSupport": "Temporarily not supported",
+    "developer": "developer"
 }

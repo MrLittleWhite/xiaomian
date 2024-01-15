@@ -7,11 +7,14 @@ enum XMErrorType {
   empty,
   networkNotAvailable,
   server,
+  custom,
 }
 
 class XMError {
   final XMErrorType type;
-  const XMError(this.type);
+  final String? customMessage;
+  final String? customTitle;
+  const XMError(this.type, {this.customTitle, this.customMessage});
   String get title {
     switch (type) {
       case XMErrorType.unknown:
@@ -22,6 +25,8 @@ class XMError {
         return XMIntl.current.connectError;
       case XMErrorType.server:
         return XMIntl.current.netError;
+      case XMErrorType.custom:
+        return customTitle ?? XMIntl.current.unknownError;
     }
   }
 
@@ -35,6 +40,8 @@ class XMError {
         return XMIntl.current.connectDesc;
       case XMErrorType.server:
         return XMIntl.current.netDesc;
+      case XMErrorType.custom:
+        return customMessage ?? XMIntl.current.tryLater;
     }
   }
 
@@ -48,6 +55,8 @@ class XMError {
         return Icons.link_off;
       case XMErrorType.server:
         return Icons.cloud_off;
+      case XMErrorType.custom:
+        return Icons.help_outline_rounded;
     }
   }
 
