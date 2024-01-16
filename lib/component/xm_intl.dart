@@ -103,15 +103,19 @@ class XMIntl {
       if (value != null) {
         final language = XMLanguage.values[value];
         return setLanguage(language);
+      } else {
+        var locale = Localizations.localeOf(Get.context!);
+        return setLocale(locale);
       }
-      return Future(() => null);
-    }).then((value) => null).catchError((e) {
+    }).catchError((e) {
       //upload error
     });
   }
 
   static Future<void> setLanguage(XMLanguage language) async {
-    S.load(language.locale);
-    return Get.updateLocale(language.locale);
+    return S.load(language.locale).then((value) => Get.updateLocale(language.locale));
+  }
+  static Future<void> setLocale(Locale locale) async {
+    return S.load(locale).then((value) => Get.updateLocale(locale));
   }
 }

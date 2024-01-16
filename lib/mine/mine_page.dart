@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/component/xm_toast.dart';
 import 'package:xiaomian/route/app_route.dart';
 
 enum ProfileItemType {
@@ -124,44 +126,51 @@ class _MinePageState extends State<MinePage> {
           ],
         ), 
         ), 
-      body: ListView.separated(
-        itemBuilder: (context, index) {
-        var item = _items[index];
-        Key key = ValueKey(item);
-        return ListTile(
-          key: key, 
-          leading: Container(width: 40, height: 40, decoration: BoxDecoration(color: item.iconColor.withOpacity(0.24), borderRadius: BorderRadius.circular(20)), child: Icon(item.icon, color: item.iconColor,),), 
-          title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 16)), 
-          trailing: const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
-          onTap: () {
-            if(item == ProfileItemType.feedBack) {
-              showFeedback(context);
-            } else {
-              item.navigateAct(context);
-            }
-          },);
-        }, 
-        separatorBuilder: (BuildContext context, int index) { 
-          var item = _items[index];
-          Key key = ValueKey(item);
-          if (item == ProfileItemType.playSetting || item == ProfileItemType.generalSetting) {
-            return SizedBox(key: key, height: 23.5, child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 72),
-                  child: Gap.expand(1, color: XMColor.xmSeparator),
-                ),
-              ],
-            )); 
-          }
-          return Padding(
-            key: key,
-            padding: const EdgeInsets.only(left: 72),
-            child: Gap(1, color: XMColor.xmSeparator,),
-          );
-        }, 
-        itemCount: _items.length,
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            sliver: SliverList.separated(
+            itemBuilder: (context, index) {
+            var item = _items[index];
+            Key key = ValueKey(item);
+            return ListTile(
+              key: key, 
+              leading: Container(width: 40, height: 40, decoration: BoxDecoration(color: item.iconColor.withOpacity(0.24), borderRadius: BorderRadius.circular(20)), child: Icon(item.icon, color: item.iconColor,),), 
+              title: Text(_items[index].name, style: const TextStyle(color: Colors.white, fontSize: 16)), 
+              trailing: const SizedBox(width: 40, height: 40, child: Icon(Icons.keyboard_arrow_right, color: Colors.white,),), 
+              onTap: () {
+                if(item == ProfileItemType.feedBack) {
+                  showFeedback(context);
+                } else {
+                  item.navigateAct(context);
+                }
+              },);
+            }, 
+            separatorBuilder: (BuildContext context, int index) { 
+              var item = _items[index];
+              Key key = ValueKey(item);
+              if (item == ProfileItemType.playSetting || item == ProfileItemType.generalSetting) {
+                return SizedBox(key: key, height: 23.5, child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 72),
+                      child: Gap.expand(1, color: XMColor.xmSeparator),
+                    ),
+                  ],
+                )); 
+              }
+              return Padding(
+                key: key,
+                padding: const EdgeInsets.only(left: 72),
+                child: Gap(1, color: XMColor.xmSeparator,),
+              );
+            }, 
+            itemCount: _items.length,
+            ),
+          ),
+        ]
+      ),
       );
   }
 
@@ -194,15 +203,16 @@ class _MinePageState extends State<MinePage> {
               if (value) {
                 return inAppReview.requestReview();
               }
-              Fluttertoast.showToast(msg: XMIntl.current.notSupport);
+              XMToast.show(XMIntl.current.notSupport);
               return Future(() => null);
             }).catchError((e) {
-              Fluttertoast.showToast(msg: "$e");
+              XMToast.show("$e");
             });
           } else {
             final url = Uri.encodeFull("mailto:luffy243077002@163.com?subject=${XMIntl.current.sleepGo}: ${XMIntl.current.questionsSuggestions}");
             launchUrlString(url).then((value) => null).catchError((e) {
-              Fluttertoast.showToast(msg: "$e", textColor: Colors.red);
+              Clipboard.setData(const ClipboardData(text: "luffy243077002@163.com"));
+              XMToast.show(XMIntl.current.emailContact);
             });
           }
           Get.back();

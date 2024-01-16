@@ -330,10 +330,10 @@ class S {
     );
   }
 
-  /// `five-star rating`
+  /// `Five-star rating`
   String get positiveFeedback {
     return Intl.message(
-      'five-star rating',
+      'Five-star rating',
       name: 'positiveFeedback',
       desc: '',
       args: [],
@@ -365,6 +365,26 @@ class S {
     return Intl.message(
       'developer',
       name: 'developer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact email has been copied to the clipboard.`
+  String get emailContact {
+    return Intl.message(
+      'Contact email has been copied to the clipboard.',
+      name: 'emailContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exception occurred`
+  String get exceptionOccurred {
+    return Intl.message(
+      'Exception occurred',
+      name: 'exceptionOccurred',
       desc: '',
       args: [],
     );

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/web/web_page.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/component/xm_toast.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
 
 enum AboutUsItemType {
@@ -61,13 +65,17 @@ extension AboutUsItemTypeExtension on AboutUsItemType {
         //todo
         break;
       case AboutUsItemType.terms:
-        //todo
+        Get.to(WebPage(title: XMIntl.current.terms, url: "https://www.bilibili.com/"));
         break;
       case AboutUsItemType.privacy:
-        //todo
+        Get.to(WebPage(title: XMIntl.current.privacy, url: "https://www.baidu.com"));
         break;
       case AboutUsItemType.contact:
-        // todo
+        final url = Uri.encodeFull("mailto:luffy243077002@163.com?subject=${XMIntl.current.sleepGo}: ${XMIntl.current.questionsSuggestions}");
+        launchUrlString(url).then((value) => null).catchError((e) {
+          Clipboard.setData(const ClipboardData(text: "luffy243077002@163.com"));
+          XMToast.show(XMIntl.current.emailContact);
+        });
         break;
     }
     if (name != null) {

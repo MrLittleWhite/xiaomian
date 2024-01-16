@@ -28,5 +28,7 @@
     "positiveFeedback": "五つ星評価",
     "questionsSuggestions": "疑問と提案",
     "notSupport": "一時的にサポートされていません",
-    "developer": "開発者"
+    "developer": "開発者",
+    "emailContact": "連絡先のメールアドレスがクリップボードにコピーされました。",
+    "exceptionOccurred": "例外が発生しました"
 }

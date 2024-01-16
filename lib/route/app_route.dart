@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:xiaomian/component/web/web_page.dart';
 import 'package:xiaomian/home/home_page.dart';
 import 'package:xiaomian/mine/about_us/about_us_page.dart';
 import 'package:xiaomian/mine/general_setting/general_setting_page.dart';

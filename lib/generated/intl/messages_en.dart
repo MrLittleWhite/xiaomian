@@ -32,6 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "developer": MessageLookupByLibrary.simpleMessage("developer"),
+        "emailContact": MessageLookupByLibrary.simpleMessage(
+            "Contact email has been copied to the clipboard."),
+        "exceptionOccurred":
+            MessageLookupByLibrary.simpleMessage("Exception occurred"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "generalSettings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
@@ -51,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pleaseSelectLanguage":
             MessageLookupByLibrary.simpleMessage("Please select a language"),
         "positiveFeedback":
-            MessageLookupByLibrary.simpleMessage("five-star rating"),
+            MessageLookupByLibrary.simpleMessage("Five-star rating"),
         "privacy": MessageLookupByLibrary.simpleMessage("Privacy"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "questionsSuggestions":

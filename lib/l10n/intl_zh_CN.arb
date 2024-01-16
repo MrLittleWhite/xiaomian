@@ -30,5 +30,7 @@
     "positiveFeedback": "五星好评",
     "questionsSuggestions": "疑问和建议",
     "notSupport": "暂未支持",
-    "developer": "开发者"
+    "developer": "开发者",
+    "emailContact": "联系邮箱已复制到剪贴板。",
+    "exceptionOccurred": "出现异常"
 }

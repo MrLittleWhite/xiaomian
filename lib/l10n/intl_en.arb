@@ -27,8 +27,10 @@
     "connectDesc": "Network unavailable, please check your network connection and try again.",
     "noDataError": "No relevant data",
     "noDataDesc": "No relevant data found, please try again later.",
-    "positiveFeedback": "five-star rating",
+    "positiveFeedback": "Five-star rating",
     "questionsSuggestions": "Questions and suggestions",
     "notSupport": "Temporarily not supported",
-    "developer": "developer"
+    "developer": "developer",
+    "emailContact": "Contact email has been copied to the clipboard.",
+    "exceptionOccurred": "Exception occurred"
 }

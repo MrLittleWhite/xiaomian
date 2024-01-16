@@ -5,6 +5,7 @@ import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_error.dart';
 import 'package:xiaomian/component/xm_error_page.dart';
 import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/component/xm_loading.dart';
 import 'package:xiaomian/mine/play_history/play_history_repository.dart';
 
 class PlayHistoryPage extends StatefulWidget {
@@ -30,7 +31,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
       backgroundColor: XMColor.xmMain,
       body: FutureBuilder(future: repository.getAll(), builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 40));
+          return xmLoading();
         } else if (snapshot.data == null || snapshot.data!.isEmpty) {
           return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
             setState(() {

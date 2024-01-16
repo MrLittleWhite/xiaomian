@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
+import 'package:xiaomian/component/network/xm_net_work.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/gen/fonts.gen.dart';
 import 'package:xiaomian/generated/l10n.dart';
@@ -25,6 +26,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     XMIntl.locale();
+    XMNetwork().initialize();
     super.initState();
   }
   @override
@@ -38,17 +40,22 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: S.delegate.supportedLocales,
       localeResolutionCallback: (locale, supportedLocales) {
-        if (locale?.languageCode == 'zh') {
-          if (locale?.countryCode == 'CN') {
-            return locale;
-          } else {
-            return const Locale('zh', 'HK');
-          }
-        } else {
-          return locale;
+        // 注意：需要返回supportedLocales中的一个实体，不能直接返回local参数实体
+        if (locale == null) {
+          return supportedLocales.first;
         }
+        Locale? loc = supportedLocales.where((element) {
+          return element.languageCode == locale.languageCode && element.countryCode == locale.countryCode;
+        }).firstOrNull;
+        if (loc != null) {
+          return loc;
+        }
+          
+        if (locale.languageCode == 'zh') {
+          return supportedLocales.where((element) => element.countryCode == 'HK').first;
+        } 
+        return supportedLocales.first;
       },
-      // locale: loc,
       onGenerateTitle: (context) => S.of(context).sleepGo,
       theme: ThemeData(
         fontFamily: FontFamily.nunito,

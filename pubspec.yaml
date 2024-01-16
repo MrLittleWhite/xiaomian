@@ -58,6 +58,10 @@ dependencies:
   url_launcher: ^6.2.3
   in_app_review: ^2.0.8
   fluttertoast: ^8.2.4
+  webview_flutter: ^4.4.4
+  provider: ^6.1.1
+  connectivity_plus: ^5.0.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -138,10 +142,6 @@ flutter:
         - asset: assets/font/round/TaiwanPearl-ExtraLight.otf
         - asset: assets/font/round/TaiwanPearl-Light.otf
         - asset: assets/font/round/TaiwanPearl-Regular.otf
-        # - asset: assets/font/round/ChillRoundGothic_Light.ttf
-        # - asset: assets/font/round/ChillRoundGothic_Medium.ttf
-        # - asset: assets/font/round/ChillRoundGothic_Normal.ttf
-        # - asset: assets/font/round/ChillRoundGothic_Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:

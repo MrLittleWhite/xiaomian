@@ -4,7 +4,7 @@ import 'package:xiaomian/model/audio_item.dart';
 
 class PlayHistoryRepository {
 
-  late Isar? _isar;
+  Isar? _isar;
   
   PlayHistoryRepository._internal();
 

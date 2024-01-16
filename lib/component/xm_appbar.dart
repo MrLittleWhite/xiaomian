@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 
 class XMAppBar {
+  XMAppBar(String title);
+
   static AppBar name(String name) {
     return AppBar(
         backgroundColor: XMColor.xmMain,

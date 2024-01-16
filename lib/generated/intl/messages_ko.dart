@@ -31,6 +31,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("네트워크를 사용할 수 없습니다"),
         "contact": MessageLookupByLibrary.simpleMessage("연락처"),
         "developer": MessageLookupByLibrary.simpleMessage("개발자"),
+        "emailContact":
+            MessageLookupByLibrary.simpleMessage("연락 이메일이 클립보드에 복사되었습니다."),
+        "exceptionOccurred": MessageLookupByLibrary.simpleMessage("예외가 발생했습니다"),
         "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("일반 설정"),
         "language": MessageLookupByLibrary.simpleMessage("언어"),
