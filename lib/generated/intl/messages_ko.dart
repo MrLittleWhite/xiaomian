@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "developer": MessageLookupByLibrary.simpleMessage("개발자"),
         "emailContact":
             MessageLookupByLibrary.simpleMessage("연락 이메일이 클립보드에 복사되었습니다."),
+        "emailContactUs": MessageLookupByLibrary.simpleMessage(
+            "luffy243077002@163.com 이(가) 클립보드에 복사되었습니다. 문의를 위해 이메일을 보내주십시오."),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("예외가 발생했습니다"),
         "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("일반 설정"),
@@ -45,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요."),
         "noDataError": MessageLookupByLibrary.simpleMessage("관련 데이터가 없습니다"),
         "notSupport": MessageLookupByLibrary.simpleMessage("일시적으로 지원하지 않음"),
+        "ok": MessageLookupByLibrary.simpleMessage("알겠습니다"),
         "playHistory": MessageLookupByLibrary.simpleMessage("재생 기록"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("재생 기간"),
         "playSettings": MessageLookupByLibrary.simpleMessage("재생 설정"),

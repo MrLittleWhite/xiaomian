@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact": MessageLookupByLibrary.simpleMessage("聯繫方式"),
         "developer": MessageLookupByLibrary.simpleMessage("開發者"),
         "emailContact": MessageLookupByLibrary.simpleMessage("聯繫郵箱已複製到剪貼板。"),
+        "emailContactUs": MessageLookupByLibrary.simpleMessage(
+            "luffy243077002@163.com已複製到剪貼板，請發送郵件聯繫我們。"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("發生異常"),
         "feedback": MessageLookupByLibrary.simpleMessage("意見反饋"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("通用設定"),
@@ -42,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage("沒有找到相關數據，請稍後再試。"),
         "noDataError": MessageLookupByLibrary.simpleMessage("沒有相關數據"),
         "notSupport": MessageLookupByLibrary.simpleMessage("暂未支援"),
+        "ok": MessageLookupByLibrary.simpleMessage("好的"),
         "playHistory": MessageLookupByLibrary.simpleMessage("播放歷史"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("播放時長"),
         "playSettings": MessageLookupByLibrary.simpleMessage("播放設置"),
@@ -52,8 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "questionsSuggestions": MessageLookupByLibrary.simpleMessage("疑問和建議"),
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),
         "terms": MessageLookupByLibrary.simpleMessage("條款"),
-        "tryAgain": MessageLookupByLibrary.simpleMessage("再試一次。"),
-        "tryLater": MessageLookupByLibrary.simpleMessage("請稍後再試"),
+        "tryAgain": MessageLookupByLibrary.simpleMessage("再試一次"),
+        "tryLater": MessageLookupByLibrary.simpleMessage("請稍後再試。"),
         "unknownError": MessageLookupByLibrary.simpleMessage("未知錯誤"),
         "version": MessageLookupByLibrary.simpleMessage("版本")
       };

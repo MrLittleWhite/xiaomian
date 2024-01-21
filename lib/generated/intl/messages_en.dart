@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "developer": MessageLookupByLibrary.simpleMessage("developer"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "Contact email has been copied to the clipboard."),
+        "emailContactUs": MessageLookupByLibrary.simpleMessage(
+            "luffy243077002@163.com has been copied to the clipboard. Please send an email to contact us."),
         "exceptionOccurred":
             MessageLookupByLibrary.simpleMessage("Exception occurred"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
@@ -49,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataError": MessageLookupByLibrary.simpleMessage("No relevant data"),
         "notSupport":
             MessageLookupByLibrary.simpleMessage("Temporarily not supported"),
+        "ok": MessageLookupByLibrary.simpleMessage("ok"),
         "playHistory": MessageLookupByLibrary.simpleMessage("Play History"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("Play Period"),
         "playSettings": MessageLookupByLibrary.simpleMessage("Play Settings"),

@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "developer": MessageLookupByLibrary.simpleMessage("開発者"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "連絡先のメールアドレスがクリップボードにコピーされました。"),
+        "emailContactUs": MessageLookupByLibrary.simpleMessage(
+            "luffy243077002@163.com がクリップボードにコピーされました。お問い合わせはメールでお願いします。"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("例外が発生しました"),
         "feedback": MessageLookupByLibrary.simpleMessage("フィードバック"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("一般設定"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "関連するデータが見つかりませんでした。後で再試してください。"),
         "noDataError": MessageLookupByLibrary.simpleMessage("関連するデータはありません"),
         "notSupport": MessageLookupByLibrary.simpleMessage("一時的にサポートされていません"),
+        "ok": MessageLookupByLibrary.simpleMessage("わかりました"),
         "playHistory": MessageLookupByLibrary.simpleMessage("再生履歴"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("再生期間"),
         "playSettings": MessageLookupByLibrary.simpleMessage("再生設定"),

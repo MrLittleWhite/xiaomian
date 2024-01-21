@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact": MessageLookupByLibrary.simpleMessage("联系方式"),
         "developer": MessageLookupByLibrary.simpleMessage("开发者"),
         "emailContact": MessageLookupByLibrary.simpleMessage("联系邮箱已复制到剪贴板。"),
+        "emailContactUs": MessageLookupByLibrary.simpleMessage(
+            "luffy243077002@163.com已复制到剪贴板，请发送邮件联系我们。"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("出现异常"),
         "feedback": MessageLookupByLibrary.simpleMessage("意见反馈"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("通用设置"),
@@ -42,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage("没有找到相关数据，请稍后再试。"),
         "noDataError": MessageLookupByLibrary.simpleMessage("没有相关数据"),
         "notSupport": MessageLookupByLibrary.simpleMessage("暂未支持"),
+        "ok": MessageLookupByLibrary.simpleMessage("好的"),
         "playHistory": MessageLookupByLibrary.simpleMessage("播放历史"),
         "playPeriod": MessageLookupByLibrary.simpleMessage("播放时长"),
         "playSettings": MessageLookupByLibrary.simpleMessage("播放设置"),

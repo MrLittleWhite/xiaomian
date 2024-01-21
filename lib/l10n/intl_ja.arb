@@ -30,5 +30,7 @@
     "notSupport": "一時的にサポートされていません",
     "developer": "開発者",
     "emailContact": "連絡先のメールアドレスがクリップボードにコピーされました。",
-    "exceptionOccurred": "例外が発生しました"
+    "exceptionOccurred": "例外が発生しました",
+    "ok": "わかりました",
+    "emailContactUs": "luffy243077002@163.com がクリップボードにコピーされました。お問い合わせはメールでお願いします。"
 }

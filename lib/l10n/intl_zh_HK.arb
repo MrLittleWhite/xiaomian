@@ -18,8 +18,8 @@
     "language": "語言",
     "pleaseSelectLanguage": "請選擇一種語言",
     "unknownError": "未知錯誤",
-    "tryLater":"請稍後再試",
-    "tryAgain":"再試一次。",
+    "tryLater":"請稍後再試。",
+    "tryAgain":"再試一次",
     "netError": "網絡錯誤",
     "netDesc": "網絡錯誤，請檢查網絡連接或稍後再試。",
     "connectError": "網絡不可用",
@@ -31,5 +31,7 @@
     "notSupport": "暂未支援",
     "developer": "開發者",
     "emailContact": "聯繫郵箱已複製到剪貼板。",
-    "exceptionOccurred": "發生異常"
+    "exceptionOccurred": "發生異常",
+    "ok": "好的",
+    "emailContactUs": "luffy243077002@163.com已複製到剪貼板，請發送郵件聯繫我們。"
 }

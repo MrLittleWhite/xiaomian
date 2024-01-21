@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "89205328837",
+    "project_id": "sleepgo-32830",
+    "storage_bucket": "sleepgo-32830.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89205328837:android:16a90185e66ba67443d9ac",
+        "android_client_info": {
+          "package_name": "com.example.xiaomian"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBClpdwWpySlDxDAJowQvBTv0hffumvMF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89205328837:android:41f26fc389e1bfab43d9ac",
+        "android_client_info": {
+          "package_name": "com.liuyunzhi.sleepgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBClpdwWpySlDxDAJowQvBTv0hffumvMF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

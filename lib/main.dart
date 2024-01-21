@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/component/network/xm_net_work.dart';
 import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/firebase_options.dart';
 import 'package:xiaomian/gen/fonts.gen.dart';
 import 'package:xiaomian/generated/l10n.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
@@ -23,8 +27,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  @override
+  @override 
   void initState() {
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) => null).catchError((e) {
+      Logger().d(e);
+    });
     XMIntl.locale();
     XMNetwork().initialize();
     super.initState();

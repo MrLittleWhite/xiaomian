@@ -1,4 +1,4 @@
-package com.example.xiaomian
+package com.liuyunzhi.sleepgo
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -4,11 +4,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/xm_dialog.dart';
 import 'package:xiaomian/component/xm_intl.dart';
+import 'package:xiaomian/component/xm_launcher.dart';
 import 'package:xiaomian/component/xm_toast.dart';
 import 'package:xiaomian/route/app_route.dart';
 
@@ -198,21 +201,34 @@ class _MinePageState extends State<MinePage> {
         title: Text(like ? XMIntl.current.positiveFeedback : XMIntl.current.questionsSuggestions, style: TextStyle(fontWeight: FontWeight.w700)),
         onTap: () {
           if (like) {
-            final inAppReview = InAppReview.instance;
-            inAppReview.isAvailable().then((value) {
-              if (value) {
-                return inAppReview.requestReview();
+            XMLauncher().toMarketCN().then((value) {
+              if (!value) {
+                final inAppReview = InAppReview.instance;
+                return inAppReview.isAvailable().then((value) {
+                  if (value) {
+                    return inAppReview.requestReview();
+                  }
+                  XMToast.show(XMIntl.current.notSupport);
+                  return Future(() => null);
+                });
               }
-              XMToast.show(XMIntl.current.notSupport);
-              return Future(() => null);
             }).catchError((e) {
               XMToast.show("$e");
             });
           } else {
             final url = Uri.encodeFull("mailto:luffy243077002@163.com?subject=${XMIntl.current.sleepGo}: ${XMIntl.current.questionsSuggestions}");
-            launchUrlString(url).then((value) => null).catchError((e) {
+            launchUrlString(url).then((value) {
+              Logger().d(value);
               Clipboard.setData(const ClipboardData(text: "luffy243077002@163.com"));
-              XMToast.show(XMIntl.current.emailContact);
+              XMDialog.show(content: "\n${XMIntl.current.emailContactUs}", buttonText: XMIntl.current.ok, onPressed: () {
+                Get.back(result: 0);
+              });
+            }).catchError((e) {
+              Clipboard.setData(const ClipboardData(text: "luffy243077002@163.com"));
+              // XMToast.show(XMIntl.current.emailContact);
+              XMDialog.show(content: "\n${XMIntl.current.emailContactUs}", buttonText: XMIntl.current.ok, onPressed: () {
+                Get.back(result: 0);
+              });
             });
           }
           Get.back();

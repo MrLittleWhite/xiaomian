@@ -389,6 +389,26 @@ class S {
       args: [],
     );
   }
+
+  /// `ok`
+  String get ok {
+    return Intl.message(
+      'ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `luffy243077002@163.com has been copied to the clipboard. Please send an email to contact us.`
+  String get emailContactUs {
+    return Intl.message(
+      'luffy243077002@163.com has been copied to the clipboard. Please send an email to contact us.',
+      name: 'emailContactUs',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
