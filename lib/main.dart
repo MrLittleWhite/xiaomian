@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +13,7 @@ import 'package:xiaomian/gen/fonts.gen.dart';
 import 'package:xiaomian/generated/l10n.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
+import 'package:xiaomian/sleep/sleep_page_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +31,9 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override 
   void initState() {
-    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) => null).catchError((e) {
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    }).catchError((e) {
       Logger().d(e);
     });
     XMIntl.locale();
@@ -85,6 +89,7 @@ class AllControllerBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<AudioPlayerController>(() => AudioPlayerController());
+    Get.lazyPut<SleepPageController>(() => SleepPageController());
   } 
 }
 

@@ -3,6 +3,7 @@ class XMPrefersKey {
   static const String autoPlay = "xm_auto_play";
   static const String playPeriod = "xm_play_period"; //mins
   static const String language = "xm_language"; 
+  static const String sleepDisplay = "sleepDisplay"; 
 }
 
 class XMSharedPreferences {
