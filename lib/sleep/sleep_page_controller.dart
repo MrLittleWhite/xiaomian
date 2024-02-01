@@ -1,21 +1,45 @@
-import 'dart:ffi';
-
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
 import 'package:xiaomian/model/audio_item.dart';
 
 class SleepPageController extends GetxController {
-
+  bool _readDisplay = false;
   RxBool displayList = false.obs;
   RxList<AudioItem> items = <AudioItem>[].obs;
 
+  RxInt state = PageState.idle.index.obs;
+
+  Object? _error;
+
+  Object? get error {
+    return _error;
+  }
+
   @override
-  void onInit() {
-    super.onInit();
+  void onReady() {
+    super.onReady();
+    fetch();
+  }
+
+  void fetch() {
+    state.value = PageState.idle.index;
+    Future.wait([getItems(), getDisplayList()]).then((value) {
+      if (items.isEmpty) {
+        state.value = PageState.empty.index;
+      } else {
+        state.value = PageState.success.index;
+      }
+    }).catchError((e) {
+      _error = e;
+      state.value = PageState.error.index;
+    });
   }
 
   Future<bool> getDisplayList() async {
-    return  XMSharedPreferences.getBool(XMPrefersKey.sleepDisplay).then((value) {
+    return _readDisplay ? Future.value(displayList.value) :  XMSharedPreferences.getBool(XMPrefersKey.sleepDisplay).then((value) {
+      _readDisplay = true;
       if (value != null) {
         displayList.value = value;
       }

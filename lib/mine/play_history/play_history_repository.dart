@@ -1,5 +1,5 @@
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:xiaomian/component/xm_directory.dart';
 import 'package:xiaomian/model/audio_item.dart';
 
 class PlayHistoryRepository {
@@ -18,7 +18,10 @@ class PlayHistoryRepository {
     if (_isar != null) {
       return Future(() => _isar!);
     }
-    return getApplicationDocumentsDirectory().then((value) => Isar.open([AudioItemSchema], directory: '$value/isarDataBase')).then((value) {
+    
+    return XMDirectory.documents.then((value) => XMDirectory.createIfPathNotExists('${value.path}/isarDataBase')).then((value) {
+      return Isar.open([AudioItemSchema], directory: value);
+    }).then((value) {
       _instance._isar = value;
       return value;
     });
@@ -55,7 +58,11 @@ class PlayHistoryRepository {
     });
   }
 
-  Future<void> delete(AudioItem item) async {
-    return _initialize().then((value) => value.writeTxn(() => value.audioItems.delete(item.id)));
+  Future<void> delete(List<AudioItem> items) async {
+    return _initialize().then((value) => value.writeTxn(() => value.audioItems.deleteAll(items.map((e) => e.id).toList())));
+  }
+
+  Future<void> deleteAll() async {
+    return _initialize().then((value) => value.writeTxn(() => value.audioItems.clear()));
   }
 }

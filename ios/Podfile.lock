@@ -67,6 +67,8 @@ PODS:
     - GoogleUtilities/Logger
   - in_app_review (0.2.0):
     - Flutter
+  - isar_flutter_libs (1.0.0):
+    - Flutter
   - just_audio (0.0.1):
     - Flutter
   - LLNetworkAccessibility-Swift (1.0.3)
@@ -108,6 +110,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - in_app_review (from `.symlinks/plugins/in_app_review/ios`)
+  - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
   - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - network_authority (from `.symlinks/plugins/network_authority/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -153,6 +156,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   in_app_review:
     :path: ".symlinks/plugins/in_app_review/ios"
+  isar_flutter_libs:
+    :path: ".symlinks/plugins/isar_flutter_libs/ios"
   just_audio:
     :path: ".symlinks/plugins/just_audio/ios"
   network_authority:
@@ -189,6 +194,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   in_app_review: 318597b3a06c22bb46dc454d56828c85f444f99d
+  isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   LLNetworkAccessibility-Swift: f9d237d2589f92eaa9baaa5351a1043e730c4773
   nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5

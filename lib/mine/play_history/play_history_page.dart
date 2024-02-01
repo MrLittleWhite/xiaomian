@@ -1,60 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
+import 'package:xiaomian/component/UI/cover_list_tile.dart';
+import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_error.dart';
 import 'package:xiaomian/component/xm_error_page.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_loading.dart';
+import 'package:xiaomian/mine/play_history/play_history_controller.dart';
 import 'package:xiaomian/mine/play_history/play_history_repository.dart';
+import 'package:xiaomian/player/audio_player_controller.dart';
 
-class PlayHistoryPage extends StatefulWidget {
+class PlayHistoryPage extends GetView<PlayHistoryController>  {
   const PlayHistoryPage({super.key});
 
   @override
-  State<PlayHistoryPage> createState() => _PlayHistoryPageState();
-}
-
-class _PlayHistoryPageState extends State<PlayHistoryPage> {
-
-  final repository = PlayHistoryRepository();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    
     return Scaffold(appBar: XMAppBar.name(XMIntl.current.playHistory), 
       backgroundColor: XMColor.xmMain,
-      body: FutureBuilder(future: repository.getAll(), builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+      body: Obx(() {
+        switch (PageState.values[controller.state.value]) {
+          case PageState.idle:
+          case PageState.loading:
           return xmLoading();
-        } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-          return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
-            setState(() {
-              
-            });
-          },);
-        } else if (snapshot.error != null) {
+          case PageState.error:
           return XMErrorPage(
                   error: 
                   XMError(XMErrorType.custom, 
                     customTitle: XMIntl.current.noDataError, 
-                    customMessage: "${snapshot.error}"), 
+                    customMessage: "${controller.error}"), 
                   retry: () {
-            setState(() {
-              
-            });
+            controller.fetch();
           });
-        } else {
-          return ListView.builder(itemCount: snapshot.data!.length, itemBuilder: (context, index) {
-            return Text(snapshot.data![index].toString());
+          case PageState.empty:
+          return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
+            controller.fetch();
+          },);
+          case PageState.success:
+          return ListView.builder(itemCount: controller.items.length, itemBuilder: (context, index) {
+            final data = controller.items[index];
+            return CoverListTile(key: ValueKey(data), data: data, onTap: (item) {
+              
+            }, editSelected: (selected) {
+              
+            },);
           });
         }
-      },));
+      })
+    );
     
   }
 }

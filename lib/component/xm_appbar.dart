@@ -3,9 +3,7 @@ import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 
 class XMAppBar {
-  XMAppBar(String title);
-
-  static AppBar name(String name) {
+  static AppBar name(String name, {List<Widget>? actions}) {
     return AppBar(
         backgroundColor: XMColor.xmMain,
         leading: IconButton(
@@ -20,6 +18,7 @@ class XMAppBar {
           color: Colors.white, 
           fontSize: 20, 
           fontWeight: FontWeight.w900),),
+        actions: actions,
     );
   }
 }

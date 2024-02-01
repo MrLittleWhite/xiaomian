@@ -1,10 +1,15 @@
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
+import 'package:xiaomian/mine/play_history/play_history_repository.dart';
+import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
 import 'package:xiaomian/player/xm_audio_handler.dart';
 import 'package:xiaomian/player/xm_audio_player.dart';
 
 class AudioPlayerController extends GetxController {
+
+  final historyRepository = PlayHistoryRepository();
 
   late final XMAudioPlayer player = XMAudioPlayer();
 
@@ -18,6 +23,7 @@ class AudioPlayerController extends GetxController {
 
   @override
   void onInit() {
+    Logger().d("AudioPlayerController onInit");
     XMAudioHandler.initialize().then((value) {
       value.attach(player);
     }).catchError((e) {
@@ -44,11 +50,22 @@ class AudioPlayerController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    Logger().d("AudioPlayerController onClose");
+    super.onClose();
+  }
+
   XMAudioHandler? get handler {
     return XMAudioHandler.shared;
   }
 
   void setPlayItem(AudioPlayItem item) {
+    if (_playItem == null || _playItem!.aId != item.aId) {
+      if (item is AudioItem) {
+        historyRepository.insert(item as AudioItem);
+      }
+    }
     _playItem = item;
     XMAudioHandler.setMedioInfo(item);
   }

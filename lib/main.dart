@@ -11,6 +11,7 @@ import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/firebase_options.dart';
 import 'package:xiaomian/gen/fonts.gen.dart';
 import 'package:xiaomian/generated/l10n.dart';
+import 'package:xiaomian/mine/play_history/play_history_controller.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
 import 'package:xiaomian/sleep/sleep_page_controller.dart';
@@ -38,6 +39,7 @@ class _MyAppState extends State<MyApp> {
     });
     XMIntl.locale();
     XMNetwork().initialize();
+    Get.put<AudioPlayerController>(AudioPlayerController(), permanent: true);
     super.initState();
   }
   @override
@@ -88,8 +90,8 @@ class _MyAppState extends State<MyApp> {
 class AllControllerBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AudioPlayerController>(() => AudioPlayerController());
-    Get.lazyPut<SleepPageController>(() => SleepPageController());
+    Get.lazyPut<SleepPageController>(() => SleepPageController(), fenix: true);
+    Get.lazyPut<PlayHistoryController>(() => PlayHistoryController(), fenix: true);
   } 
 }
 

@@ -4,9 +4,14 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/assets_code/xm_font_family.dart';
+import 'package:xiaomian/component/UI/cover_list_tile.dart';
+import 'package:xiaomian/component/UI/page_state.dart';
+import 'package:xiaomian/component/xm_error.dart';
+import 'package:xiaomian/component/xm_error_page.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_loading.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
+import 'package:xiaomian/mine/play_history/play_history_repository.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
@@ -23,11 +28,10 @@ class SleepPage extends StatefulWidget {
 class _SleepPageState extends State<SleepPage> {
 
   final AudioPlayerController playerController = Get.find();
+
   final SleepPageController sleepController = Get.find();
 
   late EasyRefreshController _controller;
-
-  
 
   @override
   void initState() {
@@ -102,21 +106,31 @@ class _SleepPageState extends State<SleepPage> {
               _controller.finishLoad(IndicatorResult.noMore);
             });
           },
-          child: _buildContent(),
+          child: Obx(() {
+            switch (PageState.values[sleepController.state.value]) {
+              case PageState.idle:
+              case PageState.loading:
+              return xmLoading();
+              case PageState.error:
+              return XMErrorPage(
+                  error: 
+                  XMError(XMErrorType.custom, 
+                    customTitle: XMIntl.current.noDataError, 
+                    customMessage: "${sleepController.error}"), 
+                  retry: () {
+                sleepController.fetch();
+              });
+              case PageState.empty:
+              return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
+                sleepController.fetch();
+              },);
+              case PageState.success:
+              return _buildScrollContent();
+            }
+          })
         ),
       ),
     );
-  }
-
-  FutureBuilder<void> _buildContent() {
-    return FutureBuilder(
-      future: Future.wait([sleepController.getItems(), sleepController.getDisplayList()]),
-      builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return xmLoading();
-          } 
-          return _buildScrollContent();
-        },);
   }
 
   CustomScrollView _buildScrollContent() {
@@ -158,52 +172,11 @@ class _SleepPageState extends State<SleepPage> {
               itemCount: sleepController.items.length,
               itemBuilder: (context, index) {
               final data = sleepController.items[index];
-              return GestureDetector(
-                  child: InkWell(
-                    child: SizedBox(
-                      height: 120,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Gap(8),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                                    placeholder: (context, url) => Container(), 
-                                    errorWidget: (context, url, error) => Container(color: Colors.white,),
-                                    imageUrl: data.cover ?? "", 
-                                    height: 90,
-                                    width: 90,
-                                    fit: BoxFit.cover,
-                                  ),
-                          ),
-                          Gap(16),
-                          Flexible(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(child: Text(data.title ?? "", maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),)),
-                                    Text(data.author?.name ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),)
-                                  ],
-                                ),
-                                Gap(5),
-                                Text(data.desc ?? "", maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),),
-                              ],
-                            ),
-                          ),
-                          Gap(16)
-                        ],
-                      ),
-                    ),
-                  ),
-                  onTap: () {
-                    
-                  },
-                );
+              return CoverListTile(key: ValueKey(data), data: data, onTap: (data) {
+                playerController.setPlayItem(data);
+                playerController.handler?.play();
+                AppRoute.toDialogNamed(AppRoute.audioPlayer);
+              },);
             },);
   }
 
@@ -213,7 +186,7 @@ class _SleepPageState extends State<SleepPage> {
               itemCount: sleepController.items.length,
               itemBuilder: (context, index) {
               final data = sleepController.items[index];
-              return GestureDetector(
+              return GestureDetector(key: ValueKey(data),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minWidth: double.infinity),
                   child: Column(
