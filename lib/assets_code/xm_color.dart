@@ -11,6 +11,10 @@ class XMColor extends Color {
   static Color get xmGreen => const XMColor(0x00D971);
   static Color get xmWhite => const XMColor(0xFFFFFF, opacity: 0.7);
 
+  static Color get xmRed => const XMColor(0xFF2D55);
+
+  
+
   static Color get xmSeparator => const XMColor(0x21283F);
   static Color get xmBackground => const XMColor(0xFAF9DE);
 

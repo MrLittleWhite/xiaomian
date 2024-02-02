@@ -67,6 +67,7 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_crashlytics: ^3.4.9
   easy_refresh: ^3.3.4
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:

@@ -32,5 +32,6 @@
     "emailContact": "연락 이메일이 클립보드에 복사되었습니다.",
     "exceptionOccurred": "예외가 발생했습니다",
     "ok": "알겠습니다",
-    "emailContactUs": "luffy243077002@163.com 이(가) 클립보드에 복사되었습니다. 문의를 위해 이메일을 보내주십시오."
+    "emailContactUs": "luffy243077002@163.com 이(가) 클립보드에 복사되었습니다. 문의를 위해 이메일을 보내주십시오.",
+    "delete": "삭제"
 }

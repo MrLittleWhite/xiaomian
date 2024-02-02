@@ -208,12 +208,14 @@ class _SleepPageState extends State<SleepPage> {
                               ),
                             ),
                             Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            child: Text(data.author?.name ?? "", 
-                            style: TextStyle(
-                              color: Colors.white, 
-                              fontSize: 12, 
-                              fontWeight: FontWeight.w600, 
-                              shadows: [Shadow(color: Colors.black, blurRadius: 5)]),)),
+                            child: FittedBox(
+                              child: Text(data.author?.name ?? "", 
+                              style: TextStyle(
+                                color: Colors.white, 
+                                fontSize: 12, 
+                                fontWeight: FontWeight.w600, 
+                                shadows: [Shadow(color: Colors.black, blurRadius: 5)]),),
+                            )),
                           ]
                         ),
                       ),

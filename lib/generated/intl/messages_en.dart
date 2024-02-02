@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectError":
             MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
+        "delete": MessageLookupByLibrary.simpleMessage("delete"),
         "developer": MessageLookupByLibrary.simpleMessage("developer"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "Contact email has been copied to the clipboard."),

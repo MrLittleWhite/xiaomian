@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("網絡不可用，請檢查網絡連接後再試。"),
         "connectError": MessageLookupByLibrary.simpleMessage("網絡不可用"),
         "contact": MessageLookupByLibrary.simpleMessage("聯繫方式"),
+        "delete": MessageLookupByLibrary.simpleMessage("刪除"),
         "developer": MessageLookupByLibrary.simpleMessage("開發者"),
         "emailContact": MessageLookupByLibrary.simpleMessage("聯繫郵箱已複製到剪貼板。"),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(

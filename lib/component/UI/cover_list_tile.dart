@@ -9,11 +9,14 @@ class CoverListTile extends StatefulWidget {
     super.key,
     required this.data,
     this.onTap, 
+    this.editEnable,
     this.editSelected,
   });
 
+
   final AudioItem data;
   final void Function(AudioItem data)? onTap;
+  final bool? editEnable;
   final void Function(bool selected)? editSelected;
 
   @override
@@ -23,8 +26,25 @@ class CoverListTile extends StatefulWidget {
 class _CoverListTileState extends State<CoverListTile> {
   final ValueNotifier<bool> _edit = ValueNotifier(false);
   final ValueNotifier<bool> _selected = ValueNotifier(false);
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+   @override
+  void didUpdateWidget(covariant CoverListTile oldWidget) {
+    if (widget.editEnable == null || widget.editEnable == false ) {
+      _selected.value = false;
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.editEnable != null) {
+      _edit.value = widget.editEnable!;
+    }
     return GestureDetector(
         onTap: widget.onTap == null ? null : () => widget.onTap!(widget.data),
         child: InkWell(
@@ -65,16 +85,21 @@ class _CoverListTileState extends State<CoverListTile> {
                   ),
                 ),
                 ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
+                  return value ? Gap(3) : Gap(0);
+                }),
+                ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
                   return value ? IconButton(onPressed: () {
                       _selected.value = !_selected.value;
                       widget.editSelected?.call(_selected.value);
                     }, icon: ValueListenableBuilder(
                       builder: (context, value, child) {
-                        return value ? const Icon(Icons.edit) : const Icon(Icons.edit_off);
+                        return value ? Icon(Icons.check_circle_outline_rounded, color: XMColor.xmRed,) : const Icon(Icons.radio_button_off_rounded, color: Colors.white,);
                       }, valueListenable: _selected,
                     )) : Gap(0);
                 },),
-                Gap(16),
+                ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
+                  return value ? Gap(0) : Gap(16);
+                }),
               ],
             ),
           ),

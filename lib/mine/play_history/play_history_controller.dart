@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:xiaomian/component/UI/page_state.dart';
@@ -9,14 +10,16 @@ class PlayHistoryController extends GetxController {
   RxList<AudioItem> items = <AudioItem>[].obs;
 
   final _repository = PlayHistoryRepository();
-  
-  RxInt state = PageState.idle.index.obs;
+
+  final ValueNotifier<PageState> state = ValueNotifier(PageState.idle);
 
   Object? _error;
 
   Object? get error {
     return _error;
   }
+  RxBool editDisplay = false.obs;
+  RxBool editEnable = false.obs;
 
   @override
   void onInit() {
@@ -52,16 +55,16 @@ class PlayHistoryController extends GetxController {
   }
 
   void fetch() {
-    state.value = PageState.loading.index;
+    state.value = PageState.loading;
     getAll().then((value) {
       if (items.isEmpty) {
-        state.value = PageState.empty.index;
+        state.value = PageState.empty;
       } else {
-        state.value = PageState.success.index;
+        state.value = PageState.success;
       }
     }).catchError((e) {
       _error = e;
-      state.value = PageState.error.index;
+      state.value = PageState.error;
     });
   }
 }

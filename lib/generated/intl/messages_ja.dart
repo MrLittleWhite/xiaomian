@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ネットワークが利用できません。ネットワーク接続を確認してから再試してください。"),
         "connectError": MessageLookupByLibrary.simpleMessage("ネットワークが利用できません"),
         "contact": MessageLookupByLibrary.simpleMessage("お問い合わせ"),
+        "delete": MessageLookupByLibrary.simpleMessage("削除"),
         "developer": MessageLookupByLibrary.simpleMessage("開発者"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "連絡先のメールアドレスがクリップボードにコピーされました。"),
