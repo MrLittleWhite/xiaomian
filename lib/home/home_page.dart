@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         },
       child: BlurryContainer(
         borderRadius: BorderRadius.zero,
-        blur: 80, elevation: 40, height: playBarHeight, width: double.infinity,
+        blur: 10, elevation: 5, height: playBarHeight, width: double.infinity,
         color: const XMColor(0x141927, opacity: 0.76), 
         padding: const EdgeInsets.only(left: 16, right: 0, top: 8, bottom: 8),
         child: Row (

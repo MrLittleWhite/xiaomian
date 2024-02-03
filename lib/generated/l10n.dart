@@ -419,6 +419,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Select all`
+  String get selectAll {
+    return Intl.message(
+      'Select all',
+      name: 'selectAll',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deselect all`
+  String get deselectAll {
+    return Intl.message(
+      'Deselect all',
+      name: 'deselectAll',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

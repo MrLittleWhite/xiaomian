@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectError": MessageLookupByLibrary.simpleMessage("ネットワークが利用できません"),
         "contact": MessageLookupByLibrary.simpleMessage("お問い合わせ"),
         "delete": MessageLookupByLibrary.simpleMessage("削除"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("すべて選択解除する"),
         "developer": MessageLookupByLibrary.simpleMessage("開発者"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "連絡先のメールアドレスがクリップボードにコピーされました。"),
@@ -57,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy": MessageLookupByLibrary.simpleMessage("プライバシー"),
         "profile": MessageLookupByLibrary.simpleMessage("プロフィール"),
         "questionsSuggestions": MessageLookupByLibrary.simpleMessage("疑問と提案"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("すべて選択する"),
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),
         "terms": MessageLookupByLibrary.simpleMessage("利用規約"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("もう一度試してください"),

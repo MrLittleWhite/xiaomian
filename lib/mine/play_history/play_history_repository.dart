@@ -61,6 +61,9 @@ class PlayHistoryRepository {
   Future<void> delete(List<AudioItem> items) async {
     return _initialize().then((value) => value.writeTxn(() => value.audioItems.deleteAll(items.map((e) => e.id).toList())));
   }
+  Future<void> deleteIds(List<int> ids) async {
+    return _initialize().then((value) => value.writeTxn(() => value.audioItems.deleteAll(ids)));
+  }
 
   Future<void> deleteAll() async {
     return _initialize().then((value) => value.writeTxn(() => value.audioItems.clear()));

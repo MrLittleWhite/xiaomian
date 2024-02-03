@@ -34,5 +34,7 @@
     "exceptionOccurred": "發生異常",
     "ok": "好的",
     "emailContactUs": "luffy243077002@163.com已複製到剪貼板，請發送郵件聯繫我們。",
-    "delete": "刪除"
+    "delete": "刪除",
+    "selectAll": "全選",
+    "deselectAll": "全不選"
 }

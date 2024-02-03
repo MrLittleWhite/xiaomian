@@ -33,5 +33,7 @@
     "exceptionOccurred": "例外が発生しました",
     "ok": "わかりました",
     "emailContactUs": "luffy243077002@163.com がクリップボードにコピーされました。お問い合わせはメールでお願いします。",
-    "delete": "削除"
+    "delete": "削除",
+    "selectAll": "すべて選択する",
+    "deselectAll": "すべて選択解除する"
 }

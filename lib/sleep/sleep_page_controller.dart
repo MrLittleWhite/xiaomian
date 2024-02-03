@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/component/UI/page_state.dart';
@@ -54,10 +56,17 @@ class SleepPageController extends GetxController {
     });
   }
 
+  final _random = Random();
+
+
+
   List<AudioItem> _createItems(int count) {
+    
     List<AudioItem> items = [];
     for (var i = 0; i < count; i++) {
-      items.add(AudioItem.fromJson(AudioItemMap.json));
+      AudioItem item = AudioItem.fromJson(AudioItemMap.json);
+      item.aId = _random.nextInt(999999).toString();
+      items.add(item);
     }
     return items;
   }

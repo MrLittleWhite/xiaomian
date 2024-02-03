@@ -5,6 +5,7 @@ import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/mine/play_history/play_history_repository.dart';
 import 'package:xiaomian/model/audio_item.dart';
 
+
 class PlayHistoryController extends GetxController {
 
   RxList<AudioItem> items = <AudioItem>[].obs;
@@ -18,8 +19,9 @@ class PlayHistoryController extends GetxController {
   Object? get error {
     return _error;
   }
-  RxBool editDisplay = false.obs;
+
   RxBool editEnable = false.obs;
+  RxMap<int, int> checks = <int, int>{}.obs;
 
   @override
   void onInit() {
@@ -43,15 +45,20 @@ class PlayHistoryController extends GetxController {
   Future<void> getAll() async {
     return _repository.getAll().then((value) {
       items.value = value;
+      checks.clear();
     });
   }
 
-  Future<void> delete(List<AudioItem> items) async {
-    return _repository.delete(items).then((value) => items.removeWhere((element) => items.contains(element)));
+  Future<void> deleteItems(List<AudioItem> deleteItems) async {
+    return _repository.delete(deleteItems).then((value) => items.removeWhere((element) => deleteItems.contains(element)));
+  }
+
+  Future<void> deleteIds(List<int> ids) async {
+    return _repository.deleteIds(ids).then((value) => items.removeWhere((element) => ids.contains(element.id)));
   }
 
   Future<void> deleteAll() async {
-    return _repository.deleteAll();
+    return _repository.deleteAll().then((value) => items.clear());
   }
 
   void fetch() {

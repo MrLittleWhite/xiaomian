@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Network unavailable"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "delete": MessageLookupByLibrary.simpleMessage("delete"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("Deselect all"),
         "developer": MessageLookupByLibrary.simpleMessage("developer"),
         "emailContact": MessageLookupByLibrary.simpleMessage(
             "Contact email has been copied to the clipboard."),
@@ -64,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "questionsSuggestions":
             MessageLookupByLibrary.simpleMessage("Questions and suggestions"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
         "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("SleepGo"),
         "terms": MessageLookupByLibrary.simpleMessage("Terms"),

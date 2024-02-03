@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("네트워크를 사용할 수 없습니다"),
         "contact": MessageLookupByLibrary.simpleMessage("연락처"),
         "delete": MessageLookupByLibrary.simpleMessage("삭제"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("전체 선택 해제"),
         "developer": MessageLookupByLibrary.simpleMessage("개발자"),
         "emailContact":
             MessageLookupByLibrary.simpleMessage("연락 이메일이 클립보드에 복사되었습니다."),
@@ -58,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy": MessageLookupByLibrary.simpleMessage("개인정보 처리방침"),
         "profile": MessageLookupByLibrary.simpleMessage("프로필"),
         "questionsSuggestions": MessageLookupByLibrary.simpleMessage("의문과 제안"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("전체 선택"),
         "sleep": MessageLookupByLibrary.simpleMessage("수면"),
         "terms": MessageLookupByLibrary.simpleMessage("약관"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("다시 시도하세요"),

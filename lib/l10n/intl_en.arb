@@ -35,5 +35,7 @@
     "exceptionOccurred": "Exception occurred",
     "ok": "ok",
     "emailContactUs" : "luffy243077002@163.com has been copied to the clipboard. Please send an email to contact us.",
-    "delete": "delete"
+    "delete": "delete",
+    "selectAll": "Select all",
+    "deselectAll": "Deselect all"
 }

@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "connectError": MessageLookupByLibrary.simpleMessage("网络不可用"),
         "contact": MessageLookupByLibrary.simpleMessage("联系方式"),
         "delete": MessageLookupByLibrary.simpleMessage("刪除"),
+        "deselectAll": MessageLookupByLibrary.simpleMessage("全不选"),
         "developer": MessageLookupByLibrary.simpleMessage("开发者"),
         "emailContact": MessageLookupByLibrary.simpleMessage("联系邮箱已复制到剪贴板。"),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(
@@ -54,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy": MessageLookupByLibrary.simpleMessage("隐私"),
         "profile": MessageLookupByLibrary.simpleMessage("我的"),
         "questionsSuggestions": MessageLookupByLibrary.simpleMessage("疑问和建议"),
+        "selectAll": MessageLookupByLibrary.simpleMessage("全选"),
         "sleep": MessageLookupByLibrary.simpleMessage("睡眠"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("失眠家"),
         "terms": MessageLookupByLibrary.simpleMessage("条款"),

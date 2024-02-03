@@ -144,7 +144,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           detail = "";
                         }
 
-                        return ListView.separated(itemBuilder: (context, index) {
+                        return ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
                           if (index == 0) {
                             return ListTile(
                             leading: SizedBox(width: 40, height: 40, child: icon,), 

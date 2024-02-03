@@ -65,6 +65,7 @@ class AudioPlayerController extends GetxController {
       if (item is AudioItem) {
         historyRepository.insert(item as AudioItem);
       }
+      handler?.pause();
     }
     _playItem = item;
     XMAudioHandler.setMedioInfo(item);

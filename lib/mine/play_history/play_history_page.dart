@@ -1,4 +1,6 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -12,13 +14,30 @@ import 'package:xiaomian/component/xm_error.dart';
 import 'package:xiaomian/component/xm_error_page.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_loading.dart';
+import 'package:xiaomian/component/xm_media_query.dart';
 import 'package:xiaomian/mine/play_history/play_history_controller.dart';
 import 'package:xiaomian/mine/play_history/play_history_repository.dart';
+import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 
-class PlayHistoryPage extends GetView<PlayHistoryController>  {
+class PlayHistoryPage extends StatefulWidget  {
   const PlayHistoryPage({super.key});
-  //save_outlined/logout_rounded //fact_check_outlined
+
+  @override
+  State<PlayHistoryPage> createState() => _PlayHistoryPageState();
+}
+
+class _PlayHistoryPageState extends State<PlayHistoryPage> {
+
+  final controller = Get.find<PlayHistoryController>();
+
+  final GlobalKey<SliverAnimatedListState> _listKey = GlobalKey<SliverAnimatedListState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: XMAppBar.name(XMIntl.current.playHistory, actions: [
@@ -29,6 +48,7 @@ class PlayHistoryPage extends GetView<PlayHistoryController>  {
             onPressed: () {
               controller.editEnable.value = !controller.editEnable.value;
               controller.update();
+              controller.checks.clear();
             }, icon: controller.editEnable.value ? const Icon(Icons.logout_rounded, color: Colors.white,) : const Icon(Icons.checklist_rounded, color: Colors.white,)
           ),
         );
@@ -56,51 +76,25 @@ class PlayHistoryPage extends GetView<PlayHistoryController>  {
           case PageState.success:
           return GetBuilder<PlayHistoryController>(
             builder: (controller) {
-              return ClipRect(
-                child: SlidableAutoCloseBehavior(
-                  child: ListView.builder(itemCount: controller.items.length, itemBuilder: (context, index) {
-                    final data = controller.items[index];
-                    return Slidable(
-                      key: ValueKey(data),
-                      enabled: !controller.editEnable.value,
-                      endActionPane: ActionPane(
-                        motion: const DrawerMotion(), 
-                        extentRatio: 0.25,
-                        dragDismissible: false,
-                        dismissible: DismissiblePane(confirmDismiss: () {
-                          return Future(() => true);
-                        },
-                        onDismissed: () {
-                
-                        }),
-                        children: [
-                          _buildAction(),
-                
-                          // SlidableAction(onPressed: (context) {
-                          //     // Slidable.of(context)?.close();
-                          //     final controller = Slidable.of(context);
-                          //     controller?.dismiss(
-                          //       ResizeRequest(const Duration(milliseconds: 200), () => {}),
-                          //       duration: const Duration(milliseconds: 200),
-                          //     );
-                
-                          //     // controller.delete([data]);
-                          //   }, 
-                          //   autoClose: false,
-                          //   foregroundColor: Colors.white, 
-                          //   backgroundColor: XMColor.xmRed,
-                          //   icon: Icons.delete_rounded,
-                          //   label: XMIntl.current.delete,
-                          // )
-                        ]),
-                  
-                      child: CoverListTile(data: data, onTap: (item) {
-                        
-                      }, editEnable: controller.editEnable.value, editSelected: (selected) {
-                        
+              return ClipRRect(
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [SlidableAutoCloseBehavior(
+                    child: CustomScrollView(
+                      slivers: [SliverAnimatedList( 
+                        key: _listKey,
+                        initialItemCount: controller.items.length, 
+                        itemBuilder: (context, index, Animation<double> animation) {
+                        final data = controller.items[index];
+                        return _buildItem(index, data, animation);
                       }),
-                    );
-                  }),
+                      SliverToBoxAdapter(child: SizedBox(height: controller.editEnable.value ? 60+XMMediaQuery.xmBottom(context) : XMMediaQuery.xmBottom(context),),)
+                      ]
+                    ),
+                  
+                  ),
+                  _buildBottomBar(context)
+                  ]
                 ),
               );
             }
@@ -112,6 +106,120 @@ class PlayHistoryPage extends GetView<PlayHistoryController>  {
     
   }
 
+  Widget _buildItem(int index, AudioItem data, Animation<double> animation) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: Slidable(
+        key: ValueKey(data),
+        enabled: !controller.editEnable.value,
+        endActionPane: ActionPane(
+          motion: const DrawerMotion(), 
+          extentRatio: 0.25,
+          dragDismissible: false,
+          dismissible: DismissiblePane(confirmDismiss: () {
+            return Future(() => true);
+          },
+          onDismissed: () {
+                      
+          }),
+          children: [
+            _buildAction(),
+          ]),
+        
+        child: CoverListTile(data: data, onTap: (item) {
+          
+        }, checkEnable: controller.editEnable.value, check: controller.checks[data.id] != null, checkTap: (selected) {
+          if (selected) {
+            controller.checks[data.id] = index;
+          } else {
+            controller.checks.remove(data.id);
+          }
+        }),
+      ),
+    );
+  }
+
+  void _remove(int index, AudioItem data) {
+    if (_listKey.currentState == null) {
+      return;
+    }
+    _listKey.currentState?.removeItem(index, (context, animation) {
+      return _buildItem(index, data, animation);
+    });
+
+  }
+
+  Widget _buildBottomBar(BuildContext context) {
+    final bottom = XMMediaQuery.xmBottom(context);
+    return Obx(() => Visibility(
+      visible: controller.editEnable.value,
+      child: BlurryContainer(
+        padding: EdgeInsets.fromLTRB(0, 0, 0, bottom),
+        borderRadius: BorderRadius.zero,
+        blur: 10, elevation: 5, height: 60+bottom, width: double.infinity,
+        color: const XMColor(0x141927, opacity: 0.76),
+        child: DecoratedBox(
+          decoration: BoxDecoration(border: Border(top: BorderSide(width: 0.2, color: Colors.white.withOpacity(0.5)))),
+          child: 
+          Row(children: [
+          Expanded(child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SizedBox(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child: TextButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)))),
+                  onPressed: () {
+                    final indexs = controller.checks.values.toList();
+                    final items = { for (var index in indexs) index: controller.items[index] };
+                    final ids = controller.checks.keys.toList();
+                    controller.deleteIds(ids).then((value){
+                      controller.editEnable.value = false;
+                      controller.checks.clear();
+                      for (var index in indexs.reversed) {
+                        _remove(index, items[index]!);
+                      }
+                      if (controller.items.isEmpty) {
+                        controller.state.value = PageState.empty;
+                      }
+                    }).catchError((e) {
+                      //upload error
+                    });
+                  }, 
+                  child: Obx(() => Text(XMIntl.current.delete, style: TextStyle(color: Colors.white.withOpacity(controller.checks.isEmpty ? 0.2 : 1)),)),
+              ));
+            }
+          )), 
+          Container(color: Colors.white.withOpacity(0.2), width: 1,), 
+          Expanded(child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SizedBox(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child: TextButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)))), 
+                  onPressed: () {
+                    if (controller.items.length == controller.checks.length) {
+                      controller.checks.clear();
+                    } else {
+                      Map<String, int> map = {};
+                      for(int i = 0; i < controller.items.length; i++) {
+                        controller.checks[controller.items[i].id] = i;
+                      }       
+                    }
+                    controller.update();
+                  }, 
+                  child: Obx(() => Text(controller.items.length == controller.checks.length ? XMIntl.current.deselectAll : XMIntl.current.selectAll, style: TextStyle(color: Colors.white),)),
+              ));
+            }
+          ))]),
+        ),
+      ),
+    ));
+  }
+
   Widget _buildAction() {
     return Expanded(
       child: Builder(builder: (context) {
@@ -121,9 +229,9 @@ class PlayHistoryPage extends GetView<PlayHistoryController>  {
             Logger().d(e);
           });
         }
-        return InkWell(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15),
+          child: GestureDetector(
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: XMColor.xmRed,
@@ -141,20 +249,21 @@ class PlayHistoryPage extends GetView<PlayHistoryController>  {
                 ],
               ),
             ),
+            onTap: () {
+              final slidableController = Slidable.of(context);
+              if (slidableController == null) {
+                return;
+              }
+              slidableController.dismiss(
+                ResizeRequest(const Duration(milliseconds: 200), () => {}),
+                duration: const Duration(milliseconds: 200),
+              );
+            },
           ),
-          onTap: () {
-            final slidableController = Slidable.of(context);
-            if (slidableController == null) {
-              return;
-            }
-            slidableController.dismiss(
-              ResizeRequest(const Duration(milliseconds: 200), () => {}),
-              duration: const Duration(milliseconds: 200),
-            );
-          },
         );
         },
       ),
     );
   }
 }
+

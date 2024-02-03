@@ -9,41 +9,53 @@ class CoverListTile extends StatefulWidget {
     super.key,
     required this.data,
     this.onTap, 
-    this.editEnable,
-    this.editSelected,
+    this.checkEnable,
+    this.checkTap,
+    this.check,
   });
 
 
   final AudioItem data;
   final void Function(AudioItem data)? onTap;
-  final bool? editEnable;
-  final void Function(bool selected)? editSelected;
+  final bool? checkEnable;
+  final void Function(bool selected)? checkTap;
+  final bool? check;
 
   @override
   State<CoverListTile> createState() => _CoverListTileState();
 }
 
 class _CoverListTileState extends State<CoverListTile> {
-  final ValueNotifier<bool> _edit = ValueNotifier(false);
-  final ValueNotifier<bool> _selected = ValueNotifier(false);
+  final ValueNotifier<bool> _checkEnable = ValueNotifier(false);
+  final ValueNotifier<bool> _check = ValueNotifier(false);
 
   @override
   void initState() {
+    if (widget.checkEnable != null ) {
+      _checkEnable.value = widget.checkEnable!;
+    }
+    if (widget.check != null) {
+      _check.value = widget.check!;  
+    }
+    
     super.initState();
   }
 
    @override
   void didUpdateWidget(covariant CoverListTile oldWidget) {
-    if (widget.editEnable == null || widget.editEnable == false ) {
-      _selected.value = false;
+    if (widget.checkEnable != null ) {
+      _checkEnable.value = widget.checkEnable!;
+    }
+    if (widget.check != null) {
+      _check.value = widget.check!;  
     }
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.editEnable != null) {
-      _edit.value = widget.editEnable!;
+    if (widget.checkEnable != null) {
+      _checkEnable.value = widget.checkEnable!;
     }
     return GestureDetector(
         onTap: widget.onTap == null ? null : () => widget.onTap!(widget.data),
@@ -84,20 +96,20 @@ class _CoverListTileState extends State<CoverListTile> {
                     ],
                   ),
                 ),
-                ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
+                ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
                   return value ? Gap(3) : Gap(0);
                 }),
-                ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
+                ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
                   return value ? IconButton(onPressed: () {
-                      _selected.value = !_selected.value;
-                      widget.editSelected?.call(_selected.value);
+                      _check.value = !_check.value;
+                      widget.checkTap?.call(_check.value);
                     }, icon: ValueListenableBuilder(
                       builder: (context, value, child) {
                         return value ? Icon(Icons.check_circle_outline_rounded, color: XMColor.xmRed,) : const Icon(Icons.radio_button_off_rounded, color: Colors.white,);
-                      }, valueListenable: _selected,
+                      }, valueListenable: _check,
                     )) : Gap(0);
                 },),
-                ValueListenableBuilder(valueListenable: _edit, builder: (context, value, child) {
+                ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
                   return value ? Gap(0) : Gap(16);
                 }),
               ],
