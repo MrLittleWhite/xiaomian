@@ -89,6 +89,19 @@ const AudioItemSchema = CollectionSchema(
           caseSensitive: true,
         )
       ],
+    ),
+    r'createTime': IndexSchema(
+      id: -7085130145048818916,
+      name: r'createTime',
+      unique: false,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'createTime',
+          type: IndexType.value,
+          caseSensitive: false,
+        )
+      ],
     )
   },
   links: {},
@@ -212,6 +225,7 @@ AudioItem _audioItemDeserialize(
       allOffsets,
     ),
     cover: reader.readStringOrNull(offsets[3]),
+    createTime: reader.readDateTimeOrNull(offsets[4]),
     descTXT: reader.readObjectOrNull<LanguageText>(
       offsets[6],
       LanguageTextSchema.deserialize,
@@ -345,6 +359,14 @@ extension AudioItemQueryWhereSort
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhere> anyCreateTime() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        const IndexWhereClause.any(indexName: r'createTime'),
+      );
+    });
+  }
 }
 
 extension AudioItemQueryWhere
@@ -455,6 +477,116 @@ extension AudioItemQueryWhere
               includeUpper: false,
             ));
       }
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [null],
+      ));
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [null],
+        includeLower: false,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'createTime',
+        value: [createTime],
+      ));
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeNotEqualTo(
+      DateTime? createTime) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [createTime],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'createTime',
+              lower: [],
+              upper: [createTime],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeGreaterThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [createTime],
+        includeLower: include,
+        upper: [],
+      ));
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeLessThan(
+    DateTime? createTime, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [],
+        upper: [createTime],
+        includeUpper: include,
+      ));
+    });
+  }
+
+  QueryBuilder<AudioItem, AudioItem, QAfterWhereClause> createTimeBetween(
+    DateTime? lowerCreateTime,
+    DateTime? upperCreateTime, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.between(
+        indexName: r'createTime',
+        lower: [lowerCreateTime],
+        includeLower: includeLower,
+        upper: [upperCreateTime],
+        includeUpper: includeUpper,
+      ));
     });
   }
 }

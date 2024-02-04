@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
@@ -13,14 +14,26 @@ class AudioPlayerController extends GetxController {
 
   late final XMAudioPlayer player = XMAudioPlayer();
 
+  final ValueNotifier<AudioPlayItem?> playItemChangeNotifier = ValueNotifier(null);
+
   RxBool autoPlay = false.obs;
   RxInt playPeriod = 30.obs;
 
-  AudioPlayItem? _playItem;
   AudioPlayItem? get playItem {
-    return _playItem;
+    return playItemChangeNotifier.value;
   }
 
+  set playItem(AudioPlayItem? item) {
+    if (playItemChangeNotifier.value?.aId != item?.aId) {
+      if (item is AudioItem) {
+        historyRepository.insert(item);
+      }
+      handler?.toStop();
+      XMAudioHandler.setMedioInfo(item);
+      playItemChangeNotifier.value = item;
+    }
+  }
+  
   @override
   void onInit() {
     Logger().d("AudioPlayerController onInit");
@@ -58,17 +71,6 @@ class AudioPlayerController extends GetxController {
 
   XMAudioHandler? get handler {
     return XMAudioHandler.shared;
-  }
-
-  void setPlayItem(AudioPlayItem item) {
-    if (_playItem == null || _playItem!.aId != item.aId) {
-      if (item is AudioItem) {
-        historyRepository.insert(item as AudioItem);
-      }
-      handler?.pause();
-    }
-    _playItem = item;
-    XMAudioHandler.setMedioInfo(item);
   }
 
 }

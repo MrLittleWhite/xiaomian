@@ -73,6 +73,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tryLater":
             MessageLookupByLibrary.simpleMessage("Please try again later."),
         "unknownError": MessageLookupByLibrary.simpleMessage("Unknown error"),
-        "version": MessageLookupByLibrary.simpleMessage("Version")
+        "version": MessageLookupByLibrary.simpleMessage("Version"),
+        "welcomeDetail": MessageLookupByLibrary.simpleMessage(
+            "Gentle rain sounds, soothing ocean waves, and warm forest sounds, taking you into a serene world, helping you forget your worries, and naturally fall asleep"),
+        "welcomeTitle":
+            MessageLookupByLibrary.simpleMessage("Welcome to the SleepGo")
       };
 }

@@ -9,23 +9,33 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsIconImageGen {
-  const $AssetsIconImageGen();
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
 
-  /// File path: assets/icon_image/app_icon.jpeg
-  String get appIcon => 'assets/icon_image/app_icon.jpeg';
+  /// File path: assets/images/app_icon.jpeg
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.jpeg');
 
-  /// File path: assets/icon_image/pull_close.png
-  String get pullClose => 'assets/icon_image/pull_close.png';
+  /// File path: assets/images/moon_star.png
+  AssetGenImage get moonStar =>
+      const AssetGenImage('assets/images/moon_star.png');
+
+  /// File path: assets/images/placeholder.jpeg
+  AssetGenImage get placeholder =>
+      const AssetGenImage('assets/images/placeholder.jpeg');
+
+  /// File path: assets/images/pull_close.png
+  AssetGenImage get pullClose =>
+      const AssetGenImage('assets/images/pull_close.png');
 
   /// List of all assets
-  List<String> get values => [appIcon, pullClose];
+  List<AssetGenImage> get values => [appIcon, moonStar, placeholder, pullClose];
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsIconImageGen iconImage = $AssetsIconImageGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {

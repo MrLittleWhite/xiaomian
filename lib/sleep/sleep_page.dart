@@ -133,21 +133,26 @@ class _SleepPageState extends State<SleepPage> {
     );
   }
 
-  CustomScrollView _buildScrollContent() {
-    return CustomScrollView(
-          slivers: [
-            const HeaderLocator.sliver(),
-            Obx(() {
-              if (sleepController.displayList.value) {
-                return _buildList();
-              } else {
-                return _buildGrid();
-              }
-            }),
-            const FooterLocator.sliver(),
-            SliverToBoxAdapter(child: SizedBox(height: 75),)
-          ],
-        );
+  RawScrollbar _buildScrollContent() {
+    return RawScrollbar(
+      thumbColor: Colors.white.withOpacity(0.3),
+      thickness: 2,
+      interactive: true,
+      child: CustomScrollView(
+            slivers: [
+              const HeaderLocator.sliver(),
+              Obx(() {
+                if (sleepController.displayList.value) {
+                  return _buildList();
+                } else {
+                  return _buildGrid();
+                }
+              }),
+              const FooterLocator.sliver(),
+              SliverToBoxAdapter(child: SizedBox(height: 75),)
+            ],
+          ),
+    );
   }
 
   FutureBuilder<bool?> _buildIcon() {
@@ -173,62 +178,65 @@ class _SleepPageState extends State<SleepPage> {
               itemBuilder: (context, index) {
               final data = sleepController.items[index];
               return CoverListTile(key: ValueKey(data), data: data, onTap: (data) {
-                playerController.setPlayItem(data);
+                playerController.playItem = data;
                 playerController.handler?.play();
                 AppRoute.toDialogNamed(AppRoute.audioPlayer);
               },);
             },);
   }
 
-  SliverGrid _buildGrid() {
-    return SliverGrid.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 0.77), 
-              itemCount: sleepController.items.length,
-              itemBuilder: (context, index) {
-              final data = sleepController.items[index];
-              return GestureDetector(key: ValueKey(data),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minWidth: double.infinity),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: Stack(
-                          alignment: AlignmentDirectional.bottomEnd,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: CachedNetworkImage(
-                                placeholder: (context, url) => Container(), 
-                                errorWidget: (context, url, error) => Container(color: Colors.white,),
-                                imageUrl: data.cover ?? "", 
-                                fit: BoxFit.cover,
+  SliverPadding _buildGrid() {
+    return SliverPadding(
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      sliver: SliverGrid.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2, crossAxisSpacing: 16, mainAxisSpacing: 20, childAspectRatio: 0.77), 
+                itemCount: sleepController.items.length,
+                itemBuilder: (context, index) {
+                final data = sleepController.items[index];
+                return GestureDetector(key: ValueKey(data),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: double.infinity),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Stack(
+                            alignment: AlignmentDirectional.bottomEnd,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Container(), 
+                                  errorWidget: (context, url, error) => Container(color: Colors.white,),
+                                  imageUrl: data.cover ?? "", 
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            child: FittedBox(
-                              child: Text(data.author?.name ?? "", 
-                              style: TextStyle(
-                                color: Colors.white, 
-                                fontSize: 12, 
-                                fontWeight: FontWeight.w600, 
-                                shadows: [Shadow(color: Colors.black, blurRadius: 5)]),),
-                            )),
-                          ]
+                              Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              child: FittedBox(
+                                child: Text(data.author?.name ?? "", 
+                                style: TextStyle(
+                                  color: Colors.white, 
+                                  fontSize: 12, 
+                                  fontWeight: FontWeight.w600, 
+                                  shadows: [Shadow(color: Colors.black, blurRadius: 5)]),),
+                              )),
+                            ]
+                          ),
                         ),
-                      ),
-                      Text(data.title ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),),
-                      Text(data.desc ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),),
-                    ],
+                        Text(data.title ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),),
+                        Text(data.desc ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),),
+                      ],
+                    ),
                   ),
-                ),
-                onTap: () {
-                  
-                }
-              );
-            },
-          );
+                  onTap: () {
+                    
+                  }
+                );
+              },
+            ),
+    );
   }
 }

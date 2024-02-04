@@ -52,7 +52,9 @@ class XMNetwork {
     _networkAuthority.startListening().catchError((e) {
       //todo: upload error
     });
-    _networkAuthority.getStatus().then((value) => _authority = value).catchError((e) {
+    _networkAuthority.getStatus().then((value) {
+      _authority = value;
+    }).catchError((e) {
       //todo: upload error
     });
     _authoritySubscription = _networkAuthority.onStatusChanged.listen((NetworkAuthorityStatus s) {

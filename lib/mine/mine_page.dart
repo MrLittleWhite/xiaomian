@@ -172,6 +172,7 @@ class _MinePageState extends State<MinePage> {
             itemCount: _items.length,
             ),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 75),)
         ]
       ),
       );

@@ -22,13 +22,11 @@ class XMAudioPlayer implements BasicAudioPlayer {
   }
 
   Future<void> dispose() async {
-    player.stop().then(
+    return player.stop().then(
       (value) => player.dispose()
     ).then(
       (value) => controller.close()
-    ).catchError((e) {
-      
-    });
+    );
   }
   
   @override
@@ -45,21 +43,52 @@ class XMAudioPlayer implements BasicAudioPlayer {
   }
 
   @override
-  void play() async {
+  void play() {
     if(player.playing) {
       return;
     }
-    player.play();
+    player.play().then((value) => null).catchError((e) {
+      //todo: upload error
+    });
   }
 
   @override
-  void pause() async {
-    player.pause();
+  void pause() {
+    player.pause().catchError((e) {
+      //todo: upload error
+    });
   }
   
   @override
-  void stop() async {
-    player.stop();
+  void stop() {
+    player.stop().catchError((e) {
+      
+    });
+  }
+
+  //adapt handler
+  Future<void> setURLAsync(String url, {dynamic medioInfo}) {
+    if (url == _url) {
+      return Future(() => null);
+    }
+    _url = url;
+    final audioSource = LockCachingAudioSource(Uri.parse(url), tag: medioInfo);
+    return player.setAudioSource(audioSource);
+  }
+
+  Future<void> playAsync() {
+    if(player.playing) {
+      return Future(() => null);
+    }
+    return player.play();
+  }
+
+  Future<void> pauseAsync() {
+    return player.pause();
+  }
+  
+  Future<void> stopAsync() {
+    return player.stop();
   }
   
   @override

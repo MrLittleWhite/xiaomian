@@ -32,6 +32,7 @@ class PlayHistoryRepository {
   }
 
   Future<void> insert(AudioItem item) async {
+    item.createTime = DateTime.now();
     return _initialize().then(
       (value) => value.writeTxn(() => value.audioItems.put(item))
     ).then( (value) {
@@ -52,7 +53,7 @@ class PlayHistoryRepository {
   }
 
   Future<List<AudioItem>> getAll() async {
-    return _initialize().then((value) => value.audioItems.where().findAll()).then((value) {
+    return _initialize().then((value) => value.audioItems.where().sortByCreateTimeDesc().findAll()).then((value) {
       count = value.length;
       return Future(() => value);
     });

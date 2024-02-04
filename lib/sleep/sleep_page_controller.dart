@@ -58,14 +58,13 @@ class SleepPageController extends GetxController {
 
   final _random = Random();
 
-
-
   List<AudioItem> _createItems(int count) {
     
     List<AudioItem> items = [];
     for (var i = 0; i < count; i++) {
       AudioItem item = AudioItem.fromJson(AudioItemMap.json);
       item.aId = _random.nextInt(999999).toString();
+      item.titleTXT?.cnHK = '${item.aId}${item.title}';
       items.add(item);
     }
     return items;

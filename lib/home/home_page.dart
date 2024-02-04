@@ -11,8 +11,10 @@ import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_media_query.dart';
 import 'package:xiaomian/component/xm_system_chrome.dart';
+import 'package:xiaomian/gen/assets.gen.dart';
 import 'package:xiaomian/mine/mine_page.dart';
 import 'package:xiaomian/model/audio_item.dart';
+import 'package:xiaomian/player/audio_play_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/player/ui/audio_player_page.dart';
 import 'package:xiaomian/route/app_route.dart';
@@ -56,9 +58,7 @@ class _HomePageState extends State<HomePage> {
               selectedIndex: _controller.index, 
               items: items, 
               onItemSelected: (value) {
-                setState(() {
-                  _controller.index = value;
-                });
+                _controller.index = value;
               }),
           ),
           Platform.isAndroid ? const Gap(0) : SizedBox(
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         screens: _buildScreens()
       );
   }
-
+  
   Widget _buildPlayerBar() {
     return GestureDetector(
       onTap: () { 
@@ -86,22 +86,36 @@ class _HomePageState extends State<HomePage> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
-              child: CachedNetworkImage(
-                placeholder: (context, url) => Container(), 
-                errorWidget: (context, url, error) => Container(),
-                imageUrl: 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
-                width: 59, height: 59, fit: BoxFit.cover,
+              child: ValueListenableBuilder(
+                valueListenable: playerController.playItemChangeNotifier,
+                builder: (BuildContext context, AudioPlayItem? value, Widget? child) { 
+                  final Widget Function(bool) placeholder = (isInit) => Container(width: 59, height: 59, 
+                                        decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.white.withOpacity(0.2), width: 1), 
+                                            borderRadius: BorderRadius.circular(12)), 
+                                        child: Icon( isInit ? Icons.waving_hand_rounded : Icons.broken_image_rounded, color: Colors.white,)); 
+                  return value?.cover == null ? placeholder(false) : CachedNetworkImage(
+                  placeholder: (context, url) => Container(), 
+                  errorWidget: (context, url, error) => placeholder(false),
+                  imageUrl: value!.cover!,
+                  width: 59, height: 59, fit: BoxFit.cover,
+                );
+                },
               ),
             ),
             const Gap(16),
             Expanded(
-              child: Column (
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Name of song", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
-                  Text("Pack name", style: TextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
-                ],
+              child: ValueListenableBuilder(
+                valueListenable: playerController.playItemChangeNotifier,
+                builder: (BuildContext context, value, Widget? child) { 
+                  return Column (
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(playerController.playItem?.title ?? XMIntl.current.welcomeTitle, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
+                    Text(playerController.playItem?.desc ?? XMIntl.current.welcomeDetail, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
+                  ],
+                );},
               ),
             ),
             SizedBox(
@@ -121,9 +135,9 @@ class _HomePageState extends State<HomePage> {
                     builder: (context, snapshot) {
                       return IconButton(
                       onPressed: () {
-                        final model = AudioItem.fromJson(AudioItemMap.json);
-                        playerController.setPlayItem(model);
-                        playerController.handler?.playOrPause();
+                        if (playerController.playItem != null) {
+                          playerController.handler?.toTogglePlay();
+                        }
                       },  
                       icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white,),
                       );
@@ -144,19 +158,17 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  List<PersistentBottomNavBarItem> _navBarsItems() {
+  List<XMPersistentBottomNavBarItem> _navBarsItems() {
       return [
-          PersistentBottomNavBarItem(
-              icon: const Icon(XMIconfont.moonStar),
+          XMPersistentBottomNavBarItem(
+              createIcon: (color) => Assets.images.moonStar.image(width: 24, height: 24, fit: BoxFit.none, color: color),//const Icon(Icons.nights_stay_rounded),
               title: XMIntl.current.sleep,
-              iconSize: 24,
               activeColorPrimary: XMColor.xmWhite,
               inactiveColorPrimary: XMColor.xmBlue,
           ),
-          PersistentBottomNavBarItem(
-              icon: const Icon(Icons.face),//const Icon(XMIconfont.userProfile),
+          XMPersistentBottomNavBarItem(
+              createIcon: (color) => Icon(Icons.face, size: 24, color: color,),
               title: XMIntl.current.profile,
-              iconSize: 24,
               activeColorPrimary: XMColor.xmWhite,
               inactiveColorPrimary: XMColor.xmBlue,
           ),  
@@ -169,7 +181,7 @@ class _HomePageState extends State<HomePage> {
 
 class CustomNavBarWidget extends StatelessWidget {
     final int selectedIndex;
-    final List<PersistentBottomNavBarItem> items; //可以使用自定义model
+    final List<XMPersistentBottomNavBarItem> items; //可以使用自定义model
     final ValueChanged<int> onItemSelected;
 
     const CustomNavBarWidget(
@@ -179,7 +191,7 @@ class CustomNavBarWidget extends StatelessWidget {
         required this.onItemSelected,});
 
     Widget _buildItem(
-        PersistentBottomNavBarItem item, bool isSelected) {
+        XMPersistentBottomNavBarItem item, bool isSelected) {
         return Container(
         color: XMColor.xmSeparator,
         alignment: Alignment.center,
@@ -188,37 +200,27 @@ class CustomNavBarWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+            children: [
             Flexible(
-                child: IconTheme(
-                  data: IconThemeData(
-                    size: item.iconSize,
-                    color: isSelected
-                        ? (item.activeColorSecondary ?? item.activeColorPrimary)
-                        : item.inactiveColorPrimary ?? item.inactiveColorSecondary),
-                  child: item.icon,
-                ),
+              child: item.createIcon(
+                isSelected ? item.activeColorPrimary : item.inactiveColorPrimary,
+              ),
             ),
-            isSelected ? Padding(  
-                padding: const EdgeInsets.only(top: 5.0),
-                child: Material(
-                type: MaterialType.transparency,
-                child: FittedBox(
-                    child: Text(
-                    item.title ?? "",
-                    style: TextStyle(
-                        color: isSelected
-                            ? (item.activeColorSecondary ?? item.activeColorPrimary)
-                            : (item.inactiveColorPrimary ?? item.inactiveColorPrimary),
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12.0),
-                ),).animate().move(
-                  duration: const Duration(milliseconds:200), 
-                  begin: const Offset(0, 16), 
-                  end: const Offset(0, 0), 
-                  curve: Curves.easeInOut
+            isSelected ? Flexible(
+              child: Text(
+                item.title,
+                style: TextStyle(
+                  decoration: TextDecoration.none,
+                  color: isSelected ? item.activeColorPrimary : item.inactiveColorPrimary,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12.0
                   ),
-                ),
+               ).animate().move(
+                duration: const Duration(milliseconds:200), 
+                begin: const Offset(0, 16), 
+                end: const Offset(0, 0), 
+                curve: Curves.easeInOut
+              ),
             ) : const Gap(0)
             ],
         ),
@@ -227,29 +229,34 @@ class CustomNavBarWidget extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return Container(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-            width: double.infinity,
-            height: kBottomNavigationBarHeight,
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: items.map((item) {
-                int index = items.indexOf(item);
-                return Flexible(
-                child: GestureDetector(
-                    onTap: () {
-                    onItemSelected(index);
-                    },
-                    child: _buildItem(
-                        item, selectedIndex == index),
-                ),
-                );
-            }).toList(),
+        return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: items.map((item) {
+            int index = items.indexOf(item);
+            return Flexible(
+            child: GestureDetector(
+                onTap: () {
+                onItemSelected(index);
+                },
+                child: _buildItem(
+                    item, selectedIndex == index),
             ),
-        ),
+            );
+        }).toList(),
         );
     }
 }
 
+class XMPersistentBottomNavBarItem {
+  final Widget Function(Color) createIcon;
+  final String title;
+  final Color activeColorPrimary;
+  final Color inactiveColorPrimary;
 
+  XMPersistentBottomNavBarItem({
+    required this.createIcon, 
+    required this.title, 
+    required this.activeColorPrimary, 
+    required this.inactiveColorPrimary
+  });
+}

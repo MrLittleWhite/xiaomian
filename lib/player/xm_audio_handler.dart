@@ -4,9 +4,7 @@ import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
 import 'package:xiaomian/player/xm_audio_player.dart';
 
-class XMAudioHandler extends BaseAudioHandler
-    with QueueHandler, // mix in default queue callback implementations
-    SeekHandler { // mix in default seek callback implementations
+class XMAudioHandler extends BaseAudioHandler { // mix in default seek callback implementations
 
   static const String remoteControlId = "com.xiaomianstudio.audio";
   static const String remoteControlName = "xiaomian audio service";
@@ -89,23 +87,38 @@ class XMAudioHandler extends BaseAudioHandler
 
   @override
   Future<void> play() async {
-    player.play();
+    return player.playAsync();
   }
   @override
   Future<void> pause() async {
-    player.pause();
+    return player.pauseAsync();
   }
   @override
   Future<void> stop() async {
-    player.pause();
+    return player.stopAsync();
   }
   
-  Future<void> playOrPause() async {
+  Future<void> togglePlay() async {
     if (player.isPlaying) {
-      pause();
+      return pause();
     } else {
-      play();
+      return play();
     }
+  }
+
+  void toPlay() {
+    return player.play();
+  }
+  void toPause() {
+    return player.pause();
+  }
+  void toStop() {
+    return player.stop();
+  }
+  void toTogglePlay() {
+    togglePlay().catchError((e) {
+      
+    });
   }
 
   // Future<void> seek(Duration position) async {}

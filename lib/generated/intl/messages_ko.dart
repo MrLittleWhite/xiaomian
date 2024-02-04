@@ -65,6 +65,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tryAgain": MessageLookupByLibrary.simpleMessage("다시 시도하세요"),
         "tryLater": MessageLookupByLibrary.simpleMessage("잠시 후에 다시 시도해 주세요."),
         "unknownError": MessageLookupByLibrary.simpleMessage("미지의 오류"),
-        "version": MessageLookupByLibrary.simpleMessage("버전")
+        "version": MessageLookupByLibrary.simpleMessage("버전"),
+        "welcomeDetail": MessageLookupByLibrary.simpleMessage(
+            "부드러운 비소리, 진정한 파도 소리, 따뜻한 숲 소리와 함께 평온한 세계로 안내되어 걱정을 잊고 자연스럽게 잠들 수 있습니다"),
+        "welcomeTitle":
+            MessageLookupByLibrary.simpleMessage("SleepGo에 오신 것을 환영합니다")
       };
 }

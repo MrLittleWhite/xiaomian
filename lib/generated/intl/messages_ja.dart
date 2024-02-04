@@ -64,6 +64,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tryAgain": MessageLookupByLibrary.simpleMessage("もう一度試してください"),
         "tryLater": MessageLookupByLibrary.simpleMessage("しばらくしてから再試してください。"),
         "unknownError": MessageLookupByLibrary.simpleMessage("未知のエラー"),
-        "version": MessageLookupByLibrary.simpleMessage("バージョン")
+        "version": MessageLookupByLibrary.simpleMessage("バージョン"),
+        "welcomeDetail": MessageLookupByLibrary.simpleMessage(
+            "穏やかな雨の音、癒しの波の音、暖かな森の音と共に、静寂な世界へと導かれ、心配事を忘れ、自然に眠りにつくことができます"),
+        "welcomeTitle": MessageLookupByLibrary.simpleMessage("SleepGo へようこそ")
       };
 }

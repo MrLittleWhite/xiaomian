@@ -33,9 +33,18 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
 
   final GlobalKey<SliverAnimatedListState> _listKey = GlobalKey<SliverAnimatedListState>();
 
+  Map<int, SlidableController> _slidableControllerTotalMap = {};
+  Map<int, SlidableController> _slidableControllerCheckMap = {};
+
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,6 +58,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
               controller.editEnable.value = !controller.editEnable.value;
               controller.update();
               controller.checks.clear();
+              _slidableControllerCheckMap.clear();
             }, icon: controller.editEnable.value ? const Icon(Icons.logout_rounded, color: Colors.white,) : const Icon(Icons.checklist_rounded, color: Colors.white,)
           ),
         );
@@ -123,18 +133,39 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                       
           }),
           children: [
-            _buildAction(),
+            _buildAction(data, index),
           ]),
         
-        child: CoverListTile(data: data, onTap: (item) {
-          
-        }, checkEnable: controller.editEnable.value, check: controller.checks[data.id] != null, checkTap: (selected) {
-          if (selected) {
-            controller.checks[data.id] = index;
-          } else {
-            controller.checks.remove(data.id);
+        child: Builder(
+          builder: (context) {
+            final slidableController = Slidable.of(context);
+            if (slidableController == null) {
+              Logger().d("slidableController is null");
+            } else {
+              _slidableControllerTotalMap[data.id] = slidableController;
+            }
+            return CoverListTile(data: data, onTap: (item) {
+              
+            }, checkEnable: controller.editEnable.value, check: controller.checks[data.id] != null, checkTap: (selected) {
+                final slidableController = Slidable.of(context);
+              if (selected) {
+                if (slidableController == null) {
+                  Logger().d("slidableController is null");
+                } else {
+                  _slidableControllerCheckMap[data.id] = slidableController;
+                }
+                controller.checks[data.id] = index;
+              } else {
+                if (slidableController == null) {
+                  Logger().d("slidableController is null");
+                } else {
+                  _slidableControllerCheckMap.removeWhere((key, value) => key == data.id);
+                }
+                controller.checks.remove(data.id);
+              }
+            });
           }
-        }),
+        ),
       ),
     );
   }
@@ -180,6 +211,17 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                       for (var index in indexs.reversed) {
                         _remove(index, items[index]!);
                       }
+                      
+                      _slidableControllerCheckMap.values.toList().forEach((controller) {
+                        controller.dismiss(
+                          ResizeRequest(const Duration(milliseconds: 200), () => {}),
+                          duration: const Duration(milliseconds: 200),
+                        );
+                      });
+                      final keys = _slidableControllerCheckMap.keys.toList();
+                      _slidableControllerTotalMap.removeWhere((key, value) => keys.contains(key));
+                      _slidableControllerCheckMap.clear();
+
                       if (controller.items.isEmpty) {
                         controller.state.value = PageState.empty;
                       }
@@ -203,11 +245,12 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                   onPressed: () {
                     if (controller.items.length == controller.checks.length) {
                       controller.checks.clear();
+                      _slidableControllerCheckMap.clear();
                     } else {
-                      Map<String, int> map = {};
                       for(int i = 0; i < controller.items.length; i++) {
                         controller.checks[controller.items[i].id] = i;
-                      }       
+                      }
+                      _slidableControllerCheckMap = _slidableControllerTotalMap;      
                     }
                     controller.update();
                   }, 
@@ -220,7 +263,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
     ));
   }
 
-  Widget _buildAction() {
+  Widget _buildAction(AudioItem data, int index) {
     return Expanded(
       child: Builder(builder: (context) {
         if (controller.editEnable.value) {
@@ -254,10 +297,21 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
               if (slidableController == null) {
                 return;
               }
-              slidableController.dismiss(
-                ResizeRequest(const Duration(milliseconds: 200), () => {}),
-                duration: const Duration(milliseconds: 200),
-              );
+              controller.deleteIds([data.id]).then((value) {
+                return slidableController.dismiss(
+                  ResizeRequest(const Duration(milliseconds: 200), () => {}),
+                  duration: const Duration(milliseconds: 200),
+                );
+              }).then((value) {
+                _remove(index, data);
+                if (controller.items.isEmpty) {
+                  controller.state.value = PageState.empty;
+                }
+                return null;
+              }).catchError((e) {
+                //upload error
+              });
+              
             },
           ),
         );

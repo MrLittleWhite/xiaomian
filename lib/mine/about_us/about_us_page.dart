@@ -113,7 +113,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ClipRRect(borderRadius: BorderRadius.circular(16), 
-                      child: Image.asset(Assets.iconImage.appIcon, width: 100, height: 100,)),
+                      child: Assets.images.appIcon.image(width: 100, height: 100,)),
                     const Gap(16),
                     Text(XMIntl.current.sleepGo, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                   ]
@@ -136,8 +136,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           icon = const Icon(Icons.bookmark, color: Colors.white,);
                           title = XMIntl.current.version;
                           detail = '${packageInfo.version}.${packageInfo.buildNumber}';
-                          // String version = packageInfo.version;
-                          // String buildNumber = packageInfo.buildNumber;
                         } else {
                           icon = LoadingAnimationWidget.threeRotatingDots(color: Colors.white, size: 40);
                           title = "${XMIntl.current.loading}...";

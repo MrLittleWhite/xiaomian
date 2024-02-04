@@ -40,7 +40,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
           backgroundColor: XMColor.xmMain,
           centerTitle: true,
           title: CupertinoButton(
-            child: Image.asset(Assets.iconImage.pullClose, width: 36, height: 10), 
+            child: Assets.images.pullClose.image(width: 36, height: 10),
             onPressed: () {
             Get.back();
           },),
@@ -53,18 +53,24 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20), 
-                    child: CachedNetworkImage(
-                      placeholder: (context, url) => Container(), 
-                      errorWidget: (context, url, error) => Container(),
-                      fit: BoxFit.cover,
-                      width: 170, 
-                      height: 170, imageUrl: 'https://cccimg.com/view.php/7ff3bd13cda0aaae9ad0de8d29411f56.jpeg', 
+                    child: ListenableBuilder(
+                      listenable: playerController.playItemChangeNotifier,
+                      builder: (BuildContext context, Widget? child) { 
+                        final placeholder = Assets.images.placeholder.image(width: 170, height: 170);
+                        return playerController.playItem?.cover == null ? placeholder : CachedNetworkImage(
+                        placeholder: (context, url) => Container(), 
+                        errorWidget: (context, url, error) => placeholder,
+                        fit: BoxFit.cover,
+                        width: 170, 
+                        height: 170, imageUrl: playerController.playItem!.cover!, 
+                      );
+                      },
                     )
                   ),
                   const Gap(23),
-                  Text("center music", style: TextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
+                  Text(playerController.playItem?.title ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
                   const Gap(10),
-                  Text("Pack name", style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900),),
+                  Text(playerController.playItem?.desc ?? "", maxLines: 10, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900),),
                 ]
               )),
               Flexible(flex: 4, child: Column(
@@ -95,9 +101,9 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                             builder: (context, snapshot) {
                               return IconButton(
                               onPressed: () {
-                                final model = AudioItem.fromJson(AudioItemMap.json);
-                                playerController.setPlayItem(model);
-                                playerController.handler?.playOrPause();
+                                if (playerController.playItem != null) {
+                                  playerController.handler?.toTogglePlay();
+                                }
                               },  
                               icon: Icon(playerController.player.isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 36,),
                               );

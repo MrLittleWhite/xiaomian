@@ -62,6 +62,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tryAgain": MessageLookupByLibrary.simpleMessage("再试一次"),
         "tryLater": MessageLookupByLibrary.simpleMessage("请稍后再试。"),
         "unknownError": MessageLookupByLibrary.simpleMessage("未知错误"),
-        "version": MessageLookupByLibrary.simpleMessage("版本")
+        "version": MessageLookupByLibrary.simpleMessage("版本"),
+        "welcomeDetail": MessageLookupByLibrary.simpleMessage(
+            "轻柔的雨声、舒缓的海浪声、温暖的森林声，带你进入宁静的世界，让你忘却烦忧，自然入眠"),
+        "welcomeTitle": MessageLookupByLibrary.simpleMessage("欢迎来到失眠家")
       };
 }

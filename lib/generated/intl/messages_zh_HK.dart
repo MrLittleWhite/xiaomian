@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tryAgain": MessageLookupByLibrary.simpleMessage("再試一次"),
         "tryLater": MessageLookupByLibrary.simpleMessage("請稍後再試。"),
         "unknownError": MessageLookupByLibrary.simpleMessage("未知錯誤"),
-        "version": MessageLookupByLibrary.simpleMessage("版本")
+        "version": MessageLookupByLibrary.simpleMessage("版本"),
+        "welcomeDetail": MessageLookupByLibrary.simpleMessage(
+            "柔和的雨聲、舒緩的海浪聲、溫暖的森林聲，帶你進入寧靜的世界，讓你忘卻煩憂，自然入眠"),
+        "welcomeTitle": MessageLookupByLibrary.simpleMessage("歡迎來到SleepGo")
       };
 }

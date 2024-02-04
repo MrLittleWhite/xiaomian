@@ -439,6 +439,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to the SleepGo`
+  String get welcomeTitle {
+    return Intl.message(
+      'Welcome to the SleepGo',
+      name: 'welcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gentle rain sounds, soothing ocean waves, and warm forest sounds, taking you into a serene world, helping you forget your worries, and naturally fall asleep`
+  String get welcomeDetail {
+    return Intl.message(
+      'Gentle rain sounds, soothing ocean waves, and warm forest sounds, taking you into a serene world, helping you forget your worries, and naturally fall asleep',
+      name: 'welcomeDetail',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
