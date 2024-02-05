@@ -30,11 +30,11 @@ class PlayHistoryPage extends StatefulWidget  {
 class _PlayHistoryPageState extends State<PlayHistoryPage> {
 
   final controller = Get.find<PlayHistoryController>();
+  final playController = Get.find<AudioPlayerController>();
 
   final GlobalKey<SliverAnimatedListState> _listKey = GlobalKey<SliverAnimatedListState>();
 
-  Map<int, SlidableController> _slidableControllerTotalMap = {};
-  Map<int, SlidableController> _slidableControllerCheckMap = {};
+  int _scrollableKey = 0;
 
   @override
   void initState() {
@@ -56,9 +56,9 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
           child: IconButton(
             onPressed: () {
               controller.editEnable.value = !controller.editEnable.value;
-              controller.update();
               controller.checks.clear();
-              _slidableControllerCheckMap.clear();
+              _scrollableKey += 1;
+              controller.update();
             }, icon: controller.editEnable.value ? const Icon(Icons.logout_rounded, color: Colors.white,) : const Icon(Icons.checklist_rounded, color: Colors.white,)
           ),
         );
@@ -90,16 +90,22 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                 child: Stack(
                   alignment: Alignment.bottomCenter,
                   children: [SlidableAutoCloseBehavior(
-                    child: CustomScrollView(
-                      slivers: [SliverAnimatedList( 
-                        key: _listKey,
-                        initialItemCount: controller.items.length, 
-                        itemBuilder: (context, index, Animation<double> animation) {
-                        final data = controller.items[index];
-                        return _buildItem(index, data, animation);
-                      }),
-                      SliverToBoxAdapter(child: SizedBox(height: controller.editEnable.value ? 60+XMMediaQuery.xmBottom(context) : XMMediaQuery.xmBottom(context),),)
-                      ]
+                    child: RawScrollbar(
+                      padding: EdgeInsets.only(right: 4),
+                      thumbColor: Colors.white.withOpacity(0.3),
+                      thickness: 2,
+                      interactive: true,
+                      child: CustomScrollView(
+                        slivers: [SliverAnimatedList( 
+                          key: _listKey,
+                          initialItemCount: controller.items.length, 
+                          itemBuilder: (context, index, Animation<double> animation) {
+                          final data = controller.items[index];
+                          return _buildItem(index, data, animation);
+                        }),
+                        SliverToBoxAdapter(child: SizedBox(height: controller.editEnable.value ? 60+XMMediaQuery.xmBottom(context) : XMMediaQuery.xmBottom(context),),)
+                        ]
+                      ),
                     ),
                   
                   ),
@@ -120,7 +126,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
     return SizeTransition(
       sizeFactor: animation,
       child: Slidable(
-        key: ValueKey(data),
+        key: ValueKey("${data.aId}$_scrollableKey"),
         enabled: !controller.editEnable.value,
         endActionPane: ActionPane(
           motion: const DrawerMotion(), 
@@ -136,35 +142,22 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
             _buildAction(data, index),
           ]),
         
-        child: Builder(
-          builder: (context) {
-            final slidableController = Slidable.of(context);
-            if (slidableController == null) {
-              Logger().d("slidableController is null");
-            } else {
-              _slidableControllerTotalMap[data.id] = slidableController;
-            }
+        child: ValueListenableBuilder(
+          builder: (context, value, child) {
             return CoverListTile(data: data, onTap: (item) {
               
-            }, checkEnable: controller.editEnable.value, check: controller.checks[data.id] != null, checkTap: (selected) {
-                final slidableController = Slidable.of(context);
+            }, 
+            playing: playController.playItem?.aId == data.aId ? value : null,
+            checkEnable: controller.editEnable.value, 
+            check: controller.checks[data.id] != null, 
+            checkTap: (selected) {
               if (selected) {
-                if (slidableController == null) {
-                  Logger().d("slidableController is null");
-                } else {
-                  _slidableControllerCheckMap[data.id] = slidableController;
-                }
                 controller.checks[data.id] = index;
               } else {
-                if (slidableController == null) {
-                  Logger().d("slidableController is null");
-                } else {
-                  _slidableControllerCheckMap.removeWhere((key, value) => key == data.id);
-                }
                 controller.checks.remove(data.id);
               }
             });
-          }
+          }, valueListenable: playController.playingChangeNotifier,
         ),
       ),
     );
@@ -211,20 +204,11 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                       for (var index in indexs.reversed) {
                         _remove(index, items[index]!);
                       }
-                      
-                      _slidableControllerCheckMap.values.toList().forEach((controller) {
-                        controller.dismiss(
-                          ResizeRequest(const Duration(milliseconds: 200), () => {}),
-                          duration: const Duration(milliseconds: 200),
-                        );
-                      });
-                      final keys = _slidableControllerCheckMap.keys.toList();
-                      _slidableControllerTotalMap.removeWhere((key, value) => keys.contains(key));
-                      _slidableControllerCheckMap.clear();
-
                       if (controller.items.isEmpty) {
                         controller.state.value = PageState.empty;
                       }
+                      _scrollableKey += 1;
+                      controller.update();
                     }).catchError((e) {
                       //upload error
                     });
@@ -245,13 +229,12 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                   onPressed: () {
                     if (controller.items.length == controller.checks.length) {
                       controller.checks.clear();
-                      _slidableControllerCheckMap.clear();
                     } else {
                       for(int i = 0; i < controller.items.length; i++) {
                         controller.checks[controller.items[i].id] = i;
-                      }
-                      _slidableControllerCheckMap = _slidableControllerTotalMap;      
+                      }       
                     }
+                    _scrollableKey += 1;
                     controller.update();
                   }, 
                   child: Obx(() => Text(controller.items.length == controller.checks.length ? XMIntl.current.deselectAll : XMIntl.current.selectAll, style: TextStyle(color: Colors.white),)),
@@ -311,7 +294,6 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
               }).catchError((e) {
                 //upload error
               });
-              
             },
           ),
         );

@@ -71,6 +71,8 @@ dependencies:
   easy_refresh: ^3.3.4
   flutter_slidable: ^3.0.1
   marquee: ^2.2.3
+  mini_music_visualizer:
+    git: https://github.com/MrLittleWhite/mini_music_visualizer.git
 
 dev_dependencies:
   flutter_test:

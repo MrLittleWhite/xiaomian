@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:mini_music_visualizer/mini_music_visualizer.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/model/audio_item.dart';
 
@@ -10,11 +11,12 @@ class CoverListTile extends StatefulWidget {
     required this.data,
     this.onTap, 
     this.checkEnable,
+    this.playing,
     this.checkTap,
     this.check,
   });
 
-
+  final bool? playing;
   final AudioItem data;
   final void Function(AudioItem data)? onTap;
   final bool? checkEnable;
@@ -28,6 +30,7 @@ class CoverListTile extends StatefulWidget {
 class _CoverListTileState extends State<CoverListTile> {
   final ValueNotifier<bool> _checkEnable = ValueNotifier(false);
   final ValueNotifier<bool> _check = ValueNotifier(false);
+  final ValueNotifier<bool?> _playing = ValueNotifier(null);
 
   @override
   void initState() {
@@ -37,7 +40,8 @@ class _CoverListTileState extends State<CoverListTile> {
     if (widget.check != null) {
       _check.value = widget.check!;  
     }
-    
+    _playing.value = widget.playing;
+
     super.initState();
   }
 
@@ -49,6 +53,7 @@ class _CoverListTileState extends State<CoverListTile> {
     if (widget.check != null) {
       _check.value = widget.check!;  
     }
+    _playing.value = widget.playing;
     super.didUpdateWidget(oldWidget);
   }
 
@@ -65,7 +70,7 @@ class _CoverListTileState extends State<CoverListTile> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Gap(8),
+                Gap(16),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: CachedNetworkImage(
@@ -96,21 +101,35 @@ class _CoverListTileState extends State<CoverListTile> {
                     ],
                   ),
                 ),
-                ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
-                  return value ? Gap(3) : Gap(0);
+                ValueListenableBuilder(valueListenable: _playing, builder: (context, value, child) {
+                  return value == null ? Gap(0) : Padding(
+                    padding: EdgeInsets.only(left: 12, right: _checkEnable.value ? 9 : 16),
+                    child: MiniMusicVisualizer(
+                              color: XMColor.xmOrange,
+                              width: 4,
+                              height: 15,   
+                              radius: 2,
+                              animate: value,
+                            ),
+                  );
                 }),
                 ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
-                  return value ? IconButton(onPressed: () {
-                      _check.value = !_check.value;
-                      widget.checkTap?.call(_check.value);
-                    }, icon: ValueListenableBuilder(
-                      builder: (context, value, child) {
-                        return value ? Icon(Icons.check_circle_outline_rounded, color: XMColor.xmRed,) : const Icon(Icons.radio_button_off_rounded, color: Colors.white,);
-                      }, valueListenable: _check,
-                    )) : Gap(0);
+                  return value ? Padding(
+                    padding: EdgeInsets.only(left: _playing.value == null ? 3 : 0,),
+                    child: IconButton(onPressed: () {
+                        _check.value = !_check.value;
+                        widget.checkTap?.call(_check.value);
+                      }, icon: ValueListenableBuilder(
+                        builder: (context, value, child) {
+                          return value ? Icon(Icons.check_circle_outline_rounded, color: XMColor.xmRed,) : const Icon(Icons.radio_button_off_rounded, color: Colors.white,);
+                        }, valueListenable: _check,
+                      )),
+                  ) : Gap(0);
                 },),
-                ValueListenableBuilder(valueListenable: _checkEnable, builder: (context, value, child) {
-                  return value ? Gap(0) : Gap(16);
+                ListenableBuilder(
+                  listenable: Listenable.merge([_check, _checkEnable]),
+                  builder: (context, child) {
+                    return _playing.value == null && !_checkEnable.value ? Gap(16) : Gap(0);
                 }),
               ],
             ),

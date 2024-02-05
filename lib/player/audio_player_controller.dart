@@ -15,6 +15,7 @@ class AudioPlayerController extends GetxController {
   late final XMAudioPlayer player = XMAudioPlayer();
 
   final ValueNotifier<AudioPlayItem?> playItemChangeNotifier = ValueNotifier(null);
+  final ValueNotifier<bool?> playingChangeNotifier = ValueNotifier(null);
 
   RxBool autoPlay = false.obs;
   RxInt playPeriod = 30.obs;
@@ -59,6 +60,18 @@ class AudioPlayerController extends GetxController {
       return XMSharedPreferences.remove(XMPrefersKey.playPeriod).then((value) => null);
     }).catchError((e) {
       //todo: upload error
+    });
+    historyRepository.getFirstItem().then((value) {
+      playItem = value;
+      playingChangeNotifier.value = false;
+    }).catchError((e) {
+      
+    });
+    player.loadingStream.listen((event) {
+      playingChangeNotifier.value = event ? true : player.isPlaying;
+    });
+    player.playingStream.listen((event) {
+      playingChangeNotifier.value = event ? true : player.isLoading;
     });
     super.onInit();
   }

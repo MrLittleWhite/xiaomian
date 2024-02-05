@@ -71,70 +71,68 @@ class _SleepPageState extends State<SleepPage> {
           sleepController.changeDisplayList();
         }, icon: _buildIcon())],
         ), 
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: EasyRefresh(
-          controller: _controller,
-          header: ClassicHeader(
-            position: IndicatorPosition.locator,
-            safeArea: false,
-            showMessage: false,
-            textStyle: TextStyle(color: Colors.white), 
-            messageStyle: TextStyle(color: Colors.white),
-            iconTheme: IconThemeData(color: Colors.white)
-          ),
-          footer: ClassicFooter(
-            position: IndicatorPosition.locator,
-            safeArea: false,
-            showMessage: false,
-            textStyle: TextStyle(color: Colors.white), 
-            messageStyle: TextStyle(color: Colors.white),
-            iconTheme: IconThemeData(color: Colors.white)),
-          onRefresh: () async {
-            sleepController.getItems().catchError((e) {
-              
-            }).whenComplete(() {
-              _controller.finishRefresh();
-              _controller.resetFooter();
-            });
-          },
-        
-          onLoad: () async {
-            sleepController.getMore().catchError((e) {
-              
-            }).whenComplete(() {
-              _controller.finishLoad(IndicatorResult.noMore);
-            });
-          },
-          child: Obx(() {
-            switch (PageState.values[sleepController.state.value]) {
-              case PageState.idle:
-              case PageState.loading:
-              return xmLoading();
-              case PageState.error:
-              return XMErrorPage(
-                  error: 
-                  XMError(XMErrorType.custom, 
-                    customTitle: XMIntl.current.noDataError, 
-                    customMessage: "${sleepController.error}"), 
-                  retry: () {
-                sleepController.fetch();
-              });
-              case PageState.empty:
-              return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
-                sleepController.fetch();
-              },);
-              case PageState.success:
-              return _buildScrollContent();
-            }
-          })
+      body: EasyRefresh(
+        controller: _controller,
+        header: ClassicHeader(
+          position: IndicatorPosition.locator,
+          safeArea: false,
+          showMessage: false,
+          textStyle: TextStyle(color: Colors.white), 
+          messageStyle: TextStyle(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.white)
         ),
+        footer: ClassicFooter(
+          position: IndicatorPosition.locator,
+          safeArea: false,
+          showMessage: false,
+          textStyle: TextStyle(color: Colors.white), 
+          messageStyle: TextStyle(color: Colors.white),
+          iconTheme: IconThemeData(color: Colors.white)),
+        onRefresh: () async {
+          sleepController.getItems().catchError((e) {
+            
+          }).whenComplete(() {
+            _controller.finishRefresh();
+            _controller.resetFooter();
+          });
+        },
+      
+        onLoad: () async {
+          sleepController.getMore().catchError((e) {
+            
+          }).whenComplete(() {
+            _controller.finishLoad(IndicatorResult.noMore);
+          });
+        },
+        child: Obx(() {
+          switch (PageState.values[sleepController.state.value]) {
+            case PageState.idle:
+            case PageState.loading:
+            return xmLoading();
+            case PageState.error:
+            return XMErrorPage(
+                error: 
+                XMError(XMErrorType.custom, 
+                  customTitle: XMIntl.current.noDataError, 
+                  customMessage: "${sleepController.error}"), 
+                retry: () {
+              sleepController.fetch();
+            });
+            case PageState.empty:
+            return XMErrorPage(error: const XMError(XMErrorType.empty), retry: () {
+              sleepController.fetch();
+            },);
+            case PageState.success:
+            return _buildScrollContent();
+          }
+        })
       ),
     );
   }
 
   RawScrollbar _buildScrollContent() {
     return RawScrollbar(
+      padding: EdgeInsets.only(right: 4),
       thumbColor: Colors.white.withOpacity(0.3),
       thickness: 2,
       interactive: true,
@@ -177,10 +175,15 @@ class _SleepPageState extends State<SleepPage> {
               itemCount: sleepController.items.length,
               itemBuilder: (context, index) {
               final data = sleepController.items[index];
-              return CoverListTile(key: ValueKey(data), data: data, onTap: (data) {
-                playerController.playItem = data;
-                playerController.handler?.play();
-                AppRoute.toDialogNamed(AppRoute.audioPlayer);
+              return ValueListenableBuilder(valueListenable: playerController.playingChangeNotifier, builder: (context, value, child) {
+                return CoverListTile(
+                key: ValueKey(data), 
+                playing: playerController.playItem?.aId == data.aId ? value : null,
+                data: data, onTap: (data) {
+                  playerController.playItem = data;
+                  playerController.handler?.play();
+                  AppRoute.toDialogNamed(AppRoute.audioPlayer);
+              },);
               },);
             },);
   }
