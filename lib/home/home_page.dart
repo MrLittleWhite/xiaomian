@@ -75,7 +75,9 @@ class _HomePageState extends State<HomePage> {
   Widget _buildPlayerBar() {
     return GestureDetector(
       onTap: () { 
-          AppRoute.toDialog(AudioPlayerPage());
+          if (playerController.playItem != null) {
+            AppRoute.toDialog(AudioPlayerPage());
+          }
         },
       child: BlurryContainer(
         borderRadius: BorderRadius.zero,

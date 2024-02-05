@@ -713,8 +713,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
-      resolved-ref: f5f0ca5bbe1bc7deb72d741e86ca7cfac41ab363
+      ref: "965c09c0be1eae1c5a6dd3591b3e684b6a7fa4f6"
+      resolved-ref: "965c09c0be1eae1c5a6dd3591b3e684b6a7fa4f6"
       url: "https://github.com/MrLittleWhite/mini_music_visualizer.git"
     source: git
     version: "1.0.2"

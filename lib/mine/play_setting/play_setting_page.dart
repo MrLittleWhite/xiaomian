@@ -113,7 +113,6 @@ class _PlaySettingPageState extends State<PlaySettingPage> {
   }
 
   void navigateAct(BuildContext context, PlayerSettingItemType type) {
-    String? name;
     switch (type) {
       case PlayerSettingItemType.timer:
         _showDialog(context);
@@ -121,9 +120,6 @@ class _PlaySettingPageState extends State<PlaySettingPage> {
       case PlayerSettingItemType.autoPlay:
         //todo
         break;
-    }
-    if (name != null) {
-      Get.toNamed(name);
     }
   }
 

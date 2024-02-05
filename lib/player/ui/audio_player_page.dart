@@ -25,6 +25,8 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
 
   final playerController = Get.find<AudioPlayerController>();
 
+  final coverSize = 240.0;
+
   @override
   Widget build(BuildContext context) {
     XMSystemChrome.setUIEdgeToEdge(XMColor.xmMain);
@@ -56,21 +58,32 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                     child: ListenableBuilder(
                       listenable: playerController.playItemChangeNotifier,
                       builder: (BuildContext context, Widget? child) { 
-                        final placeholder = Assets.images.placeholder.image(width: 170, height: 170);
+                        final placeholder = Assets.images.placeholder.image(width: coverSize, height: coverSize);
                         return playerController.playItem?.cover == null ? placeholder : CachedNetworkImage(
                         placeholder: (context, url) => Container(), 
                         errorWidget: (context, url, error) => placeholder,
                         fit: BoxFit.cover,
-                        width: 170, 
-                        height: 170, imageUrl: playerController.playItem!.cover!, 
+                        width: coverSize, 
+                        height: coverSize, imageUrl: playerController.playItem!.cover!, 
                       );
                       },
                     )
                   ),
-                  const Gap(23),
-                  Text(playerController.playItem?.title ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 20, fontWeight: FontWeight.w400),),
-                  const Gap(10),
-                  Text(playerController.playItem?.desc ?? "", maxLines: 10, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900),),
+                  const Gap(30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(playerController.playItem?.title ?? "", maxLines: 5, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
+                  ),
+                  const Gap(20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(playerController.playItem?.authorName ?? "", maxLines: 10, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmWhite, fontSize: 16, fontWeight: FontWeight.w400),),
+                  ),
+                  const Gap(20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(playerController.playItem?.desc ?? "", maxLines: 10, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 18, fontWeight: FontWeight.w400),),
+                  ),
                 ]
               )),
               Flexible(flex: 4, child: Column(
