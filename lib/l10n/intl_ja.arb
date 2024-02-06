@@ -37,5 +37,16 @@
     "selectAll": "すべて選択する",
     "deselectAll": "すべて選択解除する",
     "welcomeTitle": "SleepGo へようこそ",
-    "welcomeDetail": "穏やかな雨の音、癒しの波の音、暖かな森の音と共に、静寂な世界へと導かれ、心配事を忘れ、自然に眠りにつくことができます"
+    "welcomeDetail": "穏やかな雨の音、癒しの波の音、暖かな森の音と共に、静寂な世界へと導かれ、心配事を忘れ、自然に眠りにつくことができます",
+    
+    "pullToRefresh": "引っ張って更新する",
+    "releaseToRefresh": "離すと更新",
+    "refreshing": "リフレッシュ中...",
+    "refreshSuccess": "更新に成功しました",
+    "refreshFail": "更新に失敗しました",
+    "pullToLoad": "上にスワイプして読み込みます",
+    "releaseToLoad": "離すと即座に読み込みます",
+    "loadSuccess": "読み込み成功",
+    "loadFail": "読み込み失敗",
+    "noMore": "これ以上なし"
 }

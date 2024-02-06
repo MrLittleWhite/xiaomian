@@ -15,7 +15,7 @@
     "contact": "联系方式",
     "cancel": "取消",
     "confirm": "确认",
-    "loading": "加载中",
+    "loading": "加载中...",
     "language": "语言",
     "pleaseSelectLanguage": "请选择一种语言",
     "unknownError": "未知错误",
@@ -39,5 +39,16 @@
     "selectAll": "全选",
     "deselectAll": "全不选",
     "welcomeTitle": "欢迎来到失眠家",
-    "welcomeDetail": "轻柔的雨声、舒缓的海浪声、温暖的森林声，带你进入宁静的世界，让你忘却烦忧，自然入眠"
+    "welcomeDetail": "轻柔的雨声、舒缓的海浪声、温暖的森林声，带你进入宁静的世界，让你忘却烦忧，自然入眠",
+
+    "pullToRefresh": "下拉可以刷新",
+    "releaseToRefresh": "松开立即刷新",
+    "refreshing": "正在刷新...",
+    "refreshSuccess": "刷新成功",
+    "refreshFail": "刷新失败",
+    "pullToLoad": "上拉可以加载",
+    "releaseToLoad": "松开立即加载",
+    "loadSuccess": "加载成功",
+    "loadFail": "加载失败",
+    "noMore": "没有更多"
 }

@@ -75,6 +75,24 @@ class _SleepPageState extends State<SleepPage> {
       body: EasyRefresh(
         controller: _controller,
         header: ClassicHeader(
+
+          
+          
+      // dragText: dragText ?? 'Pull to refresh',
+      // armedText: armedText ?? 'Release ready',
+      // readyText: readyText ?? 'Refreshing...',
+      // processingText: processingText ?? 'Refreshing...',
+      // processedText: processedText ?? 'Succeeded',
+      // noMoreText: noMoreText ?? 'No more',
+      // failedText: failedText ?? 'Failed',
+          dragText: XMIntl.current.pullToRefresh,
+          armedText: XMIntl.current.releaseToRefresh,
+          readyText: XMIntl.current.refreshing,
+          processingText: XMIntl.current.refreshing,
+          processedText: XMIntl.current.refreshSuccess,
+          noMoreText: XMIntl.current.noMore,
+          failedText: XMIntl.current.refreshFail,
+
           position: IndicatorPosition.locator,
           safeArea: false,
           showMessage: false,
@@ -84,6 +102,22 @@ class _SleepPageState extends State<SleepPage> {
         ),
         footer: ClassicFooter(
           position: IndicatorPosition.locator,
+
+      // dragText: dragText ?? 'Pull to load',
+      // armedText: armedText ?? 'Release ready',
+      // readyText: readyText ?? 'Loading...',
+      // processingText: processingText ?? 'Loading...',
+      // processedText: processedText ?? 'Succeeded',
+      // noMoreText: noMoreText ?? 'No more',
+      // failedText: failedText ?? 'Failed',
+          dragText: XMIntl.current.pullToLoad,
+          armedText: XMIntl.current.releaseToLoad,
+          readyText: XMIntl.current.loading,
+          processingText: XMIntl.current.loading,
+          processedText: XMIntl.current.loadSuccess,
+          noMoreText: XMIntl.current.noMore,
+          failedText: XMIntl.current.loadFail,
+
           safeArea: false,
           showMessage: false,
           textStyle: TextStyle(color: Colors.white), 

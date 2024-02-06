@@ -38,5 +38,16 @@
     "selectAll": "全選",
     "deselectAll": "全不選",
     "welcomeTitle": "歡迎來到SleepGo",
-    "welcomeDetail": "柔和的雨聲、舒緩的海浪聲、溫暖的森林聲，帶你進入寧靜的世界，讓你忘卻煩憂，自然入眠"
+    "welcomeDetail": "柔和的雨聲、舒緩的海浪聲、溫暖的森林聲，帶你進入寧靜的世界，讓你忘卻煩憂，自然入眠",
+    
+    "pullToRefresh": "下拉可以刷新",
+    "releaseToRefresh": "放開立即刷新",
+    "refreshing": "正在刷新...",
+    "refreshSuccess": "刷新成功",
+    "refreshFail": "刷新失敗",
+    "pullToLoad": "上拉可以加载",
+    "releaseToLoad": "松開立即加載",
+    "loadSuccess": "載入成功",
+    "loadFail": "載入失敗",
+    "noMore": "沒有更多"
 }

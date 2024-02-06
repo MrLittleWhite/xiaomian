@@ -39,5 +39,16 @@
     "selectAll": "Select all",
     "deselectAll": "Deselect all",
     "welcomeTitle": "Welcome to the SleepGo",
-    "welcomeDetail": "Gentle rain sounds, soothing ocean waves, and warm forest sounds, taking you into a serene world, helping you forget your worries, and naturally fall asleep"
+    "welcomeDetail": "Gentle rain sounds, soothing ocean waves, and warm forest sounds, taking you into a serene world, helping you forget your worries, and naturally fall asleep",
+    
+    "pullToRefresh": "Pull down to refresh",
+    "releaseToRefresh": "Release to refresh immediately",
+    "refreshing": "Refreshing...",
+    "refreshSuccess": "Refresh successful",
+    "refreshFail": "Refresh failed",
+    "pullToLoad": "Pull up to load",
+    "releaseToLoad": "Release to load immediately",
+    "loadSuccess": "Load successful",
+    "loadFail": "Load failed",
+    "noMore": "No more"
 }

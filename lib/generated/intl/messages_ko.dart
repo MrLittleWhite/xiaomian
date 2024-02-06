@@ -41,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("일반 설정"),
         "language": MessageLookupByLibrary.simpleMessage("언어"),
+        "loadFail": MessageLookupByLibrary.simpleMessage("로드 실패"),
+        "loadSuccess": MessageLookupByLibrary.simpleMessage("로드 성공"),
         "loading": MessageLookupByLibrary.simpleMessage("로딩 중"),
         "netDesc": MessageLookupByLibrary.simpleMessage(
             "네트워크 오류입니다. 네트워크 연결을 확인하거나 나중에 다시 시도해 주세요."),
@@ -48,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
             "관련 데이터를 찾을 수 없습니다. 나중에 다시 시도해 주세요."),
         "noDataError": MessageLookupByLibrary.simpleMessage("관련 데이터가 없습니다"),
+        "noMore": MessageLookupByLibrary.simpleMessage("더 이상 없음"),
         "notSupport": MessageLookupByLibrary.simpleMessage("일시적으로 지원하지 않음"),
         "ok": MessageLookupByLibrary.simpleMessage("알겠습니다"),
         "playHistory": MessageLookupByLibrary.simpleMessage("재생 기록"),
@@ -58,7 +61,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "positiveFeedback": MessageLookupByLibrary.simpleMessage("별 다섯 개 평가"),
         "privacy": MessageLookupByLibrary.simpleMessage("개인정보 처리방침"),
         "profile": MessageLookupByLibrary.simpleMessage("프로필"),
+        "pullToLoad": MessageLookupByLibrary.simpleMessage("위로 당기면 로드됩니다"),
+        "pullToRefresh": MessageLookupByLibrary.simpleMessage("아래로 당겨서 새로고침"),
         "questionsSuggestions": MessageLookupByLibrary.simpleMessage("의문과 제안"),
+        "refreshFail": MessageLookupByLibrary.simpleMessage("새로고침 실패"),
+        "refreshSuccess": MessageLookupByLibrary.simpleMessage("새로고침 성공"),
+        "refreshing": MessageLookupByLibrary.simpleMessage("새로고침 중..."),
+        "releaseToLoad": MessageLookupByLibrary.simpleMessage("놓으면 즉시 로드됩니다"),
+        "releaseToRefresh":
+            MessageLookupByLibrary.simpleMessage("손을 놓으면 즉시 새로고침"),
         "selectAll": MessageLookupByLibrary.simpleMessage("전체 선택"),
         "sleep": MessageLookupByLibrary.simpleMessage("수면"),
         "terms": MessageLookupByLibrary.simpleMessage("약관"),

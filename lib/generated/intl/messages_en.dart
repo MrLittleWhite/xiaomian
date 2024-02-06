@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "generalSettings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
         "language": MessageLookupByLibrary.simpleMessage("language"),
+        "loadFail": MessageLookupByLibrary.simpleMessage("Load failed"),
+        "loadSuccess": MessageLookupByLibrary.simpleMessage("Load successful"),
         "loading": MessageLookupByLibrary.simpleMessage("loading"),
         "netDesc": MessageLookupByLibrary.simpleMessage(
             "Network error, please check your network connection or try again later."),
@@ -51,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noDataDesc": MessageLookupByLibrary.simpleMessage(
             "No relevant data found, please try again later."),
         "noDataError": MessageLookupByLibrary.simpleMessage("No relevant data"),
+        "noMore": MessageLookupByLibrary.simpleMessage("No more"),
         "notSupport":
             MessageLookupByLibrary.simpleMessage("Temporarily not supported"),
         "ok": MessageLookupByLibrary.simpleMessage("ok"),
@@ -63,8 +66,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Five-star rating"),
         "privacy": MessageLookupByLibrary.simpleMessage("Privacy"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "pullToLoad": MessageLookupByLibrary.simpleMessage("Pull up to load"),
+        "pullToRefresh":
+            MessageLookupByLibrary.simpleMessage("Pull down to refresh"),
         "questionsSuggestions":
             MessageLookupByLibrary.simpleMessage("Questions and suggestions"),
+        "refreshFail": MessageLookupByLibrary.simpleMessage("Refresh failed"),
+        "refreshSuccess":
+            MessageLookupByLibrary.simpleMessage("Refresh successful"),
+        "refreshing": MessageLookupByLibrary.simpleMessage("Refreshing..."),
+        "releaseToLoad":
+            MessageLookupByLibrary.simpleMessage("Release to load immediately"),
+        "releaseToRefresh": MessageLookupByLibrary.simpleMessage(
+            "Release to refresh immediately"),
         "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
         "sleep": MessageLookupByLibrary.simpleMessage("Sleep"),
         "sleepGo": MessageLookupByLibrary.simpleMessage("SleepGo"),

@@ -459,6 +459,106 @@ class S {
       args: [],
     );
   }
+
+  /// `Pull down to refresh`
+  String get pullToRefresh {
+    return Intl.message(
+      'Pull down to refresh',
+      name: 'pullToRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release to refresh immediately`
+  String get releaseToRefresh {
+    return Intl.message(
+      'Release to refresh immediately',
+      name: 'releaseToRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refreshing...`
+  String get refreshing {
+    return Intl.message(
+      'Refreshing...',
+      name: 'refreshing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh successful`
+  String get refreshSuccess {
+    return Intl.message(
+      'Refresh successful',
+      name: 'refreshSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh failed`
+  String get refreshFail {
+    return Intl.message(
+      'Refresh failed',
+      name: 'refreshFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pull up to load`
+  String get pullToLoad {
+    return Intl.message(
+      'Pull up to load',
+      name: 'pullToLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Release to load immediately`
+  String get releaseToLoad {
+    return Intl.message(
+      'Release to load immediately',
+      name: 'releaseToLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load successful`
+  String get loadSuccess {
+    return Intl.message(
+      'Load successful',
+      name: 'loadSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load failed`
+  String get loadFail {
+    return Intl.message(
+      'Load failed',
+      name: 'loadFail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more`
+  String get noMore {
+    return Intl.message(
+      'No more',
+      name: 'noMore',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
