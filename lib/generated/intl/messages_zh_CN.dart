@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("关于我们"),
+        "authorityDenied": MessageLookupByLibrary.simpleMessage("检测到网络权限未开启"),
         "autoPlay": MessageLookupByLibrary.simpleMessage("自动播放"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailContact": MessageLookupByLibrary.simpleMessage("联系邮箱已复制到剪贴板。"),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(
             "luffy243077002@163.com已复制到剪贴板，请发送邮件联系我们。"),
+        "enableAuthority": MessageLookupByLibrary.simpleMessage("开启权限"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("出现异常"),
         "feedback": MessageLookupByLibrary.simpleMessage("意见反馈"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("通用设置"),

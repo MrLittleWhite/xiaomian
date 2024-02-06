@@ -50,5 +50,7 @@
     "releaseToLoad": "Release to load immediately",
     "loadSuccess": "Load successful",
     "loadFail": "Load failed",
-    "noMore": "No more"
+    "noMore": "No more",
+    "enableAuthority": "Enable authority",
+    "authorityDenied": "Network authority not enabled"
 }

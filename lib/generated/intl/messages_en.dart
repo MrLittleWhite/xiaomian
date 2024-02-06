@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("About us"),
+        "authorityDenied": MessageLookupByLibrary.simpleMessage(
+            "Network authority not enabled"),
         "autoPlay": MessageLookupByLibrary.simpleMessage("Auto Play"),
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Contact email has been copied to the clipboard."),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(
             "luffy243077002@163.com has been copied to the clipboard. Please send an email to contact us."),
+        "enableAuthority":
+            MessageLookupByLibrary.simpleMessage("Enable authority"),
         "exceptionOccurred":
             MessageLookupByLibrary.simpleMessage("Exception occurred"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),

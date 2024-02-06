@@ -50,5 +50,8 @@
     "releaseToLoad": "松开立即加载",
     "loadSuccess": "加载成功",
     "loadFail": "加载失败",
-    "noMore": "没有更多"
+    "noMore": "没有更多",
+
+    "enableAuthority": "开启权限",
+    "authorityDenied": "检测到网络权限未开启"
 }

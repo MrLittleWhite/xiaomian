@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("회사 소개"),
+        "authorityDenied":
+            MessageLookupByLibrary.simpleMessage("네트워크 권한이 활성화되지 않았습니다"),
         "autoPlay": MessageLookupByLibrary.simpleMessage("자동 재생"),
         "confirm": MessageLookupByLibrary.simpleMessage("확인"),
         "connectDesc": MessageLookupByLibrary.simpleMessage(
@@ -37,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("연락 이메일이 클립보드에 복사되었습니다."),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(
             "luffy243077002@163.com 이(가) 클립보드에 복사되었습니다. 문의를 위해 이메일을 보내주십시오."),
+        "enableAuthority": MessageLookupByLibrary.simpleMessage("권한을 활성화하다"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("예외가 발생했습니다"),
         "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("일반 설정"),

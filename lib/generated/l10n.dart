@@ -559,6 +559,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Enable authority`
+  String get enableAuthority {
+    return Intl.message(
+      'Enable authority',
+      name: 'enableAuthority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network authority not enabled`
+  String get authorityDenied {
+    return Intl.message(
+      'Network authority not enabled',
+      name: 'authorityDenied',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

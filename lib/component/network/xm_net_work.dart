@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:app_settings/app_settings.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
 import 'package:network_authority/network_authority.dart';
 import 'package:network_authority/network_authority_status.dart';
+import 'package:xiaomian/component/xm_dialog.dart';
+import 'package:xiaomian/component/xm_intl.dart';
 
 class XMNetwork {
   ConnectivityResult _result = ConnectivityResult.none;
@@ -13,9 +17,19 @@ class XMNetwork {
 
   late StreamSubscription _statusSubscription;
   late StreamSubscription _authoritySubscription;
+  
+  bool _showedDialog = false;
 
   ConnectivityResult get status {
     return _result;
+  }
+
+  bool get available {
+    return status != ConnectivityResult.none;
+  }
+
+  bool get authorized {
+    return authority != NetworkAuthorityStatus.denied;
   }
 
   StreamSubscription get statusSubscription {
@@ -59,8 +73,25 @@ class XMNetwork {
     });
     _authoritySubscription = _networkAuthority.onStatusChanged.listen((NetworkAuthorityStatus s) {
       _authority = s;
+      if (s == NetworkAuthorityStatus.denied) {
+        showNetAuthorityErrorDialog();
+      } else {
+        if (_showedDialog) {
+          Get.back(result: 0);
+          _showedDialog = false;
+        }
+      }
     });
+  }
 
+  void showNetAuthorityErrorDialog() {
+    if (_showedDialog) {
+      return;
+    }
+    _showedDialog = true;
+    XMDialog.show(title: XMIntl.current.netError, content: XMIntl.current.authorityDenied, buttonText: XMIntl.current.enableAuthority, onPressed: () {
+      AppSettings.openAppSettings();
+    });
   }
 
   XMNetwork._internal();

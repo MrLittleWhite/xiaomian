@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -213,6 +214,7 @@ class _MinePageState extends State<MinePage> {
                   return Future(() => null);
                 });
               }
+              return Future(() => null);
             }).catchError((e) {
               XMToast.show("$e");
             });

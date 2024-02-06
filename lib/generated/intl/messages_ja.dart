@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutUs": MessageLookupByLibrary.simpleMessage("私たちについて"),
+        "authorityDenied":
+            MessageLookupByLibrary.simpleMessage("ネットワークの権限が有効にされていません"),
         "autoPlay": MessageLookupByLibrary.simpleMessage("自動再生"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認する"),
         "connectDesc": MessageLookupByLibrary.simpleMessage(
@@ -36,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "連絡先のメールアドレスがクリップボードにコピーされました。"),
         "emailContactUs": MessageLookupByLibrary.simpleMessage(
             "luffy243077002@163.com がクリップボードにコピーされました。お問い合わせはメールでお願いします。"),
+        "enableAuthority": MessageLookupByLibrary.simpleMessage("権限を有効にする"),
         "exceptionOccurred": MessageLookupByLibrary.simpleMessage("例外が発生しました"),
         "feedback": MessageLookupByLibrary.simpleMessage("フィードバック"),
         "generalSettings": MessageLookupByLibrary.simpleMessage("一般設定"),

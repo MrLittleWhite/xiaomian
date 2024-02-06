@@ -48,5 +48,8 @@
     "releaseToLoad": "놓으면 즉시 로드됩니다",
     "loadSuccess": "로드 성공",
     "loadFail": "로드 실패",
-    "noMore": "더 이상 없음"
+    "noMore": "더 이상 없음",
+
+    "enableAuthority": "권한을 활성화하다",
+    "authorityDenied": "네트워크 권한이 활성화되지 않았습니다"
 }

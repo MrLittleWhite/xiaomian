@@ -75,6 +75,7 @@ dependencies:
     git: 
       url: https://github.com/MrLittleWhite/mini_music_visualizer.git
       ref: 965c09c0be1eae1c5a6dd3591b3e684b6a7fa4f6
+  app_settings: ^5.1.1
 
 dev_dependencies:
   flutter_test:
