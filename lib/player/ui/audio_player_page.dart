@@ -1,17 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
-import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 
 class AudioPlayerPage extends StatefulWidget {
@@ -72,7 +69,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
                   const Gap(30),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: Text(playerController.playItem?.title ?? "", maxLines: 5, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
+                    child: Text(playerController.playItem?.title ?? "", maxLines: 5, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w900),),
                   ),
                   const Gap(20),
                   Padding(
@@ -138,7 +135,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
   AnimatedOpacity _wave() {
       return AnimatedOpacity(
         opacity: playerController.player.isPlaying ? 1 : 0, 
-        duration: Duration(milliseconds: 500), 
+        duration: const Duration(milliseconds: 500), 
         child: WaveWidget(
           config: CustomConfig(
             gradients: [
@@ -150,7 +147,7 @@ class _AudioPlayerPageState extends State<AudioPlayerPage> {
             gradientBegin: Alignment.bottomLeft,
             gradientEnd: Alignment.topRight,
           ),
-          size: Size(double.infinity, 60), 
+          size: const Size(double.infinity, 60), 
           waveAmplitude: 0,
           )
         );

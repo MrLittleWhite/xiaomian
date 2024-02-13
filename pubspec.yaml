@@ -54,7 +54,12 @@ dependencies:
   cached_network_image: ^3.3.1
   path_provider: ^2.1.2
   isar: ^3.1.0+1
-  isar_flutter_libs: ^3.1.0+1
+  isar_flutter_libs:
+    git: 
+      url: https://github.com/MrLittleWhite/isar_flutter_libs.git
+  # isar_flutter_libs:
+  #   git: 
+  #     url: https://github.com/MrLittleWhite/isar_flutter_libs.git 
   # isar: ^4.0.0-dev.14
   # isar_flutter_libs: ^4.0.0-dev.14
   url_launcher: ^6.2.3
@@ -96,6 +101,14 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
+
+# dependency_overrides:
+#   isar:
+#     path: /Users/liuyunzhi/Documents/FlutterDevelop/isar/packages/isar
+#   isar_flutter_libs:
+#     path: /Users/liuyunzhi/Documents/FlutterDevelop/isar/packages/isar_flutter_libs
+#   isar_generator: 
+#     path: /Users/liuyunzhi/Documents/FlutterDevelop/isar/packages/isar_generator
 
 flutter:
 

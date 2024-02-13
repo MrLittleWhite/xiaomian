@@ -1,10 +1,8 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/logger.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
 import 'package:xiaomian/component/UI/cover_list_tile.dart';
@@ -16,7 +14,6 @@ import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_loading.dart';
 import 'package:xiaomian/component/xm_media_query.dart';
 import 'package:xiaomian/mine/play_history/play_history_controller.dart';
-import 'package:xiaomian/mine/play_history/play_history_repository.dart';
 import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 
@@ -91,7 +88,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                   alignment: Alignment.bottomCenter,
                   children: [SlidableAutoCloseBehavior(
                     child: RawScrollbar(
-                      padding: EdgeInsets.only(right: 4),
+                      padding: const EdgeInsets.only(right: 4),
                       thumbColor: Colors.white.withOpacity(0.3),
                       thickness: 2,
                       interactive: true,
@@ -237,7 +234,7 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
                     _scrollableKey += 1;
                     controller.update();
                   }, 
-                  child: Obx(() => Text(controller.items.length == controller.checks.length ? XMIntl.current.deselectAll : XMIntl.current.selectAll, style: TextStyle(color: Colors.white),)),
+                  child: Obx(() => Text(controller.items.length == controller.checks.length ? XMIntl.current.deselectAll : XMIntl.current.selectAll, style: const TextStyle(color: Colors.white),)),
               ));
             }
           ))]),
@@ -266,12 +263,12 @@ class _PlayHistoryPageState extends State<PlayHistoryPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.delete,
                     color: Colors.white,
                   ),
-                  Gap(4),
-                  Text(XMIntl.current.delete, style: TextStyle(color: Colors.white),)
+                  const Gap(4),
+                  Text(XMIntl.current.delete, style: const TextStyle(color: Colors.white),)
                 ],
               ),
             ),

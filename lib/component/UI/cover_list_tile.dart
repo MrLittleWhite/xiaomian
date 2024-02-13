@@ -70,7 +70,7 @@ class _CoverListTileState extends State<CoverListTile> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Gap(16),
+                const Gap(16),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: CachedNetworkImage(
@@ -82,7 +82,7 @@ class _CoverListTileState extends State<CoverListTile> {
                           fit: BoxFit.cover,
                         ),
                 ),
-                Gap(16),
+                const Gap(16),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,18 +91,18 @@ class _CoverListTileState extends State<CoverListTile> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(child: Text(widget.data.title ?? "", maxLines: 2, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),)),
+                          Expanded(child: Text(widget.data.title ?? "", maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),)),
                           ConstrainedBox(constraints: const BoxConstraints(maxWidth: 120),
                           child: Text(widget.data.author?.name ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),))
                         ],
                       ),
-                      Gap(5),
+                      const Gap(5),
                       Text(widget.data.desc ?? "", maxLines: 2, softWrap: true, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),),
                     ],
                   ),
                 ),
                 ValueListenableBuilder(valueListenable: _playing, builder: (context, value, child) {
-                  return value == null ? Gap(0) : Padding(
+                  return value == null ? const Gap(0) : Padding(
                     padding: EdgeInsets.only(left: 12, right: _checkEnable.value ? 9 : 16),
                     child: MiniMusicVisualizer(
                               color: XMColor.xmOrange,
@@ -124,12 +124,12 @@ class _CoverListTileState extends State<CoverListTile> {
                           return value ? Icon(Icons.check_circle_outline_rounded, color: XMColor.xmRed,) : const Icon(Icons.radio_button_off_rounded, color: Colors.white,);
                         }, valueListenable: _check,
                       )),
-                  ) : Gap(0);
+                  ) : const Gap(0);
                 },),
                 ListenableBuilder(
                   listenable: Listenable.merge([_check, _checkEnable]),
                   builder: (context, child) {
-                    return _playing.value == null && !_checkEnable.value ? Gap(16) : Gap(0);
+                    return _playing.value == null && !_checkEnable.value ? const Gap(16) : const Gap(0);
                 }),
               ],
             ),

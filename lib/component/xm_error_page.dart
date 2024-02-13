@@ -23,34 +23,34 @@ class XMErrorPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(8, 0, 16, 0),
+            padding: const EdgeInsets.fromLTRB(8, 0, 16, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center, 
               crossAxisAlignment: CrossAxisAlignment.center, 
               children: [
                 Transform.rotate(angle: math.pi*1.5,
                 child: Transform.flip(flipY: true, child: Icon(Icons.note_outlined, color: XMColor.xmBlue, size: 48,))),
-                Flexible(child: Text(error.title, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w900),)),
+                Flexible(child: Text(error.title, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w900),)),
               ],),
           ),
-          Gap(18),
+          const Gap(18),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Gap(16),
-              Flexible(child: Text(error.message, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 20),)),
-              Gap(16),
+              const Gap(16),
+              Flexible(child: Text(error.message, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white, fontSize: 20),)),
+              const Gap(16),
             ],
           ),
-          Gap(25),
+          const Gap(25),
           SizedBox(
             width: double.infinity,
             child: Center(
               child: Container(
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: XMColor.xmOrange, width: 1)),
                 child: CupertinoButton(
-                  child: Text(XMIntl.current.tryAgain, style: TextStyle(color: XMColor.xmOrange, fontSize: 15)), 
                   onPressed: retry,
+                  child: Text(XMIntl.current.tryAgain, style: TextStyle(color: XMColor.xmOrange, fontSize: 15)),
                   ),
               ),
             ),

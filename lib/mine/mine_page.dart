@@ -1,15 +1,11 @@
-import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:logger/logger.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/xm_dialog.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_launcher.dart';
@@ -121,9 +117,9 @@ class _MinePageState extends State<MinePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Gap(5),
+            const Gap(5),
             Text(XMIntl.current.profile, 
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white, 
               fontSize: 20, 
               fontWeight: FontWeight.w900),),
@@ -173,7 +169,7 @@ class _MinePageState extends State<MinePage> {
             itemCount: _items.length,
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 75),)
+          const SliverToBoxAdapter(child: SizedBox(height: 75),)
         ]
       ),
       );
@@ -200,7 +196,7 @@ class _MinePageState extends State<MinePage> {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(vertical: 6),
         leading: Icon( like ? Icons.favorite : Icons.edit_document, color: like ? Colors.red : XMColor.xmBlue,), 
-        title: Text(like ? XMIntl.current.positiveFeedback : XMIntl.current.questionsSuggestions, style: TextStyle(fontWeight: FontWeight.w700)),
+        title: Text(like ? XMIntl.current.positiveFeedback : XMIntl.current.questionsSuggestions, style: const TextStyle(fontWeight: FontWeight.w700)),
         onTap: () {
           if (like) {
             XMLauncher().toMarketCN().then((value) {

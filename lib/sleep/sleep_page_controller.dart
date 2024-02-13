@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
@@ -71,12 +70,12 @@ class SleepPageController extends GetxController {
   }
 
   Future<void> getItems() async {
-    List<AudioItem> list = await Future.delayed(Duration(seconds: 3), () => _createItems(16));
+    List<AudioItem> list = await Future.delayed(const Duration(seconds: 3), () => _createItems(16));
     items.value = list;
   }
 
   Future<void> getMore() async {
-    List<AudioItem> list = await Future.delayed(Duration(seconds: 3), () => _createItems(16));
+    List<AudioItem> list = await Future.delayed(const Duration(seconds: 3), () => _createItems(16));
     items.addAll(list);
   }
   

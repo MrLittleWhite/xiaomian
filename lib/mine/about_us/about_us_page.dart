@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/web/web_page.dart';
 import 'package:xiaomian/component/xm_appbar.dart';
 import 'package:xiaomian/component/xm_intl.dart';
@@ -59,7 +57,6 @@ extension AboutUsItemTypeExtension on AboutUsItemType {
   }
 
   void navigateAct() {
-    String? name;
     switch (this) {
       case AboutUsItemType.version:
         //todo
@@ -77,9 +74,6 @@ extension AboutUsItemTypeExtension on AboutUsItemType {
           XMToast.show(XMIntl.current.emailContact);
         });
         break;
-    }
-    if (name != null) {
-      Get.toNamed(name);
     }
   }
 }
@@ -115,7 +109,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                     ClipRRect(borderRadius: BorderRadius.circular(16), 
                       child: Assets.images.appIcon.image(width: 100, height: 100,)),
                     const Gap(16),
-                    Text(XMIntl.current.sleepGo, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
+                    Text(XMIntl.current.sleepGo, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),),
                   ]
                 ),
             ),

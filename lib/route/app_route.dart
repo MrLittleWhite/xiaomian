@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:xiaomian/component/web/web_page.dart';
 import 'package:xiaomian/home/home_page.dart';
 import 'package:xiaomian/mine/about_us/about_us_page.dart';
 import 'package:xiaomian/mine/general_setting/general_setting_page.dart';
@@ -41,20 +40,20 @@ class AppRoute {
 
   static toDialogNamed(String name) {
     if (name == AppRoute.audioPlayer) {
-      toDialog(AudioPlayerPage());
+      toDialog(const AudioPlayerPage());
     }
   }
 
   static toDialog(Widget page) {
       Get.generalDialog(
       barrierColor: Colors.transparent,
-      transitionDuration: Duration(milliseconds: 200),
+      transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (context, anim1, anim2) {
         return page;
       },
       transitionBuilder: (context, anim1, anim2, child) {
         return SlideTransition(
-          position: Tween(begin: Offset(0, 1), end: Offset(0, 0))
+          position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
               .animate(anim1),
           child: child,
         );

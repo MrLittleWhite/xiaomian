@@ -4,16 +4,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:mini_music_visualizer/mini_music_visualizer.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:xiaomian/assets_code/xm_font_family.dart';
 import 'package:xiaomian/component/UI/cover_list_tile.dart';
 import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/component/xm_error.dart';
 import 'package:xiaomian/component/xm_error_page.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_loading.dart';
-import 'package:xiaomian/component/xm_shared_preferences.dart';
-import 'package:xiaomian/mine/play_history/play_history_repository.dart';
-import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
 import 'package:easy_refresh/easy_refresh.dart';
@@ -60,9 +56,9 @@ class _SleepPageState extends State<SleepPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Gap(5),
+            const Gap(5),
             Text(XMIntl.current.sleep, 
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white, 
               fontSize: 20, 
               fontWeight: FontWeight.w900),),
@@ -96,9 +92,9 @@ class _SleepPageState extends State<SleepPage> {
           position: IndicatorPosition.locator,
           safeArea: false,
           showMessage: false,
-          textStyle: TextStyle(color: Colors.white), 
-          messageStyle: TextStyle(color: Colors.white),
-          iconTheme: IconThemeData(color: Colors.white)
+          textStyle: const TextStyle(color: Colors.white), 
+          messageStyle: const TextStyle(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white)
         ),
         footer: ClassicFooter(
           position: IndicatorPosition.locator,
@@ -120,9 +116,9 @@ class _SleepPageState extends State<SleepPage> {
 
           safeArea: false,
           showMessage: false,
-          textStyle: TextStyle(color: Colors.white), 
-          messageStyle: TextStyle(color: Colors.white),
-          iconTheme: IconThemeData(color: Colors.white)),
+          textStyle: const TextStyle(color: Colors.white), 
+          messageStyle: const TextStyle(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white)),
         onRefresh: () async {
           sleepController.getItems().catchError((e) {
             
@@ -167,7 +163,7 @@ class _SleepPageState extends State<SleepPage> {
 
   RawScrollbar _buildScrollContent() {
     return RawScrollbar(
-      padding: EdgeInsets.only(right: 4),
+      padding: const EdgeInsets.only(right: 4),
       thumbColor: Colors.white.withOpacity(0.3),
       thickness: 2,
       interactive: true,
@@ -182,7 +178,7 @@ class _SleepPageState extends State<SleepPage> {
                 }
               }),
               const FooterLocator.sliver(),
-              SliverToBoxAdapter(child: SizedBox(height: 75),)
+              const SliverToBoxAdapter(child: SizedBox(height: 75),)
             ],
           ),
     );
@@ -192,13 +188,13 @@ class _SleepPageState extends State<SleepPage> {
     return FutureBuilder(
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Icon(Icons.hourglass_empty_rounded, color: Colors.white,);
+            return const Icon(Icons.hourglass_empty_rounded, color: Colors.white,);
           } 
           return Obx(() {
             if (sleepController.displayList.value) {
-              return Icon(Icons.grid_view_rounded, color: Colors.white,);
+              return const Icon(Icons.grid_view_rounded, color: Colors.white,);
             } else {
-              return Icon(Icons.table_rows_rounded, color: Colors.white,);
+              return const Icon(Icons.table_rows_rounded, color: Colors.white,);
             }
           });
         }, future: sleepController.getDisplayList(),
@@ -225,15 +221,15 @@ class _SleepPageState extends State<SleepPage> {
 
   SliverPadding _buildGrid() {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverGrid.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2, crossAxisSpacing: 16, mainAxisSpacing: 20, childAspectRatio: 0.77), 
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount:2, crossAxisSpacing: 16, mainAxisSpacing: 20, childAspectRatio: 0.77), 
                 itemCount: sleepController.items.length,
                 itemBuilder: (context, index) {
                 final data = sleepController.items[index];
                 return GestureDetector(key: ValueKey(data),
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
+                    constraints: const BoxConstraints(minWidth: double.infinity),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,10 +276,10 @@ class _SleepPageState extends State<SleepPage> {
                                       ),
                                     ),
                                     Flexible(
-                                      child: Padding(padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      child: Padding(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                       child: FittedBox(
                                         child: Text(data.author?.name ?? "", 
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white, 
                                           fontSize: 12, 
                                           fontWeight: FontWeight.w600, 
@@ -296,7 +292,7 @@ class _SleepPageState extends State<SleepPage> {
                             ),
                           ),
                         ),
-                        Flexible(child: Text(data.title ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),)),
+                        Flexible(child: Text(data.title ?? "", overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w900),)),
                         Flexible(child: Text(data.desc ?? "", overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 12, fontWeight: FontWeight.w600),)),
                       ],
                     ),

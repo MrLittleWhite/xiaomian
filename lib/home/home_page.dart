@@ -7,20 +7,17 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:xiaomian/assets_code/xm_icons.dart';
 import 'package:xiaomian/component/xm_intl.dart';
 import 'package:xiaomian/component/xm_media_query.dart';
 import 'package:xiaomian/component/xm_system_chrome.dart';
 import 'package:xiaomian/gen/assets.gen.dart';
 import 'package:xiaomian/mine/mine_page.dart';
-import 'package:xiaomian/model/audio_item.dart';
 import 'package:xiaomian/player/audio_play_item.dart';
 import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/player/ui/audio_player_page.dart';
 import 'package:xiaomian/route/app_route.dart';
 import 'package:xiaomian/sleep/sleep_page.dart';
 import 'package:xiaomian/assets_code/xm_color.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -76,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: () { 
           if (playerController.playItem != null) {
-            AppRoute.toDialog(AudioPlayerPage());
+            AppRoute.toDialog(const AudioPlayerPage());
           }
         },
       child: BlurryContainer(
@@ -91,7 +88,7 @@ class _HomePageState extends State<HomePage> {
               child: ValueListenableBuilder(
                 valueListenable: playerController.playItemChangeNotifier,
                 builder: (BuildContext context, AudioPlayItem? value, Widget? child) { 
-                  final Widget Function(bool) placeholder = (isInit) => Container(width: 59, height: 59, 
+                  placeholder(isInit) => Container(width: 59, height: 59, 
                                         decoration: BoxDecoration(
                                             border: Border.all(color: Colors.white.withOpacity(0.2), width: 1), 
                                             borderRadius: BorderRadius.circular(12)), 
@@ -114,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(playerController.playItem?.title ?? XMIntl.current.welcomeTitle, overflow: TextOverflow.ellipsis, style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
+                    Text(playerController.playItem?.title ?? XMIntl.current.welcomeTitle, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),),
                     Text(playerController.playItem?.desc ?? XMIntl.current.welcomeDetail, overflow: TextOverflow.ellipsis, style: TextStyle(color: XMColor.xmGrey, fontSize: 14, fontWeight: FontWeight.w600)),
                   ],
                 );},
