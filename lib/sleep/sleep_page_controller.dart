@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:xiaomian/component/UI/page_state.dart';
 import 'package:xiaomian/component/xm_shared_preferences.dart';
 import 'package:xiaomian/model/audio_item.dart';
+import 'package:xiaomian/sleep/sleep_page_repository.dart';
 
 class SleepPageController extends GetxController {
   bool _readDisplay = false;
@@ -17,6 +18,8 @@ class SleepPageController extends GetxController {
   Object? get error {
     return _error;
   }
+
+  final repository = SleepPageRepository();
 
   @override
   void onReady() {
@@ -57,19 +60,26 @@ class SleepPageController extends GetxController {
 
   final _random = Random();
 
+  //test data
   List<AudioItem> _createItems(int count) {
     
     List<AudioItem> items = [];
     for (var i = 0; i < count; i++) {
       AudioItem item = AudioItem.fromJson(AudioItemMap.json);
       item.aId = _random.nextInt(999999).toString();
-      item.titleTXT?.cnHK = '${item.aId}${item.title}';
+      item.titleTXT?.en = '${item.aId} ${item.titleTXT?.en}';
+      item.titleTXT?.cn = '${item.aId} ${item.titleTXT?.cn}';
+      item.titleTXT?.ja = '${item.aId} ${item.titleTXT?.ja}';
+      item.titleTXT?.ko = '${item.aId} ${item.titleTXT?.ko}';
+      item.titleTXT?.cnHK = '${item.aId} ${item.titleTXT?.cnHK}';
       items.add(item);
     }
     return items;
   }
 
   Future<void> getItems() async {
+    // return repository.fetchData(pageSize: 2, apiKey: "3").then((value) => items.value = value);
+
     List<AudioItem> list = await Future.delayed(const Duration(seconds: 3), () => _createItems(16));
     items.value = list;
   }
