@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,22 @@ import 'package:xiaomian/player/audio_player_controller.dart';
 import 'package:xiaomian/route/app_route.dart';
 import 'package:xiaomian/sleep/sleep_page_controller.dart';
 
+// 重写HttpOverrides
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    var httpClient = super.createHttpClient(context);
+    httpClient.findProxy = (uri) {
+      return 'PROXY 192.168.0.115:8888';
+    };
+    httpClient.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    return httpClient;
+  }
+}
+
 void main() {
+  HttpOverrides.global = MyHttpOverrides(); 
   runApp(const MyApp());
 }
 
